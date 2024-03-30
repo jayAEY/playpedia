@@ -1,4 +1,4 @@
-# game-app
+# playpedia
 
 App that allows for keeping a video game backlog and completion list.
 Also allows for searching and displaying info on games.

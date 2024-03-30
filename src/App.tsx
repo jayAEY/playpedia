@@ -1,6 +1,17 @@
 // things to add
 // user auth?
-// page to see more on each game?
+// pages or modal to see more on each game?
+// add priorities to backlog?
+// add notes to each?
+// search in backlog/completed??
+// add hltb
+// add dates added/finished?
+// add goal dates? / planning features?
+// sorting based on goal dates
+// add tags for each?
+//filter based on tags?
+
+//ADD ENV TO GIT IGNORE
 
 import { ThemeProvider } from "./components/theme-provider";
 import AlertComponent from "./components/alert-component";

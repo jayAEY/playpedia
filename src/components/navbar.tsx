@@ -17,8 +17,9 @@ const NavBar = (props) => {
   return (
     <NavigationMenu className="sticky justify-between px-10 py-4 bg-background shadow-lg border-b ">
       <NavigationMenuList className="cursor-pointer space-x-0">
-        <NavigationMenuLink className="flex">
+        <NavigationMenuLink className="flex items-center justify-center-center">
           <ModeToggle />
+
           <Input
             onKeyUp={(e) => e.key == "Enter" && handleSearch()}
             type="text"
@@ -37,6 +38,17 @@ const NavBar = (props) => {
           </Button>
         </NavigationMenuLink>
       </NavigationMenuList>
+      <button
+        onClick={(e) => {
+          props.setSearch("");
+        }}
+      >
+        <h1 className="hidden text-xl font-[400] tracking-[12px] sm:flex md:pr-48 ">
+          {/* <h1 className="hidden text-lg font-extrabold px-1 pr-2 pt-0.5 h-9 border sm:flex"> */}
+          🎮playpedia
+        </h1>
+      </button>
+
       <AvatarMenu
         setBacklogOpen={props.setBacklogOpen}
         setCompletedOpen={props.setCompletedOpen}
