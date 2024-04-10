@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import {
   NavigationMenu,
   NavigationMenuLink,
@@ -10,9 +11,10 @@ import { IoSearch } from "react-icons/io5";
 import { Button } from "./ui/button";
 
 const NavBar = (props) => {
+  const searchRef = useRef();
+
   let handleSearch = () => {
-    let searchInput = document.querySelector("#searchInput");
-    props.setSearch(searchInput.value.trim());
+    props.setSearch(searchRef.current.value.trim());
   };
   return (
     <NavigationMenu className="sticky justify-between px-10 py-4 bg-background shadow-lg border-b ">
@@ -21,6 +23,7 @@ const NavBar = (props) => {
           <ModeToggle />
 
           <Input
+            ref={searchRef}
             onKeyUp={(e) => e.key == "Enter" && handleSearch()}
             type="text"
             placeholder="Search..."
@@ -43,8 +46,7 @@ const NavBar = (props) => {
           props.setSearch("");
         }}
       >
-        <h1 className="hidden text-xl font-[400] tracking-[12px] sm:flex md:pr-48 ">
-          {/* <h1 className="hidden text-lg font-extrabold px-1 pr-2 pt-0.5 h-9 border sm:flex"> */}
+        <h1 className="hidden text-l font-[900] tracking-[8px] md:flex md:pr-48 ">
           🎮playpedia
         </h1>
       </button>
