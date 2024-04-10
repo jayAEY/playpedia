@@ -9,7 +9,7 @@
 // add goal dates? / planning features?
 // sorting based on goal dates
 // add tags for each?
-//filter based on tags?
+// filter based on tags?
 
 //ADD ENV TO GIT IGNORE
 
@@ -27,21 +27,34 @@ import { Toaster } from "./components/ui/toaster";
 import { useToast } from "./components/ui/use-toast";
 
 function App() {
-  const [data, setData] = useState([]);
+  type game = {
+    name: string;
+    parent_platforms: string;
+    released: string;
+    metacritic: string;
+    background_image: string;
+    playtime: string;
+    rating: string;
+  };
+  const [data, setData] = useState<game[]>([]);
 
   // const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState("");
-  const [searchFilter, setSearchFilter] = useState("relevance");
-  const [sortOrder, setSortOrder] = useState("ascending");
+  const [search, setSearch] = useState<string>("");
+  const [searchFilter, setSearchFilter] = useState<
+    "relevance" | "released" | "rating" | "metacritic"
+  >("relevance");
+  const [sortOrder, setSortOrder] = useState<"ascending" | "descending">(
+    "ascending"
+  );
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
-  const [backlog, setBacklog] = useState([]);
-  const [backlogOpen, setBacklogOpen] = useState(false);
+  const [backlog, setBacklog] = useState<string[]>([]);
+  const [backlogOpen, setBacklogOpen] = useState<boolean>(false);
 
-  const [completed, setCompleted] = useState([]);
-  const [completedOpen, setCompletedOpen] = useState(false);
+  const [completed, setCompleted] = useState<string[] | undefined>([]);
+  const [completedOpen, setCompletedOpen] = useState<boolean>(false);
 
   const [toastMsg, setToastMsg] = useState("");
   const { toast } = useToast();
@@ -64,24 +77,25 @@ function App() {
           sortOrder == "descending" ? "-" : ""
         }${searchFilter}`
       );
-      let json;
+      let json: { results: [] };
       // await new Promise((resolve) => setTimeout(resolve, 2000));
       if (search == "") {
         json = await initialData.json();
+        setData(json.results);
       } else if (search != "") {
         json = await searchData.json();
+        setData(json.results);
       }
-      setData(json.results);
       // setIsLoading(false);
     };
     fetchData().catch(console.error);
   }, [search, searchFilter, sortOrder]);
 
   useEffect(() => {
-    localStorage.getItem("backlog") &&
-      setBacklog(localStorage.getItem("backlog")?.split(","));
-    localStorage.getItem("completed") &&
-      setCompleted(localStorage.getItem("completed")?.split(","));
+    const currentBacklog = localStorage.getItem("backlog");
+    const currentCompleted = localStorage.getItem("completed");
+    currentBacklog && setBacklog(currentBacklog?.split(","));
+    currentCompleted && setCompleted(currentCompleted?.split(","));
   }, [backlog]);
 
   useEffect(() => {
@@ -140,28 +154,29 @@ function App() {
             </section>
           )}
           <section className="grid p-10 min-h-screen min-w-screen grid-cols-4 gap-4">
-            {data.map((game, index) => {
-              if (game.background_image && index < 17) {
-                return (
-                  <GameCard
-                    name={game.name}
-                    platforms={game.parent_platforms}
-                    released={game.released}
-                    metacritic={game.metacritic}
-                    background_image={game.background_image}
-                    playtime={game.playtime}
-                    rating={game.rating}
-                    key={index}
-                    backlog={backlog}
-                    setBacklog={setBacklog}
-                    setBacklogOpen={setBacklogOpen}
-                    setAlertOpen={setAlertOpen}
-                    setAlertMessage={setAlertMessage}
-                    setToastMsg={setToastMsg}
-                  />
-                );
-              }
-            })}
+            {data &&
+              data.map((game: game, index: number) => {
+                if (game.background_image && index < 17) {
+                  return (
+                    <GameCard
+                      name={game.name}
+                      platforms={game.parent_platforms}
+                      released={game.released}
+                      metacritic={game.metacritic}
+                      background_image={game.background_image}
+                      playtime={game.playtime}
+                      rating={game.rating}
+                      key={index}
+                      backlog={backlog}
+                      setBacklog={setBacklog}
+                      setBacklogOpen={setBacklogOpen}
+                      setAlertOpen={setAlertOpen}
+                      setAlertMessage={setAlertMessage}
+                      setToastMsg={setToastMsg}
+                    />
+                  );
+                }
+              })}
           </section>
         </main>
       </ThemeProvider>

@@ -11,7 +11,7 @@ import { IoSearch } from "react-icons/io5";
 import { Button } from "./ui/button";
 
 const NavBar = (props) => {
-  const searchRef = useRef();
+  const searchRef = useRef<HTMLInputElement>(null);
 
   let handleSearch = () => {
     props.setSearch(searchRef.current.value.trim());
