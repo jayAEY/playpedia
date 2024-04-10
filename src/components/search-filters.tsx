@@ -5,7 +5,17 @@ import {
   PiSortAscendingDuotone,
   PiSortDescendingDuotone,
 } from "react-icons/pi";
-const SearchFilters = (props) => {
+
+interface Props {
+  searchFilter: string;
+  setSearchFilter: React.Dispatch<React.SetStateAction<string>>;
+  search: string;
+  sortOrder: "ascending" | "descending";
+  setSortOrder: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const SearchFilters = (props: Props) => {
+  // function changeFilter(button: HTMLButtonElement | EventTarget) {
   function changeFilter(button) {
     let filter = button.innerText.toLowerCase();
     filter == "user rating" && (filter = "rating");

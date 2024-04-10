@@ -11,7 +11,12 @@ import {
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
-const AvatarMenu = (props) => {
+interface Props {
+  setBacklogOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setCompletedOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const AvatarMenu = (props: Props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

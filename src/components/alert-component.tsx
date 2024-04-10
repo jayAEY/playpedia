@@ -3,9 +3,17 @@ import {
   AlertDialogAction,
   AlertDialogContent,
 } from "./ui/alert-dialog";
-import { Alert, AlertDescription } from "./ui/alert";
+import { AlertDescription } from "./ui/alert";
+import { PropsWithChildren } from "react";
 
-const AlertComponent = (props) => {
+// React.Dispatch<React.SetStateAction<boolean>>
+interface Props {
+  alertOpen: boolean;
+  setAlertOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  alertMessage: string;
+}
+const AlertComponent = (props: Props) => {
+  // const AlertComponent = (props: PropsWithChildren<Props>) => {
   return (
     <AlertDialog open={props.alertOpen}>
       <AlertDialogContent onEscapeKeyDown={() => props.setAlertOpen(false)}>
