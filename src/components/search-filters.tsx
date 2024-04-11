@@ -10,18 +10,11 @@ interface Props {
   searchFilter: string;
   setSearchFilter: React.Dispatch<React.SetStateAction<string>>;
   search: string;
-  sortOrder: "ascending" | "descending";
+  sortOrder: string;
   setSortOrder: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const SearchFilters = (props: Props) => {
-  // function changeFilter(button: HTMLButtonElement | EventTarget) {
-  function changeFilter(button) {
-    let filter = button.innerText.toLowerCase();
-    filter == "user rating" && (filter = "rating");
-    props.setSearchFilter(filter);
-  }
-
   return (
     props.search.length > 0 && (
       <section
@@ -36,7 +29,7 @@ const SearchFilters = (props: Props) => {
           className="flex flex-wrap justify-normal gap-1"
         >
           <ToggleGroupItem
-            onClick={(e) => changeFilter(e.target)}
+            onClick={() => props.setSearchFilter("relevance")}
             value="relevance"
             aria-label="relevance"
             size="sm"
@@ -44,7 +37,7 @@ const SearchFilters = (props: Props) => {
             Relevance
           </ToggleGroupItem>
           <ToggleGroupItem
-            onClick={(e) => changeFilter(e.target)}
+            onClick={() => props.setSearchFilter("released")}
             value="released"
             aria-label="released"
             size="sm"
@@ -52,7 +45,7 @@ const SearchFilters = (props: Props) => {
             Released
           </ToggleGroupItem>
           <ToggleGroupItem
-            onClick={(e) => changeFilter(e.target)}
+            onClick={() => props.setSearchFilter("rating")}
             value="rating"
             aria-label="rating"
             size="sm"
@@ -60,7 +53,7 @@ const SearchFilters = (props: Props) => {
             User Rating
           </ToggleGroupItem>
           <ToggleGroupItem
-            onClick={(e) => changeFilter(e.target)}
+            onClick={() => props.setSearchFilter("metacritic")}
             value="metacritic"
             aria-label="metacritic"
             size="sm"

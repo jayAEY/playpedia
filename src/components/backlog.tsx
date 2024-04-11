@@ -8,7 +8,24 @@ import {
 } from "./ui/card";
 import { Checkbox } from "./ui/checkbox";
 
-const Backlog = (props) => {
+interface Props {
+  setBacklog: React.Dispatch<React.SetStateAction<string[]>>;
+  setAlertOpen(true);
+  setAlertMessage
+  setCompletedOpen(true);
+  setBacklog(newBacklog);
+ setBacklogOpen(false)
+backlog
+  setToastMsg
+  setCompleted
+
+
+  // search: string;
+  // sortOrder: string;
+  // setSortOrder: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Backlog = (props: Props) => {
   function selectGame(elem) {
     if (elem.children[0]) {
       elem.children[0].checked == true

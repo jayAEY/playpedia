@@ -40,12 +40,15 @@ function App() {
 
   // const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState<string>("");
-  const [searchFilter, setSearchFilter] = useState<
-    "relevance" | "released" | "rating" | "metacritic"
-  >("relevance");
-  const [sortOrder, setSortOrder] = useState<"ascending" | "descending">(
-    "ascending"
-  );
+  const [searchFilter, setSearchFilter] = useState<string>("relevance");
+  const [sortOrder, setSortOrder] = useState<string>("ascending");
+
+  // const [searchFilter, setSearchFilter] = useState<
+  //   "relevance" | "released" | "rating" | "metacritic"
+  // >("relevance");
+  // const [sortOrder, setSortOrder] = useState<"ascending" | "descending">(
+  //   "ascending"
+  // );
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -53,7 +56,7 @@ function App() {
   const [backlog, setBacklog] = useState<string[]>([]);
   const [backlogOpen, setBacklogOpen] = useState<boolean>(false);
 
-  const [completed, setCompleted] = useState<string[] | undefined>([]);
+  const [completed, setCompleted] = useState<string[]>([]);
   const [completedOpen, setCompletedOpen] = useState<boolean>(false);
 
   const [toastMsg, setToastMsg] = useState("");
