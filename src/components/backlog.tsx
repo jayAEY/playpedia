@@ -1,3 +1,4 @@
+import { ReactComponentElement, ReactElement, ReactNode } from "react";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -10,19 +11,13 @@ import { Checkbox } from "./ui/checkbox";
 
 interface Props {
   setBacklog: React.Dispatch<React.SetStateAction<string[]>>;
-  setAlertOpen(true);
-  setAlertMessage
-  setCompletedOpen(true);
-  setBacklog(newBacklog);
- setBacklogOpen(false)
-backlog
-  setToastMsg
-  setCompleted
-
-
-  // search: string;
-  // sortOrder: string;
-  // setSortOrder: React.Dispatch<React.SetStateAction<string>>;
+  setBacklogOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  backlog: string[];
+  setAlertOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setAlertMessage: React.Dispatch<React.SetStateAction<string>>;
+  setCompletedOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setToastMsg: React.Dispatch<React.SetStateAction<string>>;
+  setCompleted: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const Backlog = (props: Props) => {
@@ -34,15 +29,19 @@ const Backlog = (props: Props) => {
     }
   }
 
-  function markAsCompleted(button) {
+  function markAsCompleted() {
     let allGames = document.querySelectorAll(".backlogLi");
     let currentBacklog = localStorage.getItem("backlog")?.split(",");
-    let currentCompleted = [];
+    let currentCompleted: string[] = [];
     if (localStorage.getItem("completed")) {
-      currentCompleted = localStorage.getItem("completed").split(",");
+      currentCompleted = localStorage.getItem("completed").split(",") || [""];
     }
-    let toRemove = [];
-    let newBacklog = [];
+    // if (localStorage.getItem("completed")) {
+    //   currentCompleted = localStorage.getItem("completed").split(",");
+    // }
+
+    let toRemove: string[] = [];
+    let newBacklog: string[] = [];
 
     allGames.forEach((game) => {
       let gameName = game.innerText;
@@ -66,10 +65,12 @@ const Backlog = (props: Props) => {
     });
     props.setCompletedOpen(true);
 
-    newBacklog = currentBacklog.filter(
-      (game) => !toRemove.includes(game) && game.length > 0
-    );
-    localStorage.setItem("backlog", newBacklog);
+    currentBacklog &&
+      (newBacklog = currentBacklog.filter(
+        (game) => !toRemove.includes(game) && game.length > 0
+      ));
+
+    localStorage.setItem("backlog", JSON.stringify(newBacklog));
     props.setBacklog(newBacklog);
 
     toRemove.map((game) => {
@@ -88,7 +89,7 @@ const Backlog = (props: Props) => {
       }`
     );
 
-    localStorage.setItem("completed", currentCompleted);
+    localStorage.setItem("completed", JSON.stringify(currentCompleted));
     props.setCompleted(currentCompleted);
   }
 
@@ -133,8 +134,8 @@ const Backlog = (props: Props) => {
       </CardContent>
       <CardFooter className="flex flex-col items-center">
         <Button
-          onClick={(e) => {
-            markAsCompleted(e.target);
+          onClick={() => {
+            markAsCompleted();
           }}
         >
           Mark as completed
