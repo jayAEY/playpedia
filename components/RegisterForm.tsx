@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import heroImage from "@/public/eberhard-grossgasteiger-LmqySFs3TQQ-unsplash.jpg";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,7 +9,7 @@ import { Label } from "@/components/ui/label";
 
 export function RegisterForm() {
   return (
-    <main className="w-full min-h-screen lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+    <main className="w-full top-0 absolute min-h-screen flex justify-center lg:grid lg:grid-cols-2">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
@@ -71,13 +72,12 @@ export function RegisterForm() {
           </div>
         </div>
       </div>
-      <div className="hidden bg-muted lg:block">
+      <div className="max-h-screen object-contain hidden bg-muted lg:block">
         <Image
-          src="/eberhard-grossgasteiger-LmqySFs3TQQ-unsplash.jpg"
-          alt="Image"
-          width="1920"
-          height="1080"
-          className="h-screen w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          priority
+          src={heroImage}
+          alt="Hero Image"
+          className="h-screen w-full object-cover"
         />
       </div>
     </main>
