@@ -28,17 +28,14 @@ import { ModeToggle } from "./ModeToggle";
 import { useState } from "react";
 
 export function Navbar() {
-  // const [loggedIn, setLoggedIn] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+  // const [loggedIn, setLoggedIn] = useState(true);
 
   return (
-    // <div className="flex min-h-screen w-full flex-col">
-    // <header className="sticky top-0 flex h-16 z-50 items-center gap-4 border-b-2 shadow-xl bg-background px-4 md:px-6">
-
-    <header className="sticky top-0  grid grid-cols-3  h-16 z-50 items-center gap-4 border-b-2 shadow-xl bg-background px-4 md:px-6">
+    <header className="sticky top-0 grid grid-cols-1 h-28 z-50 items-center border-b-2 shadow-xl bg-background px-4 md:flex md:h-16 md:gap-6 md:justify-between">
       <nav
         id="desktop-nav"
-        className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6"
+        className="hidden gap-6 text-lg font-medium md:flex md:items-center md:gap-5 md:text-sm lg:gap-6 sm:w-[300px] md:w-[200px] lg:w-[300px]z"
       >
         <ModeToggle />
         {loggedIn ? (
@@ -65,19 +62,17 @@ export function Navbar() {
           </>
         )}
       </nav>
-      <div className="">
+      <div className="mx-auto">
         <Link
           href="/"
-          className="flex justify-center items-center gap-2 text-lg font-semibold md:text-base"
+          className="flex justify-center  gap-2 text-lg font-semibold md:text-base"
         >
           <Package2 className="h-8 w-8" />
           <h1 className="font-extrabold">playpedia</h1>
           <span className="sr-only">Acme Inc</span>
         </Link>
       </div>
-
-      {/* <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4"> */}
-      <div className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+      <div className="flex items-center gap-4 md:gap-2 lg:gap-4">
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -92,17 +87,17 @@ export function Navbar() {
           <SheetContent side="left">
             <nav
               id="mobile-nav"
-              className="grid gap-6 text-lg font-medium"
+              className="grid gap-6 m-3 text-lg font-medium"
             >
               {loggedIn ? (
                 <>
-                  <Link
-                    href="#"
-                    className="flex items-center gap-2 text-lg font-semibold"
-                  >
-                    <Package2 className="h-6 w-6" />
-                    <span className="sr-only">Acme Inc</span>
-                  </Link>
+                  <div className="flex justify-between">
+                    <ModeToggle />
+                    <Link
+                      href="#"
+                      className="flex items-center gap-2 text-lg font-semibold"
+                    ></Link>
+                  </div>
                   <Link
                     href="/dashboard"
                     className="hover:text-foreground"
@@ -112,18 +107,24 @@ export function Navbar() {
                 </>
               ) : (
                 <>
+                  <div className="flex justify-between">
+                    <ModeToggle />
+                    <Link
+                      href="#"
+                      className="flex items-center gap-2 text-lg font-semibold"
+                    ></Link>
+                  </div>
                   <Link
-                    href="#"
-                    className="flex items-center gap-2 text-lg font-semibold"
-                  >
-                    <Package2 className="h-6 w-6" />
-                    <span className="sr-only">Acme Inc</span>
-                  </Link>
-                  <Link
-                    href="/dashboard"
+                    href="/login"
                     className="hover:text-foreground"
                   >
-                    Dashboard
+                    Login
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="hover:text-foreground"
+                  >
+                    Register
                   </Link>
                 </>
               )}
