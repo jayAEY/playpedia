@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 
 export function LoginForm() {
   return (
-    <main className="w-full top-14 absolute min-h-screen flex justify-center lg:grid lg:grid-cols-2 lg:top-0">
+    <main className="w-full top-14 absolute min-h-screen flex justify-center lg:grid lg:grid-cols-2 md:top-0">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
