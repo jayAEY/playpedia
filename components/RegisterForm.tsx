@@ -9,10 +9,21 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+
 export function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
@@ -25,14 +36,13 @@ export function RegisterForm() {
         body: JSON.stringify({ email, password, avatar }),
       });
       if (res.ok) {
-        // let form = document.getElementById("#register-form") as HTMLFormElement;
-        // form.reset();
-        alert(`${email} is now registered!`);
+        setAlertOpen(true);
+        setAlertMessage(`${email} is now registered!`);
         router.push("/login");
       } else {
         let responseObject = await res.json();
-
-        alert(`Error: ${responseObject.message}`);
+        setAlertOpen(true);
+        setAlertMessage(`Error: ${responseObject.message}`);
       }
     } catch (err) {
       console.log(err);
@@ -41,6 +51,21 @@ export function RegisterForm() {
 
   return (
     <main className="w-full top-14 absolute min-h-screen flex justify-center lg:grid lg:grid-cols-2 md:top-0">
+      <AlertDialog open={alertOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogCancel
+              onClick={() => setAlertOpen(false)}
+              className="w-0.5"
+            >
+              x
+            </AlertDialogCancel>
+            <AlertDialogTitle className="text-center min-h-14 pb-8">
+              {alertMessage}
+            </AlertDialogTitle>
+          </AlertDialogHeader>
+        </AlertDialogContent>
+      </AlertDialog>
       <form
         id="register-form"
         className="flex items-center justify-center py-12"

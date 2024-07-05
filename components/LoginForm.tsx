@@ -6,11 +6,53 @@ import heroImage from "@/public/eberhard-grossgasteiger-LmqySFs3TQQ-unsplash.jpg
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export function LoginForm() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const router = useRouter();
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setAlertMessage(`${email} ${password}`);
+    setAlertOpen(true);
+  }
+
   return (
     <main className="w-full top-14 absolute min-h-screen flex justify-center lg:grid lg:grid-cols-2 md:top-0">
-      <div className="flex items-center justify-center py-12">
+      <AlertDialog open={alertOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogCancel
+              onClick={() => setAlertOpen(false)}
+              className="w-0.5"
+            >
+              x
+            </AlertDialogCancel>
+            <AlertDialogTitle className="text-center min-h-14 pb-8">
+              {alertMessage}
+            </AlertDialogTitle>
+          </AlertDialogHeader>
+        </AlertDialogContent>
+      </AlertDialog>
+      <form
+        id="login-form"
+        className="flex items-center justify-center py-12"
+        onSubmit={handleSubmit}
+      >
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">Login</h1>
@@ -26,6 +68,7 @@ export function LoginForm() {
                 type="email"
                 placeholder="m@example.com"
                 required
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="grid gap-2">
@@ -42,6 +85,7 @@ export function LoginForm() {
                 id="password"
                 type="password"
                 required
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <Button
@@ -67,7 +111,7 @@ export function LoginForm() {
             </Link>
           </div>
         </div>
-      </div>
+      </form>
       <div className="max-h-screen object-contain hidden bg-muted lg:block">
         <Image
           priority
