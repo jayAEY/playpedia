@@ -4,6 +4,8 @@ const usersSchema = new Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   avatar: String,
+  backlog: Array,
+  completed: Array,
 });
 
 const UsersModel = models.users || mongoose.model("users", usersSchema);

@@ -16,6 +16,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { signIn } from "next-auth/react";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -27,8 +28,18 @@ export function LoginForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setAlertMessage(`${email} ${password}`);
-    setAlertOpen(true);
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+    if (res?.ok) {
+      setAlertMessage("Login Successful");
+      setAlertOpen(true);
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 2000);
+    }
   }
 
   return (

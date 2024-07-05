@@ -1,18 +1,8 @@
 "use client";
 import Link from "next/link";
-import {
-  Activity,
-  ArrowUpRight,
-  CircleUser,
-  CreditCard,
-  DollarSign,
-  Menu,
-  Package2,
-  Search,
-  Users,
-} from "lucide-react";
+import { CircleUser, Menu, Package2, Search } from "lucide-react";
 
-// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -25,11 +15,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ModeToggle } from "./ModeToggle";
-import { useState } from "react";
+import { signOut, useSession } from "next-auth/react";
 
 export function Navbar() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  // const [loggedIn, setLoggedIn] = useState(true);
+  const { data: session, status } = useSession();
 
   return (
     <header className="sticky top-0 grid grid-cols-1 h-32 z-50 items-center gap-4 border-b-2 border-b-primary shadow-xl bg-background px-4 py-4 md:flex md:h-16 md:gap-6 md:justify-between">
@@ -38,7 +27,7 @@ export function Navbar() {
         className="hidden gap-6 text-lg font-medium md:flex md:items-center md:gap-5 md:text-sm lg:gap-6 sm:w-[300px] md:w-[200px] lg:w-[300px]z"
       >
         <ModeToggle />
-        {loggedIn ? (
+        {status === "authenticated" ? (
           <Link
             href="/dashboard"
             className="text-foreground transition-colors hover:text-foreground"
@@ -89,7 +78,7 @@ export function Navbar() {
               id="mobile-nav"
               className="grid gap-6 m-3 text-lg font-medium"
             >
-              {loggedIn ? (
+              {status === "authenticated" ? (
                 <>
                   <div className="flex justify-between">
                     <ModeToggle />
@@ -141,7 +130,7 @@ export function Navbar() {
             />
           </div>
         </form>
-        {loggedIn && (
+        {status === "authenticated" && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -149,7 +138,12 @@ export function Navbar() {
                 size="icon"
                 className="rounded-full"
               >
-                <CircleUser className="h-5 w-5" />
+                <Avatar>
+                  <AvatarImage src={session?.user?.avatar} />
+                  <AvatarFallback>
+                    <CircleUser className="h-5 w-5" />
+                  </AvatarFallback>
+                </Avatar>
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
@@ -159,7 +153,9 @@ export function Navbar() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => signOut()}>
+                Logout
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         )}
