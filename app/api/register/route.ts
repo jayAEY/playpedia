@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { connectToDb } from "@/lib/mongodb";
 import UsersModel from "@/models/Users";
 import bcrypt from "bcryptjs";
@@ -8,7 +8,7 @@ export function GET() {
   return NextResponse.json({ Date: new Date() }, { status: 201 });
 }
 
-export async function POST(req: NextResponse) {
+export async function POST(req: NextRequest) {
   const { email, password, avatar } = await req.json();
   try {
     connectToDb();
