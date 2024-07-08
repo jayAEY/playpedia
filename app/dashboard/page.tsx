@@ -1,6 +1,6 @@
 import UserInfo from "@/components/User-Info";
 import authOptions from "@/lib/authOptions";
-import getServerSession from "next-auth";
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 const Dashboard = async () => {
