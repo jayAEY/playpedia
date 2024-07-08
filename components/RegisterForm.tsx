@@ -38,7 +38,9 @@ export function RegisterForm() {
       if (res.ok) {
         setAlertOpen(true);
         setAlertMessage(`${email} is now registered!`);
-        router.push("/login");
+        setTimeout(() => {
+          router.push("/login");
+        }, 3000);
       } else {
         let responseObject = await res.json();
         setAlertOpen(true);
