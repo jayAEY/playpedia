@@ -16,9 +16,22 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ModeToggle } from "./ModeToggle";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useState } from "react";
 
 export function Navbar() {
   const { data: session, status } = useSession();
+  const searchParams = useSearchParams();
+  let searchQuery = "";
+  searchParams && (searchQuery = searchParams.get("query") as string);
+  const router = useRouter();
+
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    return router.push(`/search/?query=${searchValue}`);
+  };
 
   return (
     <header className="sticky top-0 grid grid-cols-1 h-32 z-50 items-center gap-4 border-b-2 border-b-primary shadow-xl bg-background px-4 py-4 md:flex md:h-16 md:gap-6 md:justify-between">
@@ -120,13 +133,22 @@ export function Navbar() {
             </nav>
           </SheetContent>
         </Sheet>
-        <form className="ml-auto flex-1 sm:flex-initial">
+        <form
+          className="ml-auto flex-1 sm:flex-initial"
+          onSubmit={(e) => {
+            handleSearch(e);
+          }}
+        >
           <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
               placeholder="Search games..."
               className="pl-8 md:w-[200px]"
+              // value={=}
+              onChange={(e) => setSearchValue(e.target.value)}
+              defaultValue={searchQuery}
+              // defaultValue={searchParams.get("query")?.toString()}
             />
           </div>
         </form>
