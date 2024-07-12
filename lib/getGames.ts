@@ -1,29 +1,38 @@
-export default async function getGames() {
+export default async function getGames(searchTerm: string) {
   let accessToken;
+  const clientId = process.env.IGDB_ID as string;
+  const secret = process.env.IGDB_SECRET;
   try {
     const res = await fetch(
-      `https://id.twitch.tv/oauth2/token?client_id=${process.env.NEXT_PUBLIC_IGDB_ID}&client_secret=${process.env.NEXT_PUBLIC_IGDB_SECRET}&grant_type=client_credentials`,
+      `https://id.twitch.tv/oauth2/token?client_id=${clientId}&client_secret=${secret}&grant_type=client_credentials`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       }
     );
+
     if (res.ok) {
-      // console.log(await res.json());
       accessToken = await res.json();
       try {
         const gamesRes = await fetch("https://api.igdb.com/v4/games", {
           method: "POST",
           headers: {
-            "Client-ID": "itljwapfoi3ntn66gh77kmjy5e7f8r",
+            "Client-ID": clientId,
             Authorization: `Bearer ${await accessToken.access_token}`,
           },
-          body: 'fields *; search "sonic the hedgehog"; limit 50;',
+          // body: `fields *; search "${searchTerm}"; limit 10;`,
+          body: `fields name, cover.*; ;
+                 exclude dlcs;
+                 search "${searchTerm}";
+                  limit 10;`,
+          // body:`query games "Playstation Games" {
+          //   fields name,platforms.name;
+          //   limit 10;
+          // };`,
         });
-        // if (gamesRes.ok) {
-        // console.log(await gamesRes.json());
-        return await gamesRes.json();
-        // }
+        if (gamesRes.ok) {
+          return await gamesRes.json();
+        }
       } catch (error) {
         console.log(error);
       }

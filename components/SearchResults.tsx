@@ -1,69 +1,90 @@
 // "use client";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import GameCard from "./GameCard";
+
+type Game = {
+  name: string;
+  platforms: string;
+  released: string;
+  metacritic: string;
+  background_image: string;
+  playtime: string;
+  rating: string;
+  genres: string;
+  screenshots: { string };
+  // cover: { url: string };
+};
 
 const SearchResults = () => {
   const searchParams = useSearchParams();
   const searchQuery = searchParams && searchParams.get("query");
+  const [gameData, setGameData] = useState<{ games: [Game] }>({
+    games: [{}] as [Game],
+  });
 
-  const pp = async () => {
-    try {
-      const res = await fetch("/api/search", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: "p" }),
-      });
-      if (res.ok) {
-        // console.log(await res.json());
-      }
-    } catch (error) {}
-  };
+  async function getData() {
+    const res = await fetch("/api/search", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ searchTerm: searchQuery }),
+    });
 
-  pp();
-  // const getGames = async () => {
-  // const res = await fetch("/search", { method: "GET" });
-  // console.log(await res.json());
-  // };
-  // const getGames = async () => {
-  // let accessToken;
-  // try {
-  //   const res = await fetch(
-  //     `https://id.twitch.tv/oauth2/token?client_id=${process.env.NEXT_PUBLIC_IGDB_ID}&client_secret=${process.env.NEXT_PUBLIC_IGDB_SECRET}&grant_type=client_credentials`,
-  //     {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //     }
-  //   );
-  //   if (res.ok) {
-  //     // console.log(await res.json());
-  //     accessToken = await res.json();
-  //     try {
-  //       const gamesRes = await fetch("https://api.igdb.com/v4/games", {
-  //         method: "POST",
-  //         headers: {
-  //           "Client-ID": "itljwapfoi3ntn66gh77kmjy5e7f8r",
-  //           Authorization: `Bearer ${await accessToken.access_token}`,
-  //         },
-  //       });
-  //       if (gamesRes.ok) {
-  //         console.log(await gamesRes.json());
-  //       }
-  //     } catch (error) {}
-  //   }
-  // } catch (error) {}
-  // try {
-  //   const res = await fetch("/api/search", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ email: "p" }),
-  //   });
-  //   if (res.ok) {
-  //     console.log(await res.json());
-  //   }
-  // } catch (error) {}
-  // };
+    if (res.ok) {
+      return setGameData(await res.json());
+    }
+    return;
+  }
 
-  // getGames();
-  return <h1>{searchQuery}</h1>;
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log(gameData?.games && gameData?.games[0]);
+  // console.log(getData());
+  return (
+    <main>
+      <h1>Search results for "{searchQuery}"</h1>
+      <section className="grid p-10 min-h-screen min-w-screen grid-cols-4 gap-4">
+        {gameData?.games &&
+          gameData.games.map((game, index) => {
+            return (
+              <GameCard
+                key={index}
+                name={game.name}
+                // cover={game.cover.url}
+              />
+            );
+          })}
+        {/* {data &&
+              data.map((game: game, index: number) => {
+                if (game.background_image && index < 17) {
+                  return (
+                    <GameCard
+                      name={game.name}
+                      platforms={game.parent_platforms}
+                      released={game.released}
+                      metacritic={game.metacritic}
+                      background_image={game.background_image}
+                      playtime={game.playtime}
+                      rating={game.rating}
+                      genres={game.genres}
+                      screenshots={game.short_screenshots}
+                      key={index}
+                      backlog={backlog}
+                      setBacklog={setBacklog}
+                      setBacklogOpen={setBacklogOpen}
+                      setAlertOpen={setAlertOpen}
+                      setAlertMessage={setAlertMessage}
+                      setToastMsg={setToastMsg}
+                    />
+                  );
+                } 
+               }) 
+              }*/}
+      </section>
+    </main>
+  );
 };
 
 export default SearchResults;
