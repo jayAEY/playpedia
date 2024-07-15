@@ -2,26 +2,12 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import GameCard from "./GameCard";
-
-type Game = {
-  name: string;
-  platforms: string;
-  released: string;
-  metacritic: string;
-  background_image: string;
-  playtime: string;
-  rating: string;
-  genres: string;
-  screenshots: { string };
-  // cover: { url: string };
-};
+import { HowLongToBeatEntry } from "howlongtobeat";
 
 const SearchResults = () => {
   const searchParams = useSearchParams();
   const searchQuery = searchParams && searchParams.get("query");
-  const [gameData, setGameData] = useState<{ games: [Game] }>({
-    games: [{}] as [Game],
-  });
+  const [data, setData] = useState<{ results: [HowLongToBeatEntry] }>();
 
   async function getData() {
     const res = await fetch("/api/search", {
@@ -31,31 +17,45 @@ const SearchResults = () => {
     });
 
     if (res.ok) {
-      return setGameData(await res.json());
+      setData(await res.json());
     }
-    return;
   }
 
   useEffect(() => {
     getData();
   }, []);
 
-  console.log(gameData?.games && gameData?.games[0]);
-  // console.log(getData());
+  console.log(data);
+
   return (
     <main>
       <h1>Search results for "{searchQuery}"</h1>
       <section className="grid p-10 min-h-screen min-w-screen grid-cols-4 gap-4">
-        {gameData?.games &&
-          gameData.games.map((game, index) => {
+        {data?.results &&
+          data?.results.map((game, index) => {
             return (
               <GameCard
-                key={index}
                 name={game.name}
-                // cover={game.cover.url}
+                image={game.imageUrl}
+                gameplayMain={game.gameplayMain}
+                gameplayMainExtra={game.gameplayMainExtra}
+                completionist={game.gameplayCompletionist}
+                platforms={game.platforms}
+                key={game.name}
               />
             );
           })}
+        {/* {gameData?.games && 
+          // gameData.games.map((game, index) => {
+            // return (
+              // <GameCard
+              // key={index}
+              // name={game.name}
+              // cover={game.cover?.url}
+              // screenshots={game.screenshots?.[0].url}
+              // />
+            // );
+          // })}
         {/* {data &&
               data.map((game: game, index: number) => {
                 if (game.background_image && index < 17) {

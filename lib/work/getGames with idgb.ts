@@ -21,8 +21,8 @@ export default async function getGames(searchTerm: string) {
             Authorization: `Bearer ${await accessToken.access_token}`,
           },
           // body: `fields *; search "${searchTerm}"; limit 10;`,
-          body: `fields name, cover.*; ;
-                 exclude dlcs;
+          body: `fields *, name, cover.*; screenshots.*; ;
+                 exclude alternative_name;
                  search "${searchTerm}";
                   limit 10;`,
           // body:`query games "Playstation Games" {

@@ -18,8 +18,25 @@ import {
 } from "react-icons/bs";
 import { DiLinux } from "react-icons/di";
 import { SiNintendo } from "react-icons/si";
+
+type GameCardProps = {
+  name: string;
+  image: string;
+  gameplayMain: string;
+  gameplayMainExtra: string;
+  completionist: string;
+  platforms: string;
+};
+
 // const GameCard = (props) => {
-const GameCard = ({ name, cover }) => {
+const GameCard = ({
+  name,
+  image,
+  gameplayMain,
+  gameplayMainExtra,
+  completionist,
+  platforms,
+}: GameCardProps) => {
   let handlePlatformIcons = (platform, index) => {
     switch (platform) {
       case "PlayStation":
@@ -133,22 +150,30 @@ const GameCard = ({ name, cover }) => {
   return (
     <Card className="flex-row col-span-4 md:col-span-2 xl:col-span-1 gap-2 rounded-none bg-card shadow-2xl border-foreground/15 hover:bg-secondary">
       <CardHeader>
-        <CardTitle className="text-4xl font-extrabold tracking-tight -mb-2">
+        <CardTitle className="text-3xl font-extrabold tracking-tight -mb-2">
           {name}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4 text-foreground/70">
         <div className="flex-row mb-6">
           {/* <p>Average playtime: {props.playtime} hours</p> */}
+          <p>Average playtimes:</p>
+          <p>Main: {gameplayMain} hours</p>
+          <p>Main + Extra: {gameplayMainExtra} hours</p>
+          <p>Completionist: {completionist} hours</p>
+
           {/* <p>User Rating: {props.rating}/5</p> */}
           <div className="flex gap-2">
             {/* Metacritic: {handleMetacritic(props.metacritic)} */}
           </div>
         </div>
         <img
-          //   src={props.background_image}
-          src={cover}
-          className=" w-full aspect-video object-cover "
+          // src={props.background_image}
+          // src={cover}
+          src={image}
+          // src={screenshots}
+          // width={"400px"}
+          className=" top-0 w-full aspect-video object-cover "
           //   alt={props.name}
         />
         <div className="flex space-x-2 items-center">
