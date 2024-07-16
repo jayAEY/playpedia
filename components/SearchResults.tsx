@@ -23,13 +23,16 @@ const SearchResults = () => {
 
   useEffect(() => {
     getData();
-  }, []);
-
-  console.log(data);
+    // }, [searchQuery]);
+  }, [searchQuery]);
 
   return (
     <main>
-      <h1>Search results for "{searchQuery}"</h1>
+      {searchQuery && (
+        <h1 className="pl-10 pt-10 text-2xl font-semibold text-muted-foreground">
+          Search results for &ldquo;{searchQuery}&ldquo;
+        </h1>
+      )}
       <section className="grid p-10 min-h-screen min-w-screen grid-cols-4 gap-4">
         {data?.results &&
           data?.results.map((game, index) => {
@@ -41,7 +44,7 @@ const SearchResults = () => {
                 gameplayMainExtra={game.gameplayMainExtra}
                 completionist={game.gameplayCompletionist}
                 platforms={game.platforms}
-                key={game.name}
+                key={game.name + index}
               />
             );
           })}

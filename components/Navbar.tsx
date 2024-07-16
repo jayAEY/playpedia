@@ -30,11 +30,7 @@ export function Navbar() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // router.push(`/search/?query=${searchValue}`);
-    // return router.reload();
-    return router.forward(`/search/?query=${searchValue}`);
-
-    // router.replace(`/search/?query=${searchValue}`);
+    router.push(`/search/?query=${searchValue}`);
   };
 
   return (
