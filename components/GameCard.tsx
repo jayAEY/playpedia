@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import {
@@ -8,6 +9,15 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 import {
   BsWindows,
@@ -292,6 +302,8 @@ const GameCard = ({
   //   }
   // }
 
+  const imgUrl = image;
+
   return (
     // <Card className="flex-row col-span-4 md:col-span-2 xl:col-span-1 gap-2 rounded-none bg-card shadow-2xl border-foreground/15 hover:bg-secondary">
 
@@ -302,14 +314,32 @@ const GameCard = ({
         </CardTitle>
       </CardHeader>
       {/* <CardContent className="space-y-4 text-foreground/70"> */}
-      <CardContent className="space-y-4 text-foreground/70 flex">
+      <CardContent className="space-y-4 gap-2 text-foreground/70 flex-row md:flex">
         {/* <div className="flex-row mb-6"> */}
         <div className="flex-row flex-1">
-          {/* <p>Average playtime: {props.playtime} hours</p> */}
           <p>Average playtimes:</p>
-          <p>Main: {gameplayMain} hours</p>
-          <p>Main + Extra: {gameplayMainExtra} hours</p>
-          <p>Completionist: {completionist} hours</p>
+          <table className="w-full text-sm font-black ">
+            <tbody>
+              <tr>
+                <td className="flex-1">Main</td>
+                <td className="flex-1 text-nowrap px-2">
+                  {gameplayMain} hours
+                </td>
+              </tr>
+              <tr>
+                <td>Main + Extra</td>
+                <td className="flex-1 text-nowrap px-2">
+                  {gameplayMainExtra} hours
+                </td>
+              </tr>
+              <tr>
+                <td>Completionist</td>
+                <td className="flex-1 text-nowrap px-2">
+                  {completionist} hours
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           {/* <p>User Rating: {props.rating}/5</p> */}
           <div className="flex gap-2">
@@ -324,9 +354,15 @@ const GameCard = ({
           </div>
         </div>
         <div className="flex-1">
-          <Image
-            src={image}
+          {/* <Image
+            priority
+            src="https://howlongtobeat.com/games/46464_Mario__Rabbids_Kingdom_Battle.jpg"
             fill={true}
+            className="w-full object-cover"
+            alt={name}
+          /> */}
+          <img
+            src={image}
             className="w-full object-cover"
             alt={name}
           />

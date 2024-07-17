@@ -6,7 +6,7 @@ import { HowLongToBeatEntry } from "howlongtobeat";
 
 const SearchResults = () => {
   const searchParams = useSearchParams();
-  const searchQuery = searchParams && searchParams.get("query");
+  const searchQuery = (searchParams && searchParams.get("query")) || "";
   const [data, setData] = useState<{ results: [HowLongToBeatEntry] }>();
 
   async function getData() {
@@ -23,9 +23,9 @@ const SearchResults = () => {
 
   useEffect(() => {
     getData();
-    // }, [searchQuery]);
   }, [searchQuery]);
 
+  console.log(data);
   return (
     <main>
       {searchQuery && (
