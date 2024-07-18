@@ -25,7 +25,7 @@ const SearchResults = () => {
     getData();
   }, [searchQuery]);
 
-  console.log(data);
+  // console.log(data);
   return (
     <main>
       {searchQuery && (
@@ -44,47 +44,11 @@ const SearchResults = () => {
                 gameplayMainExtra={game.gameplayMainExtra}
                 completionist={game.gameplayCompletionist}
                 platforms={game.platforms}
+                id={game.id}
                 key={game.name + index}
               />
             );
           })}
-        {/* {gameData?.games && 
-          // gameData.games.map((game, index) => {
-            // return (
-              // <GameCard
-              // key={index}
-              // name={game.name}
-              // cover={game.cover?.url}
-              // screenshots={game.screenshots?.[0].url}
-              // />
-            // );
-          // })}
-        {/* {data &&
-              data.map((game: game, index: number) => {
-                if (game.background_image && index < 17) {
-                  return (
-                    <GameCard
-                      name={game.name}
-                      platforms={game.parent_platforms}
-                      released={game.released}
-                      metacritic={game.metacritic}
-                      background_image={game.background_image}
-                      playtime={game.playtime}
-                      rating={game.rating}
-                      genres={game.genres}
-                      screenshots={game.short_screenshots}
-                      key={index}
-                      backlog={backlog}
-                      setBacklog={setBacklog}
-                      setBacklogOpen={setBacklogOpen}
-                      setAlertOpen={setAlertOpen}
-                      setAlertMessage={setAlertMessage}
-                      setToastMsg={setToastMsg}
-                    />
-                  );
-                } 
-               }) 
-              }*/}
       </section>
     </main>
   );
