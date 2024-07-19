@@ -311,7 +311,7 @@ const GameCard = ({
         <CardTitle className="text-xl font-extrabold tracking-tight leading-6 -mb-2">
           {name}
         </CardTitle>
-        <CardDescription>{platforms[0]} ...</CardDescription>
+        <CardDescription>{platforms[1]} ...</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4 gap-2 text-foreground/70 flex-row md:flex">
         <div className="flex-row flex-1">

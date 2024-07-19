@@ -5,7 +5,7 @@ import { Card } from "./ui/card";
 
 type GameProps = {
   name: string;
-  background_image: string;
+  // background_image: string;
   esrb_rating: { name: string };
   genres: [{ name: string }];
   // parent_platforms: object[];
@@ -22,28 +22,23 @@ const GamePage = () => {
   let gameName = (searchParams && searchParams.get("name")) || "";
   const [gameData, setGameData] = useState<GameProps>();
 
-  // const [gameData, setGameData] = useState<GameProps[]>([]);
-
   async function getGameData() {
-    const res = await fetch(
-      `https://rawg.io/api/games?key=${process.env.NEXT_PUBLIC_RAWG}&search=${gameName}&search_precise`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    const res = await fetch("/api/details", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ gameName }),
+    });
 
     if (res.ok) {
       let response = await res.json();
-      setGameData(response.results[0]);
+      setGameData(response.results);
     }
   }
 
   useEffect(() => {
     getGameData();
-  });
+  }, []);
 
-  // getGameData();
   console.log(gameData);
   return (
     <>
@@ -58,27 +53,29 @@ const GamePage = () => {
           {gameData?.platforms.map((platform) => {
             return <li>{platform.platform.name}</li>;
           })}
-          {gameData?.background_image && (
+          {gameData?.short_screenshots[0].image && (
             <img
-              src={gameData?.background_image}
+              src={gameData?.short_screenshots[0].image}
               alt={`${gameData?.name} background`}
             />
           )}
           {gameData?.short_screenshots?.map((screenshot, i) => {
             return (
-              <img
-                src={screenshot.image}
-                alt={`${gameData.name} screenshot ${i}`}
-              />
+              i > 0 && (
+                <img
+                  src={screenshot.image}
+                  alt={`${gameData.name} screenshot ${i}`}
+                />
+              )
             );
           })}
-          {/* <h1>{gameData?.esrb_rating.name}</h1> */}
         </Card>
       ) : (
-        <h1>loading</h1>
+        <Card className="w-full p-10 rounded-none">
+          <h1>loading</h1>
+        </Card>
       )}
     </>
   );
-  // return <h1>{gameData.results}</h1>;
 };
 export default GamePage;
