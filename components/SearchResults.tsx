@@ -41,7 +41,7 @@ const SearchResults = () => {
           </h1>
         )
       )}
-      <section className="grid p-10  min-w-screen grid-cols-4 gap-4">
+      <section className="grid p-10 min-w-screen grid-cols-1 md:grid-cols-2 xl:grid-cols-3 min-[1600px]:grid-cols-4  gap-4">
         {data?.results
           ? data?.results.map((game, index) => {
               return (

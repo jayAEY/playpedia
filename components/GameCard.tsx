@@ -51,6 +51,7 @@ const GameCard = ({
   platforms,
   id,
 }: GameCardProps) => {
+  // console.log(platforms.filter((platform) => platform !== "Emulated").toString());
   // let handlePlatformIcons = (platform: string, index: number) => {
   //   switch (platform) {
   //     case "PlayStation":
@@ -305,60 +306,69 @@ const GameCard = ({
   //   }
   // }
 
+  // return (
   return (
-    <Card className="flex-row max-h-96 gap-2 col-span-4 md:col-span-2 xl:col-span-1 rounded-none border-foreground/15 shadow-2xl hover:bg-secondary">
-      <CardHeader>
-        <CardTitle className="text-xl font-extrabold tracking-tight leading-6 -mb-2">
-          {name}
-        </CardTitle>
-        <CardDescription>{platforms[1]} ...</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4 gap-2 text-foreground/70 flex-row md:flex">
-        <div className="flex-row flex-1">
-          <p>Average playtimes:</p>
-          <table className="w-full text-sm font-black ">
-            <tbody>
-              <tr>
-                <td className="flex-1">Main</td>
-                <td className="flex-1 text-nowrap px-2">
-                  {gameplayMain} hours
-                </td>
-              </tr>
-              <tr>
-                <td>Main + Extra</td>
-                <td className="flex-1 text-nowrap px-2">
-                  {gameplayMainExtra} hours
-                </td>
-              </tr>
-              <tr>
-                <td>Completionist</td>
-                <td className="flex-1 text-nowrap px-2">
-                  {completionist} hours
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div className="flex gap-2"></div>
-        </div>
-        {/* <div className="flex-1"> */}
-        <div className="">
+    <Card className="flex gap-2 h-full p-6 col-span-1 rounded-none border-foreground/15 shadow-2xl hover:bg-secondary">
+      <CardContent className="flex flex-col gap-6 p-0 w-full h-full">
+        <div className="flex flex-col md:flex-row h-full gap-6 text-foreground/70 ">
+          <div className="flex flex-col flex-1 gap-6 h-full">
+            <CardHeader className="p-0 pb-1 ">
+              <CardTitle className="text-2xl font-black text-primary-foreground tracking-tight leading-6 -mb-1">
+                {name}
+              </CardTitle>
+              <CardDescription
+                title={platforms
+                  .filter((platform) => platform !== "Emulated")
+                  .join(", ")}
+              >
+                {platforms[0] !== "Emulated"
+                  ? platforms[0]
+                  : platforms[1] && platforms[1]}{" "}
+                ...
+              </CardDescription>
+            </CardHeader>
+            <table className="w-full text-xs font-bold">
+              <tbody>
+                <tr>
+                  <td className="flex-1 border p-2">Main</td>
+                  <td className="flex-1 border p-2 text-nowrap px-2">
+                    {gameplayMain} hours
+                  </td>
+                </tr>
+                <tr>
+                  <td className="flex-1 border p-2">Main + Extra</td>
+                  <td className="flex-1 border p-2 text-nowrap px-2">
+                    {gameplayMainExtra} hours
+                  </td>
+                </tr>
+                <tr>
+                  <td className="flex-1 border p-2">Completionist</td>
+                  <td className="flex-1 border p-2 text-nowrap px-2">
+                    {completionist} hours
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <img
             src={image}
-            className="w-auto object-cover max-h-56"
+            className="w-full md:max-w-[35%] object-contain self-start"
             alt={name}
           />
         </div>
+        <CardFooter className="flex p-0 justify-between">
+          {/* <Button onClick={(e) => addGame(e)}>Add to Backlog</Button> */}
+          <Link
+            href={`/details/game?name=${name}`}
+            className="text-primary font-extrabold text-sm hover:text-primary-foreground"
+          >
+            More Info ...
+          </Link>
+          <Button className="h-8 text-xs font-black hover:bg-primary/50">
+            Add to Backlog
+          </Button>
+        </CardFooter>
       </CardContent>
-      <CardFooter>
-        {/* <Button onClick={(e) => addGame(e)}>Add to Backlog</Button> */}
-        <Button>Add to Backlog</Button>
-        {/* <Link href={`/game/?${id}`}>More Info ..</Link> */}
-        {/* router.push(`/search/?query=${searchValue}`); */}
-        <Link href={`/details/game?name=${name}`}>More Info ..</Link>
-
-        {/* <Link href={`/game/id=?${id}`}>More Info ..</Link> */}
-      </CardFooter>
     </Card>
   );
 };
