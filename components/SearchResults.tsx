@@ -25,7 +25,7 @@ const SearchResults = () => {
     getData();
   }, [searchQuery]);
 
-  // console.log(data);
+  console.log(data);
   return (
     <main>
       {searchQuery && (
@@ -34,21 +34,28 @@ const SearchResults = () => {
         </h1>
       )}
       <section className="grid p-10 min-h-screen min-w-screen grid-cols-4 gap-4">
-        {data?.results &&
+        {data?.results ? (
           data?.results.map((game, index) => {
             return (
-              <GameCard
-                name={game.name}
-                image={game.imageUrl}
-                gameplayMain={game.gameplayMain}
-                gameplayMainExtra={game.gameplayMainExtra}
-                completionist={game.gameplayCompletionist}
-                platforms={game.platforms}
-                id={game.id}
-                key={game.name + index}
-              />
+              game.gameplayMain != 0 && (
+                <GameCard
+                  name={game.name}
+                  image={game.imageUrl}
+                  gameplayMain={game.gameplayMain}
+                  gameplayMainExtra={game.gameplayMainExtra}
+                  completionist={game.gameplayCompletionist}
+                  platforms={game.platforms}
+                  id={game.id}
+                  key={game.name + index}
+                />
+              )
             );
-          })}
+          })
+        ) : (
+          <h1 className="pl-10 pt-10 text-2xl font-semibold text-muted-foreground">
+            No results found
+          </h1>
+        )}
       </section>
     </main>
   );

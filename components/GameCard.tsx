@@ -306,7 +306,7 @@ const GameCard = ({
   // }
 
   return (
-    <Card className="flex-row h-full gap-2 col-span-4 md:col-span-2 xl:col-span-1 rounded-none border-foreground/15 shadow-2xl hover:bg-secondary">
+    <Card className="flex-row max-h-96 gap-2 col-span-4 md:col-span-2 xl:col-span-1 rounded-none border-foreground/15 shadow-2xl hover:bg-secondary">
       <CardHeader>
         <CardTitle className="text-xl font-extrabold tracking-tight leading-6 -mb-2">
           {name}

@@ -1,16 +1,18 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "./ui/card";
 
 type GameProps = {
   name: string;
   background_image: string;
-  esrb_rating: object;
-  genres: object[];
-  parent_platforms: object[];
+  esrb_rating: { name: string };
+  genres: [{ name: string }];
+  // parent_platforms: object[];
+  platforms: [{ platform: { name: string } }];
+
   released: string;
-  short_screenshots: object[];
+  short_screenshots: [{ image: string }];
   tags: object[];
 };
 
@@ -37,12 +39,45 @@ const GamePage = () => {
     }
   }
 
-  getGameData();
-  // console.log(gameData);
+  useEffect(() => {
+    getGameData();
+  });
+
+  // getGameData();
+  console.log(gameData);
   return (
-    <Card className="w-full p-10 rounded-none">
-      <h1 className="text-2xl font-extrabold">{gameName}</h1>
-    </Card>
+    <>
+      {gameData ? (
+        <Card className="w-full p-10 rounded-none">
+          <h1 className="text-2xl font-extrabold">{gameData?.name}</h1>
+          <h1>{gameData?.esrb_rating?.name}</h1>
+          {gameData?.genres?.map((genre) => {
+            return <li>{genre.name}</li>;
+          })}
+          {gameData?.released && <h1>Release Date : {gameData?.released}</h1>}
+          {gameData?.platforms.map((platform) => {
+            return <li>{platform.platform.name}</li>;
+          })}
+          {gameData?.background_image && (
+            <img
+              src={gameData?.background_image}
+              alt={`${gameData?.name} background`}
+            />
+          )}
+          {gameData?.short_screenshots?.map((screenshot, i) => {
+            return (
+              <img
+                src={screenshot.image}
+                alt={`${gameData.name} screenshot ${i}`}
+              />
+            );
+          })}
+          {/* <h1>{gameData?.esrb_rating.name}</h1> */}
+        </Card>
+      ) : (
+        <h1>loading</h1>
+      )}
+    </>
   );
   // return <h1>{gameData.results}</h1>;
 };
