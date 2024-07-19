@@ -313,7 +313,7 @@ const GameCard = ({
         <div className="flex flex-col md:flex-row h-full gap-6 text-foreground/70 ">
           <div className="flex flex-col flex-1 gap-6 h-full">
             <CardHeader className="p-0 pb-1 ">
-              <CardTitle className="text-2xl font-black text-primary-foreground tracking-tight leading-6 -mb-1">
+              <CardTitle className="text-2xl font-black text-foreground tracking-tight leading-6 -mb-1">
                 {name}
               </CardTitle>
               <CardDescription
@@ -329,19 +329,19 @@ const GameCard = ({
             </CardHeader>
             <table className="w-full text-xs font-bold">
               <tbody>
-                <tr>
+                <tr className="hover:bg-primary">
                   <td className="flex-1 border p-2">Main</td>
                   <td className="flex-1 border p-2 text-nowrap px-2">
                     {gameplayMain} hours
                   </td>
                 </tr>
-                <tr>
+                <tr className="hover:bg-primary">
                   <td className="flex-1 border p-2">Main + Extra</td>
                   <td className="flex-1 border p-2 text-nowrap px-2">
                     {gameplayMainExtra} hours
                   </td>
                 </tr>
-                <tr>
+                <tr className="hover:bg-primary">
                   <td className="flex-1 border p-2">Completionist</td>
                   <td className="flex-1 border p-2 text-nowrap px-2">
                     {completionist} hours
