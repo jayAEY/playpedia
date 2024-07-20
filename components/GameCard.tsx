@@ -359,7 +359,8 @@ const GameCard = ({
         <CardFooter className="flex p-0 justify-between">
           {/* <Button onClick={(e) => addGame(e)}>Add to Backlog</Button> */}
           <Link
-            href={`/details/game?name=${name}`}
+            // href={`/details/game?name=${name}`}
+            href={`/details/game?name=${name}&times=${gameplayMain}-${gameplayMainExtra}-${completionist}`}
             className="text-primary font-extrabold text-sm hover:text-primary-foreground"
           >
             More Info ...

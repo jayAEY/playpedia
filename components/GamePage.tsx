@@ -10,7 +10,6 @@ type GameProps = {
   genres: [{ name: string }];
   // parent_platforms: object[];
   platforms: [{ platform: { name: string } }];
-
   released: string;
   short_screenshots: [{ image: string }];
   tags: object[];
@@ -20,6 +19,8 @@ const GamePage = () => {
   const searchParams = useSearchParams();
 
   let gameName = (searchParams && searchParams.get("name")) || "";
+  let gameTimes = (searchParams && searchParams.get("times")) || "";
+
   const [gameData, setGameData] = useState<GameProps>();
 
   async function getGameData() {
@@ -45,6 +46,7 @@ const GamePage = () => {
       {gameData ? (
         <Card className="w-full p-10 rounded-none">
           <h1 className="text-2xl font-extrabold">{gameData?.name}</h1>
+          <h1 className="text-3xl font-extrabold">{gameTimes}</h1>
           <h1>{gameData?.esrb_rating?.name}</h1>
           {gameData?.genres?.map((genre) => {
             return <li>{genre.name}</li>;
