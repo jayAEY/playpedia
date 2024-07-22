@@ -18,7 +18,7 @@ const authOptions: NextAuthOptions = {
         await connectToDb();
         const user = await UsersModel.findOne({ email });
         if (!user) throw new Error("User does not exist");
-        const passwordMatch = bcrypt.compare(password, user.password);
+        const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) throw new Error("Wrong Password");
         return user;
       },

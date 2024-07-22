@@ -39,6 +39,10 @@ export function LoginForm() {
       setTimeout(() => {
         router.push("/dashboard");
       }, 3000);
+    } else {
+      setAlertMessage(res?.error as string);
+      setAlertOpen(true);
+      console.log(res);
     }
   }
 
