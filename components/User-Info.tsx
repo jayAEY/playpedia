@@ -8,8 +8,199 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Backlog from "./Backlog";
 import Completed from "./Completed";
 
-const UserInfo = () => {
+const UserInfo = ({ columns, DataTable }) => {
   const { data: session, status } = useSession();
+
+  // async function getData(): Promise<Payment[]> {
+  function getData() {
+    // Fetch data from your API here.
+    return [
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "a@example.com",
+      },
+      {
+        id: "728esd2f",
+        amount: 100,
+        status: "pending",
+        email: "b@example.com",
+      },
+      {
+        id: "asd8ed52f",
+        amount: 100,
+        status: "pending",
+        email: "c@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "d@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "e@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "f@example.com",
+      },
+      {
+        id: "728esd2f",
+        amount: 100,
+        status: "pending",
+        email: "g@example.com",
+      },
+      {
+        id: "asd8ed52f",
+        amount: 100,
+        status: "pending",
+        email: "h@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728esd2f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "asd8ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728esd2f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "asd8ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728esd2f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "asd8ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728esd2f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "asd8ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+      },
+      // ...
+    ];
+  }
+
+  const data = getData();
+
   return (
     <main>
       {status === "authenticated" ? (
@@ -35,9 +226,13 @@ const UserInfo = () => {
               Logout
             </Button>
           </div>
-          <div>
-            <Backlog />
-            <Completed />
+          <div className="p-4">
+            {/* <Backlog /> */}
+            {/* <Completed /> */}
+            <DataTable
+              columns={columns}
+              data={data}
+            />
           </div>
         </>
       ) : (
