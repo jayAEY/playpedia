@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 import Backlog from "./Backlog";
 import Completed from "./Completed";
 
@@ -50,5 +51,4 @@ const UserInfo = () => {
     </main>
   );
 };
-
 export default UserInfo;
