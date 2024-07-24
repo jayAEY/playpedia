@@ -23,6 +23,20 @@ export type Payment = {
   email: string;
 };
 
+export type BacklogGame = {
+  name: String;
+  avg: Number;
+  platform: String;
+  date: Date;
+};
+
+export type CompletedGame = {
+  name: String;
+  time: String;
+  platform: String;
+  date: Date;
+};
+
 export const columns: ColumnDef<Payment>[] = [
   {
     id: "select",

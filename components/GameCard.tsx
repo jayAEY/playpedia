@@ -1,4 +1,7 @@
 "use client";
+
+import { useState } from "react";
+
 import Image from "next/image";
 import { Button } from "./ui/button";
 import {
@@ -32,6 +35,23 @@ import { SiNintendo } from "react-icons/si";
 import { FaMobileAlt } from "react-icons/fa";
 import Link from "next/link";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 type GameCardProps = {
   name: string;
   image: string;
@@ -40,6 +60,18 @@ type GameCardProps = {
   completionist: number;
   platforms: string[];
   id: number | string;
+};
+
+type GameProps = {
+  name: string;
+  // background_image: string;
+  esrb_rating: { name: string };
+  genres: [{ name: string }];
+  // parent_platforms: object[];
+  platforms: [{ platform: { name: string } }];
+  released: string;
+  short_screenshots: [{ image: string }];
+  tags: object[];
 };
 
 const GameCard = ({
@@ -51,6 +83,22 @@ const GameCard = ({
   platforms,
   id,
 }: GameCardProps) => {
+  const [moreOpen, setmoreOpen] = useState(false);
+  const [gameData, setGameData] = useState<GameProps>();
+
+  async function getGameData(gameName: string) {
+    const res = await fetch("/api/details", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ gameName }),
+    });
+
+    if (res.ok) {
+      let response = await res.json();
+      setGameData(response.results);
+    }
+  }
+
   // console.log(platforms.filter((platform) => platform !== "Emulated").toString());
   // let handlePlatformIcons = (platform: string, index: number) => {
   //   switch (platform) {
@@ -307,70 +355,203 @@ const GameCard = ({
   // }
 
   // return (
+
+  // add completed form
+  // <Card className="w-full p-10 rounded-none">
+  // <div className="flex gap-2">
+  //   <Input
+  //     className="w-14  text-center bg-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+  //     id="hours"
+  //     name="hours"
+  //     placeholder="HH"
+  //     type="number"
+  //   />
+  //   <Input
+  //     className="w-14 text-center bg-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+  //     id="minutes"
+  //     name="minutes"
+  //     placeholder="MM"
+  //     type="number"
+  //   />
+  //   <Input
+  //     className="w-14 text-center bg-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+  //     id="seconds"
+  //     name="seconds"
+  //     placeholder="SS"
+  //     type="number"
+  //   />
+  // </div>
+  // <Input
+  //     className="w-14  text-center bg-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+  //     id="Notes"
+  //     name="notes"
+  //     placeholder="Notes"
+  //     type="text"
+  //   />
+
   return (
-    <Card className="flex gap-2 h-full p-6 col-span-1 rounded-none border-foreground/15 shadow-2xl hover:bg-secondary">
-      <CardContent className="flex flex-col gap-6 p-0 w-full h-full">
-        <div className="flex flex-col md:flex-row h-full gap-6 text-foreground/70 ">
-          <div className="flex flex-col flex-1 gap-6 h-full">
-            <CardHeader className="p-0 pb-1 ">
-              <CardTitle className="text-2xl font-black text-foreground tracking-tight leading-6 -mb-1">
-                {name}
-              </CardTitle>
-              <CardDescription
-                title={platforms
-                  .filter((platform) => platform !== "Emulated")
-                  .join(", ")}
-              >
-                {platforms[0] !== "Emulated"
-                  ? platforms[0]
-                  : platforms[1] && platforms[1]}{" "}
-                ...
-              </CardDescription>
-            </CardHeader>
-            <table className="w-full text-xs font-bold">
-              <tbody>
-                <tr className="hover:bg-primary">
-                  <td className="flex-1 border p-2">Main</td>
-                  <td className="flex-1 border p-2 text-nowrap px-2">
-                    {gameplayMain} hours
-                  </td>
-                </tr>
-                <tr className="hover:bg-primary">
-                  <td className="flex-1 border p-2">Main + Extra</td>
-                  <td className="flex-1 border p-2 text-nowrap px-2">
-                    {gameplayMainExtra} hours
-                  </td>
-                </tr>
-                <tr className="hover:bg-primary">
-                  <td className="flex-1 border p-2">Completionist</td>
-                  <td className="flex-1 border p-2 text-nowrap px-2">
-                    {completionist} hours
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+    <>
+      {/* {moreOpen ? ( */}
+      {/* <Dialog>
+          <DialogTrigger>Open</DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Are you absolutely sure?</DialogTitle>
+              <DialogDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog> */}
+      {/* ) : ( */}
+      <Card className="flex gap-2 h-full p-6 col-span-1 rounded-none border-foreground/15 shadow-2xl hover:bg-secondary">
+        <CardContent className="flex flex-col gap-6 p-0 w-full h-full">
+          <div className="flex flex-col md:flex-row h-full gap-6 text-foreground/70 ">
+            <div className="flex flex-col flex-1 gap-6 h-full">
+              <CardHeader className="p-0 pb-1 ">
+                <CardTitle className="text-2xl font-black text-foreground tracking-tight leading-6 -mb-1">
+                  {name}
+                </CardTitle>
+                <CardDescription
+                  title={platforms
+                    .filter((platform) => platform !== "Emulated")
+                    .join(", ")}
+                >
+                  {platforms[0] !== "Emulated"
+                    ? platforms[0]
+                    : platforms[1] && platforms[1]}
+                  ...
+                </CardDescription>
+              </CardHeader>
+              <table className="w-full text-xs font-bold">
+                <tbody>
+                  <tr className="hover:bg-primary">
+                    <td className="flex-1 border border-foreground p-2">
+                      Main
+                    </td>
+                    <td className="flex-1 border border-foreground p-2 text-nowrap px-2">
+                      {gameplayMain} hours
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-primary">
+                    <td className="flex-1 border border-foreground p-2">
+                      Main + Extra
+                    </td>
+                    <td className="flex-1 border border-foreground p-2 text-nowrap px-2">
+                      {gameplayMainExtra} hours
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-primary">
+                    <td className="flex-1 border border-foreground p-2">
+                      Completionist
+                    </td>
+                    <td className="flex-1 border border-foreground p-2 text-nowrap px-2">
+                      {completionist} hours
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <img
+              src={image}
+              className="w-full md:max-w-[35%] object-contain self-start"
+              alt={name}
+            />
           </div>
-          <img
-            src={image}
-            className="w-full md:max-w-[35%] object-contain self-start"
-            alt={name}
-          />
-        </div>
-        <CardFooter className="flex p-0 justify-between">
-          {/* <Button onClick={(e) => addGame(e)}>Add to Backlog</Button> */}
-          <Link
-            // href={`/details/game?name=${name}`}
-            href={`/details/game?name=${name}&times=${gameplayMain}-${gameplayMainExtra}-${completionist}`}
-            className="text-primary font-extrabold text-sm hover:text-primary-foreground"
-          >
-            More Info ...
-          </Link>
-          <Button className="h-8 text-xs font-black hover:bg-primary/50">
-            Add to Backlog
-          </Button>
-        </CardFooter>
-      </CardContent>
-    </Card>
+          <CardFooter className="flex-col gap-4 items-start md:flex-row p-0 md:justify-between">
+            {/* <Button onClick={(e) => addGame(e)}>Add to Backlog</Button> */}
+            {/* <Link
+              // href={`/details/game?name=${name}`}
+              href={`/details/game?name=${name}&times=${gameplayMain}-${gameplayMainExtra}-${completionist}`}
+              className="text-primary font-extrabold text-xs hover:text-secondary-foreground"
+            >
+              More Info...
+            </Link> */}
+            <Dialog>
+              <DialogTrigger
+                className="text-primary font-extrabold text-xs hover:text-secondary-foreground"
+                onClick={() => getGameData(name)}
+              >
+                More Info...
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-extrabold">
+                    {gameData?.name}
+                  </DialogTitle>
+                </DialogHeader>
+
+                {/* <DialogDescription> */}
+                <div className="flex flex-col">
+                  <h1 className="text-3xl font-extrabold">{gameplayMain}</h1>
+                  <h1 className="text-3xl font-extrabold">
+                    {gameplayMainExtra}
+                  </h1>
+                  <h1 className="text-3xl font-extrabold">{completionist}</h1>
+
+                  <h1>{gameData?.esrb_rating?.name}</h1>
+                  {gameData?.genres?.map((genre) => {
+                    return <li>{genre.name}</li>;
+                  })}
+                  {gameData?.released && (
+                    <h1>Release Date : {gameData?.released}</h1>
+                  )}
+                  {gameData?.platforms.map((platform) => {
+                    return <li>{platform.platform.name}</li>;
+                  })}
+                  <Carousel className="w-[90%] self-center">
+                    <CarouselContent>
+                      {gameData?.short_screenshots?.map((screenshot, i) => {
+                        return (
+                          <CarouselItem>
+                            <img
+                              src={screenshot.image}
+                              alt={`${gameData.name} screenshot ${i}`}
+                              // className="object-cover"
+                              key={"screenshot-" + i}
+                            />
+                          </CarouselItem>
+                        );
+                      })}
+                      <CarouselPrevious />
+                      <CarouselNext />
+                    </CarouselContent>
+                  </Carousel>
+
+                  {/* {gameData?.short_screenshots[0].image && (
+                      <img
+                        src={gameData?.short_screenshots[0].image}
+                        alt={`${gameData?.name} background`}
+                      />
+                    )} */}
+                  {/* {gameData?.short_screenshots?.map((screenshot, i) => {
+                      return (
+                        i > 0 && (
+                          <img
+                            src={screenshot.image}
+                            alt={`${gameData.name} screenshot ${i}`}
+                          />
+                        )
+                      );
+                    })} */}
+                </div>
+                {/* </DialogDescription> */}
+              </DialogContent>
+            </Dialog>
+            <div className="flex gap-2">
+              <Button className="max-h-6 px-2 text-xs font-black hover:bg-secondary-foreground hover:text-secondary">
+                + Backlog
+              </Button>
+              <Button className="max-h-6 px-2 text-xs font-black hover:bg-secondary-foreground hover:text-secondary">
+                + Completed
+              </Button>
+            </div>
+          </CardFooter>
+        </CardContent>
+      </Card>
+      {/* )} */}
+    </>
   );
 };
 export default GameCard;
