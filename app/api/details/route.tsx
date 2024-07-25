@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const { gameName } = await req.json();
-  console.log(gameName);
+  // console.log(gameName);
   try {
     const res = await fetch(
       // `https://rawg.io/api/games?key=${process.env.RAWG_KEY}&search=${gameName}&search_precise&search_exact&page_size=3&ordering=name`,
