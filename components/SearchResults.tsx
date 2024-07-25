@@ -47,7 +47,7 @@ const SearchResults = () => {
         },
         {
           id: "50419",
-          name: "Nioh: Complete Edition",
+          name: "Nioh 2",
           imageUrl: "https://howlongtobeat.com/games/60877_Nioh_2.jpg",
           platforms: ["PS4", "PS4", "PC"],
           gameplayMain: 42,
@@ -82,7 +82,7 @@ const SearchResults = () => {
         },
         {
           id: "99219",
-          name: "Tekken 5: Dark Resurection",
+          name: "Tekken 5: Dark Resurrection",
           imageUrl:
             "https://howlongtobeat.com/games/230px-PSP-TekkenDarkRessurectionUSversion-FrontCover.jpg",
           platforms: ["PS4", "PS4", "PC"],
@@ -116,7 +116,7 @@ const SearchResults = () => {
         },
         {
           id: "50419",
-          name: "Nioh: Complete Edition",
+          name: "Nioh 2",
           imageUrl: "https://howlongtobeat.com/games/60877_Nioh_2.jpg",
           platforms: ["PS4", "PS4", "PC"],
           gameplayMain: 42,
@@ -151,7 +151,7 @@ const SearchResults = () => {
         },
         {
           id: "99219",
-          name: "Tekken 5: Dark Resurection",
+          name: "Tekken 5: Dark Resurrection",
           imageUrl:
             "https://howlongtobeat.com/games/230px-PSP-TekkenDarkRessurectionUSversion-FrontCover.jpg",
           platforms: ["PS4", "PS4", "PC"],

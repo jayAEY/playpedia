@@ -480,27 +480,83 @@ const GameCard = ({
                   <DialogTitle className="text-2xl font-extrabold">
                     {gameData?.name}
                   </DialogTitle>
+                  <DialogDescription>{/* {gameData?.} */}</DialogDescription>
                 </DialogHeader>
 
                 {/* <DialogDescription> */}
-                <div className="flex flex-col">
-                  <h1 className="text-3xl font-extrabold">{gameplayMain}</h1>
-                  <h1 className="text-3xl font-extrabold">
-                    {gameplayMainExtra}
-                  </h1>
-                  <h1 className="text-3xl font-extrabold">{completionist}</h1>
-
+                {/* <div className="flex flex-col"> */}
+                <div className="grid grid-cols-2 ">
                   <h1>{gameData?.esrb_rating?.name}</h1>
                   {gameData?.genres?.map((genre) => {
-                    return <li>{genre.name}</li>;
+                    return <li key={genre.name}>{genre.name}</li>;
                   })}
                   {gameData?.released && (
                     <h1>Release Date : {gameData?.released}</h1>
                   )}
                   {gameData?.platforms.map((platform) => {
-                    return <li>{platform.platform.name}</li>;
+                    return (
+                      <li key={platform.platform.name}>
+                        {platform.platform.name}
+                      </li>
+                    );
                   })}
-                  <Carousel className="w-[90%] self-center">
+
+                  {/* <h1 className="text-3xl font-extrabold">{gameplayMain}</h1>
+                  <h1 className="text-3xl font-extrabold">
+                    {gameplayMainExtra}
+                  </h1>
+                  <h1 className="text-3xl font-extrabold">{completionist}</h1> */}
+                  <table className="self-center mb-8 text-xs font-bold">
+                    <tbody>
+                      <tr className="hover:bg-primary">
+                        <td className="flex-1 border border-foreground p-2">
+                          Main
+                        </td>
+                        <td className="flex-1 border border-foreground p-2 text-nowrap px-2">
+                          {gameplayMain} hours
+                        </td>
+                      </tr>
+                      <tr className="hover:bg-primary">
+                        <td className="flex-1 border border-foreground p-2">
+                          Main + Extra
+                        </td>
+                        <td className="flex-1 border border-foreground p-2 text-nowrap px-2">
+                          {gameplayMainExtra} hours
+                        </td>
+                      </tr>
+                      <tr className="hover:bg-primary">
+                        <td className="flex-1 border border-foreground p-2">
+                          Completionist
+                        </td>
+                        <td className="flex-1 border border-foreground p-2 text-nowrap px-2">
+                          {completionist} hours
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <Carousel className="mx-8 col-span-2">
+                    <CarouselContent>
+                      {gameData?.short_screenshots?.map((screenshot, i) => {
+                        return (
+                          <CarouselItem
+                            key={"screenshot-" + i}
+                            className="flex"
+                          >
+                            <img
+                              src={screenshot.image}
+                              alt={`${gameData.name} screenshot ${i}`}
+                              className="self-center"
+                            />
+                          </CarouselItem>
+                        );
+                      })}
+                    </CarouselContent>
+                    <CarouselPrevious />
+                    <CarouselNext />
+                  </Carousel>
+
+                  {/* <Carousel className="w-[90%] self-center">
                     <CarouselContent>
                       {gameData?.short_screenshots?.map((screenshot, i) => {
                         return (
@@ -517,7 +573,7 @@ const GameCard = ({
                       <CarouselPrevious />
                       <CarouselNext />
                     </CarouselContent>
-                  </Carousel>
+                  </Carousel> */}
 
                   {/* {gameData?.short_screenshots[0].image && (
                       <img

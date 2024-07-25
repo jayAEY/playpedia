@@ -34,7 +34,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 grid grid-cols-1 h-32 z-50 items-center gap-4 border-b-2 border-b-primary shadow-xl bg-background px-4 py-4 md:flex md:h-16 md:gap-6 md:justify-between">
+    <header className="sticky top-0 grid grid-cols-1 h-32 z-40 items-center gap-4 border-b-2 border-b-primary shadow-xl bg-background px-4 py-4 md:flex md:h-16 md:gap-6 md:justify-between">
       <nav
         id="desktop-nav"
         className="hidden gap-6 text-lg font-medium md:flex md:items-center md:gap-5 md:text-sm lg:gap-6 sm:w-[300px] md:w-[200px] lg:w-[300px]z"
