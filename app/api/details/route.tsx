@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     );
     if (res.ok) {
       let response = await res.json();
-      console.log(response.results);
+      // console.log(response.results);
       return NextResponse.json(
         { results: response.results[0] },
         { status: 200 }

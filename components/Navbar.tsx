@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { CircleUser, Menu, Package2, Search } from "lucide-react";
+import { CircleUser, Gamepad2, Menu, Package2, Search } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -67,11 +67,10 @@ export function Navbar() {
       <div className="mx-auto">
         <Link
           href="/"
-          className="flex justify-center items-center gap-2 text-lg font-semibold md:text-base"
+          className="flex gap-2 text-lg font-semibold md:text-base"
         >
-          <Package2 className="h-8 w-8" />
+          <Gamepad2 className="mt-0.5 h-6 w-6" />
           <h1 className="font-extrabold">playpedia</h1>
-          <span className="sr-only">Acme Inc</span>
         </Link>
       </div>
       <div className="flex items-center gap-4 md:gap-2 lg:gap-4">

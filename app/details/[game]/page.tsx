@@ -1,4 +1,4 @@
-import GamePage from "@/components/GamePage";
+import GamePage from "@/components/work/GamePage";
 
 const Game = () => {
   return <GamePage />;

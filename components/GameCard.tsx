@@ -27,12 +27,35 @@ import { FaMobileAlt } from "react-icons/fa";
 import Link from "next/link";
 
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { useToast } from "@/components/ui/use-toast";
+
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
 
 type GameCardProps = {
   name: string;
@@ -49,7 +72,6 @@ type GameProps = {
   // background_image: string;
   esrb_rating: { name: string };
   genres: [{ name: string }];
-  // parent_platforms: object[];
   platforms: [{ platform: { name: string } }];
   released: string;
   short_screenshots: [{ image: string }];
@@ -66,9 +88,23 @@ const GameCard = ({
   platforms,
   id,
 }: GameCardProps) => {
+  const { toast } = useToast();
+
   const [gameData, setGameData] = useState<GameProps>();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const [goalTime, setGoalTime] = useState<string>();
+  const [goalDate, setGoalDate] = useState<string>();
+  const [backlogNotes, setBacklogNotes] = useState<string>();
+  const [backlogPlatform, setBacklogPlatform] = useState<string>();
+
+  let averageTime = (
+    (gameplayMain + gameplayMainExtra + completionist) /
+    3
+  ).toFixed(2);
 
   async function getGameData(gameName: string) {
+    setLoading(true);
     const res = await fetch("/api/details", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -79,6 +115,7 @@ const GameCard = ({
       let response = await res.json();
       setGameData(response.results);
     }
+    setLoading(false);
   }
 
   // console.log(platforms.filter((platform) => platform !== "Emulated").toString());
@@ -138,6 +175,14 @@ const GameCard = ({
           <BsPlaystation
             key={platform + index}
             title="Playstation Portable"
+          />
+        );
+        break;
+      case "PSP":
+        return (
+          <BsPlaystation
+            key={platform + index}
+            title="PSP"
           />
         );
         break;
@@ -330,7 +375,7 @@ const GameCard = ({
         );
       } else if (score < 75 && score > 49) {
         return (
-          <p className="bg-primary text-s font-extrabold px-1 text-white">
+          <p className="bg-yellow-500 text-s font-extrabold px-1 text-white">
             {score}
           </p>
         );
@@ -350,6 +395,22 @@ const GameCard = ({
       );
     }
   };
+
+  function addToBacklog(e: React.FormEvent) {
+    e.preventDefault();
+    let backlogEntry = {
+      name,
+      backlogPlatform,
+      goalTime,
+      goalDate,
+      backlogNotes,
+      dateAdded: new Date().toLocaleDateString(),
+    };
+    console.log(backlogEntry);
+    toast({
+      title: `${name} added to backlog`,
+    });
+  }
 
   // function addGame(game) {
   //   let gameName = game.target.parentElement.parentElement.firstChild.innerText;
@@ -409,17 +470,9 @@ const GameCard = ({
                 <CardTitle className="text-2xl font-black text-foreground tracking-tight leading-6 -mb-1">
                   {name}
                 </CardTitle>
-                <CardDescription></CardDescription>
-                {/* <CardDescription
-                  title={platforms
-                    .filter((platform) => platform !== "Emulated")
-                    .join(", ")}
-                >
-                  {platforms[0] !== "Emulated"
-                    ? platforms[0]
-                    : platforms[1] && platforms[1]}
-                  ...
-                </CardDescription> */}
+                <CardDescription>
+                  Average Time: {averageTime} hours
+                </CardDescription>
               </CardHeader>
               <table className="w-full text-xs font-bold">
                 <tbody>
@@ -449,13 +502,242 @@ const GameCard = ({
                   </tr>
                 </tbody>
               </table>
-              <div className="flex gap-2">
-                <Button className="max-h-6 px-2 text-xs font-black hover:bg-secondary-foreground hover:text-secondary">
+              <div className="flex flex-col w-32 self-center gap-2 sm:flex-row sm:w-full ">
+                {/* backlog dialog */}
+                <Dialog>
+                  <DialogTrigger
+                    asChild
+                    className="
+                    bg-primary
+                    text-foreground
+                    max-h-6
+                    px-3
+                    pr-4
+                    text-xs
+                    font-black
+                    hover:bg-secondary-foreground
+                    hover:text-secondary"
+                  >
+                    <Button variant="outline">+ Backlog</Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <form onSubmit={(e) => addToBacklog(e)}>
+                      <DialogHeader>
+                        <DialogTitle className="font-extrabold text-2xl">
+                          {name}
+                        </DialogTitle>
+                        <DialogDescription className="text-sm font-extrabold text-foreground">
+                          Enter additional info (optional):
+                        </DialogDescription>
+                      </DialogHeader>
+
+                      <div className="grid gap-4 py-4">
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label
+                            htmlFor="backlog-platform"
+                            className="text-right"
+                          >
+                            Platform:
+                          </Label>
+                          <Input
+                            id="backlog-platform"
+                            placeholder={platforms[0]}
+                            className="col-span-3"
+                            onChange={(e) => setGoalTime(e.target.value)}
+                          />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label
+                            htmlFor="goal-time"
+                            className="text-right"
+                          >
+                            Goal Time:
+                          </Label>
+                          <Input
+                            id="goal-time"
+                            placeholder="HH-MM-SS"
+                            className="col-span-3"
+                            onChange={(e) => setGoalTime(e.target.value)}
+                          />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label
+                            htmlFor="goal-date"
+                            className="text-right"
+                          >
+                            Goal Date:
+                          </Label>
+                          <Input
+                            id="goal-date"
+                            placeholder="YYYY-MM-DD"
+                            className="col-span-3"
+                            onChange={(e) => setGoalDate(e.target.value)}
+                          />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label
+                            htmlFor="backlog-notes"
+                            className="text-right"
+                          >
+                            Notes
+                          </Label>
+                          <Input
+                            id="backlog-notes"
+                            placeholder="Enter notes here..."
+                            className="col-span-3"
+                            onChange={(e) => setBacklogNotes(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <DialogFooter>
+                        <Button
+                          type="submit"
+                          className="
+                    bg-primary
+                    text-foreground
+                    max-h-6
+                    px-3
+                    pr-4
+                    text-xs
+                    font-black
+                    hover:bg-secondary-foreground
+                    hover:text-secondary"
+                        >
+                          Add to Backlog
+                        </Button>
+                      </DialogFooter>
+                    </form>
+                  </DialogContent>
+                </Dialog>
+
+                {/* completed dialog */}
+                <Dialog>
+                  <DialogTrigger
+                    asChild
+                    className="
+                    bg-primary
+                    text-foreground
+                    max-h-6
+                    px-3
+                    pr-4
+                    text-xs
+                    font-black
+                    hover:bg-secondary-foreground
+                    hover:text-secondary"
+                  >
+                    <Button variant="outline">+ Completed</Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <form onSubmit={(e) => addToBacklog(e)}>
+                      <DialogHeader>
+                        <DialogTitle className="font-extrabold text-2xl">
+                          {name}
+                        </DialogTitle>
+                        <DialogDescription className="text-sm font-extrabold text-foreground">
+                          Enter additional info (optional):
+                        </DialogDescription>
+                      </DialogHeader>
+
+                      <div className="grid gap-4 py-4">
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label
+                            htmlFor="completed-platform"
+                            className="text-right"
+                          >
+                            Platform:
+                          </Label>
+                          <Input
+                            id="completed-platform"
+                            placeholder={platforms[0]}
+                            className="col-span-3"
+                            onChange={(e) => setGoalTime(e.target.value)}
+                          />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label
+                            htmlFor="completed-date"
+                            className="text-right"
+                          >
+                            Completed Date:
+                          </Label>
+                          <Input
+                            id="completed-date"
+                            placeholder="YYYY-MM-DD"
+                            className="col-span-3"
+                            onChange={(e) => setGoalDate(e.target.value)}
+                          />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label
+                            htmlFor="completed-time"
+                            className="text-right"
+                          >
+                            Completed Time:
+                          </Label>
+                          <Input
+                            id="completed-time"
+                            placeholder="YYYY-MM-DD"
+                            className="col-span-3"
+                            onChange={(e) => setGoalDate(e.target.value)}
+                          />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label
+                            htmlFor="rating"
+                            className="text-right"
+                          >
+                            Rating:
+                          </Label>
+                          <Input
+                            id="rating"
+                            placeholder="0/10"
+                            className="col-span-3"
+                            onChange={(e) => setGoalDate(e.target.value)}
+                          />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label
+                            htmlFor="completed-notes"
+                            className="text-right"
+                          >
+                            Notes
+                          </Label>
+                          <Input
+                            id="completed-notes"
+                            placeholder="Enter notes here..."
+                            className="col-span-3"
+                            onChange={(e) => setCompletedNotes(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <DialogFooter>
+                        <Button
+                          type="submit"
+                          className="
+                    bg-primary
+                    text-foreground
+                    max-h-6
+                    px-3
+                    pr-4
+                    text-xs
+                    font-black
+                    hover:bg-secondary-foreground
+                    hover:text-secondary"
+                        >
+                          Add to Completed
+                        </Button>
+                      </DialogFooter>
+                    </form>
+                  </DialogContent>
+                </Dialog>
+
+                {/* <Button className="max-h-6 px-2 text-xs font-black hover:bg-secondary-foreground hover:text-secondary">
                   + Backlog
-                </Button>
+                </Button> */}
+                {/*                 
                 <Button className="max-h-6 px-2 text-xs font-black hover:bg-secondary-foreground hover:text-secondary">
                   + Completed
-                </Button>
+                </Button> */}
               </div>
             </div>
 
@@ -466,93 +748,100 @@ const GameCard = ({
             />
           </div>
           <CardFooter className="flex-col gap-4 items-start md:flex-row p-0 md:justify-between">
-            {/* <Button onClick={(e) => addGame(e)}>Add to Backlog</Button> */}
             <details>
               <summary
-                className="text-primary marker:font-extrabold text-xs hover:text-secondary-foreground cursor-pointer"
+                className="text-primary font-extrabold text-xs hover:text-secondary-foreground cursor-pointer"
                 onClick={() => getGameData(name)}
               >
                 More Info...
               </summary>
               <div className="m-6 grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm pb-2 underline text-muted-foreground">
-                    Metacritic:
+                {loading ? (
+                  <p className="text-foreground -mx-6 text-sm ">
+                    Loading Details...
                   </p>
-                  <div className="flex gap-2">
-                    {handleMetacritic(gameData?.metacritic)}
-                  </div>
-                </div>
-                <div>
-                  <p className="text-sm pb-2 underline text-muted-foreground">
-                    Platforms:
-                  </p>
-                  {gameData?.platforms.map((platform, i) => {
-                    return (
-                      <p
-                        className="flex gap-2 text-sm font-bold text-foreground no-underline"
-                        key={platform.platform.name}
-                      >
-                        {handlePlatformIcons(platform.platform.name, i)}
-                        {platform.platform.name}
+                ) : (
+                  <>
+                    <div>
+                      <p className="text-sm pb-2 underline text-muted-foreground">
+                        Metacritic:
                       </p>
-                    );
-                  })}
-                </div>
-                <div>
-                  <p className="text-sm underline text-muted-foreground">
-                    Release Date:
-                  </p>
-                  {gameData?.released && (
-                    <p className="text-sm font-bold text-foreground no-underline">
-                      {gameData?.released}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <p className="text-sm underline text-muted-foreground">
-                    Genres:
-                  </p>
-                  {gameData?.genres?.map((genre) => {
-                    return (
-                      <p
-                        className="text-sm font-bold text-foreground no-underline"
-                        key={genre.name}
-                      >
-                        {genre.name}
+                      <div className="flex gap-2">
+                        {handleMetacritic(gameData?.metacritic)}
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-sm pb-2 underline text-muted-foreground">
+                        Platforms:
                       </p>
-                    );
-                  })}
-                </div>
-                <div>
-                  <p className="text-sm underline text-muted-foreground">
-                    Age Rating:
-                  </p>
-                  <p className="text-sm font-bold text-foreground no-underline">
-                    {gameData?.esrb_rating?.name}
-                  </p>
-                </div>
+                      {gameData?.platforms.map((platform, i) => {
+                        return (
+                          <p
+                            className="flex items-center gap-2 text-xs font-extrabold text-foreground no-underline"
+                            key={platform.platform.name}
+                          >
+                            {handlePlatformIcons(platform.platform.name, i)}
+                            {platform.platform.name}
+                          </p>
+                        );
+                      })}
+                    </div>
+                    <div>
+                      <p className="text-sm underline text-muted-foreground">
+                        Release Date:
+                      </p>
+                      {gameData?.released && (
+                        <p className="text-xs font-extrabold text-foreground no-underline">
+                          {gameData?.released}
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <p className="text-sm underline text-muted-foreground">
+                        Genres:
+                      </p>
+                      {gameData?.genres?.map((genre) => {
+                        return (
+                          <p
+                            className="text-xs font-extrabold text-foreground no-underline"
+                            key={genre.name}
+                          >
+                            {genre.name}
+                          </p>
+                        );
+                      })}
+                    </div>
+                    <div>
+                      <p className="text-sm underline text-muted-foreground">
+                        Age Rating:
+                      </p>
+                      <p className="text-xs font-extrabold text-foreground no-underline">
+                        {gameData?.esrb_rating?.name}
+                      </p>
+                    </div>
 
-                <Carousel className="col-span-2">
-                  <CarouselContent>
-                    {gameData?.short_screenshots?.map((screenshot, i) => {
-                      return (
-                        <CarouselItem
-                          key={"screenshot-" + i}
-                          className="flex object-contain"
-                        >
-                          <img
-                            src={screenshot.image}
-                            alt={`${gameData.name} screenshot ${i}`}
-                            className="self-center w-full"
-                          />
-                        </CarouselItem>
-                      );
-                    })}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
+                    <Carousel className="col-span-2">
+                      <CarouselContent>
+                        {gameData?.short_screenshots?.map((screenshot, i) => {
+                          return (
+                            <CarouselItem
+                              key={"screenshot-" + i}
+                              className="flex object-contain"
+                            >
+                              <img
+                                src={screenshot.image}
+                                alt={`${gameData.name} screenshot ${i}`}
+                                className="self-center w-full"
+                              />
+                            </CarouselItem>
+                          );
+                        })}
+                      </CarouselContent>
+                      <CarouselPrevious />
+                      <CarouselNext />
+                    </Carousel>
+                  </>
+                )}
               </div>
             </details>
           </CardFooter>

@@ -227,8 +227,8 @@ const UserInfo = ({ columns, DataTable }) => {
             </Button>
           </div>
           <div className="p-4">
-            {/* <Backlog /> */}
-            {/* <Completed /> */}
+            <Backlog />
+            <Completed />
             <DataTable
               columns={columns}
               data={data}
