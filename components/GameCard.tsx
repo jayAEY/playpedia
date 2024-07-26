@@ -672,7 +672,7 @@ const GameCard = ({
                             htmlFor="completed-time"
                             className="text-right"
                           >
-                            Completed Time:
+                            Completed Time :
                           </Label>
                           <Input
                             id="completed-time"
