@@ -56,6 +56,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import { BacklogForm } from "./BacklogForm";
 
 type GameCardProps = {
   name: string;
@@ -520,6 +521,34 @@ const GameCard = ({
                   >
                     <Button variant="outline">+ Backlog</Button>
                   </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px] pt-2 pb-1">
+                    <DialogHeader>
+                      <DialogTitle className="hidden">{name}</DialogTitle>
+                      <DialogDescription className="hidden">
+                        Enter additional info for backlog(optional):
+                      </DialogDescription>
+                    </DialogHeader>
+                    <BacklogForm name={name} />
+                    <DialogFooter></DialogFooter>
+                  </DialogContent>
+                </Dialog>
+
+                {/* <Dialog>
+                  <DialogTrigger
+                    asChild
+                    className="
+                    bg-primary
+                    text-foreground
+                    max-h-6
+                    px-3
+                    pr-4
+                    text-xs
+                    font-black
+                    hover:bg-secondary-foreground
+                    hover:text-secondary"
+                  >
+                    <Button variant="outline">+ Backlog</Button>
+                  </DialogTrigger>
                   <DialogContent className="sm:max-w-[425px]">
                     <form onSubmit={(e) => addToBacklog(e)}>
                       <DialogHeader>
@@ -608,7 +637,7 @@ const GameCard = ({
                       </DialogFooter>
                     </form>
                   </DialogContent>
-                </Dialog>
+                </Dialog> */}
 
                 {/* completed dialog */}
                 <Dialog>

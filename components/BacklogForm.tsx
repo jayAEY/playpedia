@@ -132,11 +132,11 @@ const formSchema = z.object({
   //   message: "Username must be at least 2 characters.",
   // }),
   name: z.string(),
-  backlogPlatform: z.string(),
-  goalTime: z.string(),
-  goalDate: z.string(),
-  backlogNotes: z.string(),
-  dateAdded: z.string(),
+  backlogPlatform: z.string().optional(),
+  goalTime: z.string().optional(),
+  goalDate: z.string().optional(),
+  backlogNotes: z.string().optional(),
+  dateAdded: z.string().optional(),
 });
 
 export function BacklogForm({ name }: { name: string }) {
@@ -159,132 +159,158 @@ export function BacklogForm({ name }: { name: string }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8"
+        className="sm:max-w-[425px]"
       >
         <h1 className="text-2xl font-extrabold">{name}</h1>
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem className="hidden">
-              <FormLabel>Name</FormLabel>
+            <FormItem>
+              <FormLabel className="hidden">Name</FormLabel>
               <FormControl>
                 <Input
-                  defaultValue={name}
-                  // placeholder={name}
+                  // value={name}
+                  // defaultValue={name}
+                  // value={name}
+                  className="hidden"
                   {...field}
                   disabled
                 />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
+              <FormDescription className="text-sm font-extrabold text-foreground">
+                Enter additional info (optional)
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="backlogPlatform"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Platform</FormLabel>
-              <FormControl>
-                <Input
-                  // defaultValue={na
-                  placeholder="Enter platform"
-                  {...field}
-                />
-              </FormControl>
-              {/* <FormDescription> */}
-              {/* This is your public display name. */}
-              {/* </FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="goalTime"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Goal Time:</FormLabel>
-              <FormControl>
-                <Input
-                  // defaultValue={na
-                  placeholder="HHH:MM:SS"
-                  {...field}
-                />
-              </FormControl>
-              {/* <FormDescription> */}
-              {/* This is your public display name. */}
-              {/* </FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="goalDate"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Goal Date:</FormLabel>
-              <FormControl>
-                <Input
-                  // defaultValue={na
-                  placeholder="YYYY-MM-DD"
-                  {...field}
-                />
-              </FormControl>
-              {/* <FormDescription> */}
-              {/* This is your public display name. */}
-              {/* </FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="dateAdded"
-          render={({ field }) => (
-            <FormItem className="hidden">
-              <FormLabel>Date Added</FormLabel>
+        <div className="grid gap-4">
+          <FormField
+            control={form.control}
+            name="backlogPlatform"
+            render={({ field }) => (
+              <FormItem className="grid grid-cols-4 items-center gap-4">
+                <FormLabel className="text-right">Platform</FormLabel>
+                <FormControl>
+                  <Input
+                    // defaultValue={na
+                    className="col-span-3"
+                    placeholder="Enter platform"
+                    {...field}
+                  />
+                </FormControl>
+                {/* <FormDescription> */}
+                {/* This is your public display name. */}
+                {/* </FormDescription> */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="goalTime"
+            render={({ field }) => (
+              <FormItem className="grid grid-cols-4 items-center gap-4">
+                <FormLabel className="text-right">Goal Time:</FormLabel>
+                <FormControl>
+                  <Input
+                    className="col-span-3"
+                    // defaultValue={na
+                    placeholder="HHH:MM:SS"
+                    {...field}
+                  />
+                </FormControl>
+                {/* <FormDescription> */}
+                {/* This is your public display name. */}
+                {/* </FormDescription> */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="goalDate"
+            render={({ field }) => (
+              <FormItem className="grid grid-cols-4 items-center gap-4">
+                <FormLabel className="text-right">Goal Date:</FormLabel>
+                <FormControl>
+                  <Input
+                    className="col-span-3"
+                    // defaultValue={na
+                    placeholder="YYYY-MM-DD"
+                    {...field}
+                  />
+                </FormControl>
+                {/* <FormDescription> */}
+                {/* This is your public display name. */}
+                {/* </FormDescription> */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="dateAdded"
+            render={({ field }) => (
+              <FormItem className="grid grid-cols-4 items-center gap-4">
+                <FormLabel className="text-right">Date Added</FormLabel>
 
-              <FormControl>
-                <Input
-                  defaultValue={new Date().toLocaleDateString()}
-                  // placeholder="Notes ..."
-                  {...field}
-                />
-              </FormControl>
-              {/* <FormDescription> */}
-              {/* This is your public display name. */}
-              {/* </FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="backlogNotes"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Notes</FormLabel>
-              <FormControl>
-                <Input
-                  // defaultValue={na
-                  placeholder="Notes ..."
-                  {...field}
-                />
-              </FormControl>
-              {/* <FormDescription> */}
-              {/* This is your public display name. */}
-              {/* </FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
+                <FormControl>
+                  <Input
+                    className="col-span-3"
+                    defaultValue={new Date().toLocaleDateString()}
+                    // placeholder="Notes ..."
+                    {...field}
+                  />
+                </FormControl>
+                {/* <FormDescription> */}
+                {/* This is your public display name. */}
+                {/* </FormDescription> */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="backlogNotes"
+            render={({ field }) => (
+              <FormItem className="grid grid-cols-4 items-center gap-4">
+                <FormLabel className="text-right">Notes</FormLabel>
+                <FormControl>
+                  <Input
+                    className="col-span-3"
+                    // defaultValue={na
+                    placeholder="Notes ..."
+                    {...field}
+                  />
+                </FormControl>
+                {/* <FormDescription> */}
+                {/* This is your public display name. */}
+                {/* </FormDescription> */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            className="
+                    bg-primary
+                    text-foreground
+                    max-h-6
+                    mt-4
+                    px-3
+                    pr-4
+                    text-xs
+                    font-black
+                    hover:bg-secondary-foreground
+                    hover:text-secondary"
+          >
+            Submit
+          </Button>
+        </div>
       </form>
     </Form>
   );
