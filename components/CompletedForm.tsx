@@ -17,15 +17,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "./ui/use-toast";
 
-// const formSchema = z.object({
-//   name: z.string(),
-//   backlogPlatform: z.string().optional(),
-//   goalTime: z.string().optional(),
-//   goalDate: z.string().optional(),
-//   backlogNotes: z.string().optional(),
-//   dateAdded: z.string().optional(),
-// });
-
 const formSchema = z.object({
   name: z.string(),
   completedPlatform: z.string().optional(),
@@ -45,8 +36,8 @@ export function CompletedForm({ name }: { name: string }) {
       name: name,
       completedPlatform: "",
       completedTime: "",
-      completedDate: "",
-      rating: "5/5",
+      completedDate: currentDate,
+      rating: "",
       completedNotes: "",
     },
   });
@@ -57,8 +48,9 @@ export function CompletedForm({ name }: { name: string }) {
     // ✅ This will be type-safe and validated.
 
     console.log(values);
+
     toast({
-      title: `${values.name} added to backlog`,
+      title: `${values.name} added to completed`,
     });
   }
 
@@ -156,6 +148,7 @@ export function CompletedForm({ name }: { name: string }) {
                   <Input
                     className="col-span-3"
                     {...field}
+                    placeholder="?/?"
                   />
                 </FormControl>
                 <FormMessage />
@@ -195,7 +188,7 @@ export function CompletedForm({ name }: { name: string }) {
                     hover:bg-secondary-foreground
                     hover:text-secondary"
           >
-            Submit
+            Add to Completed
           </Button>
         </div>
       </form>

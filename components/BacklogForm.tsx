@@ -86,7 +86,7 @@ export function BacklogForm({ name }: { name: string }) {
             name="backlogPlatform"
             render={({ field }) => (
               <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right  pt-1">Platform:</FormLabel>
+                <FormLabel className="text-right pt-1">Platform:</FormLabel>
                 <FormControl>
                   <Input
                     className="col-span-3"
@@ -103,7 +103,7 @@ export function BacklogForm({ name }: { name: string }) {
             name="goalTime"
             render={({ field }) => (
               <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right  pt-1">Goal Time:</FormLabel>
+                <FormLabel className="text-right pt-1">Goal Time:</FormLabel>
                 <FormControl>
                   <Input
                     className="col-span-3"
@@ -120,11 +120,10 @@ export function BacklogForm({ name }: { name: string }) {
             name="goalDate"
             render={({ field }) => (
               <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right  pt-1">Goal Date:</FormLabel>
+                <FormLabel className="text-right pt-1">Goal Date:</FormLabel>
                 <FormControl>
                   <Input
                     className="col-span-3"
-                    // defaultValue={na
                     placeholder="YYYY-MM-DD"
                     {...field}
                   />
@@ -138,7 +137,7 @@ export function BacklogForm({ name }: { name: string }) {
             name="dateAdded"
             render={({ field }) => (
               <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right  pt-1">Date Added:</FormLabel>
+                <FormLabel className="text-right pt-1">Date Added:</FormLabel>
 
                 <FormControl>
                   <Input
@@ -155,7 +154,7 @@ export function BacklogForm({ name }: { name: string }) {
             name="backlogNotes"
             render={({ field }) => (
               <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right  pt-1">Notes:</FormLabel>
+                <FormLabel className="text-right pt-1">Notes:</FormLabel>
                 <FormControl>
                   <Input
                     className="col-span-3"
@@ -183,7 +182,7 @@ export function BacklogForm({ name }: { name: string }) {
                     hover:bg-secondary-foreground
                     hover:text-secondary"
           >
-            Submit
+            Add to Backlog
           </Button>
         </div>
       </form>
