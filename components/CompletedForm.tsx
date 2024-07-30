@@ -17,16 +17,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "./ui/use-toast";
 
+// const formSchema = z.object({
+//   name: z.string(),
+//   backlogPlatform: z.string().optional(),
+//   goalTime: z.string().optional(),
+//   goalDate: z.string().optional(),
+//   backlogNotes: z.string().optional(),
+//   dateAdded: z.string().optional(),
+// });
+
 const formSchema = z.object({
   name: z.string(),
-  backlogPlatform: z.string().optional(),
-  goalTime: z.string().optional(),
-  goalDate: z.string().optional(),
-  backlogNotes: z.string().optional(),
-  dateAdded: z.string().optional(),
+  completedPlatform: z.string().optional(),
+  completedDate: z.string().optional(),
+  completedTime: z.string().optional(),
+  rating: z.string().optional(),
+  completedNotes: z.string().optional(),
 });
 
-export function BacklogForm({ name }: { name: string }) {
+export function CompletedForm({ name }: { name: string }) {
   let currentDate = new Date().toLocaleDateString();
 
   // 1. Define your form.
@@ -34,11 +43,11 @@ export function BacklogForm({ name }: { name: string }) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: name,
-      backlogPlatform: "",
-      goalTime: "",
-      goalDate: "",
-      backlogNotes: "",
-      dateAdded: currentDate,
+      completedPlatform: "",
+      completedTime: "",
+      completedDate: "",
+      rating: "5/5",
+      completedNotes: "",
     },
   });
 
@@ -83,10 +92,10 @@ export function BacklogForm({ name }: { name: string }) {
         <div className="grid gap-4">
           <FormField
             control={form.control}
-            name="backlogPlatform"
+            name="completedPlatform"
             render={({ field }) => (
               <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right  pt-1">Platform:</FormLabel>
+                <FormLabel className="text-right pt-1">Platform:</FormLabel>
                 <FormControl>
                   <Input
                     className="col-span-3"
@@ -100,10 +109,12 @@ export function BacklogForm({ name }: { name: string }) {
           />
           <FormField
             control={form.control}
-            name="goalTime"
+            name="completedTime"
             render={({ field }) => (
               <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right  pt-1">Goal Time:</FormLabel>
+                <FormLabel className="text-right pt-1">
+                  Completed Time:
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="col-span-3"
@@ -117,10 +128,12 @@ export function BacklogForm({ name }: { name: string }) {
           />
           <FormField
             control={form.control}
-            name="goalDate"
+            name="completedDate"
             render={({ field }) => (
               <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right  pt-1">Goal Date:</FormLabel>
+                <FormLabel className="text-right pt-1">
+                  Completed Date:
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="col-span-3"
@@ -135,11 +148,10 @@ export function BacklogForm({ name }: { name: string }) {
           />
           <FormField
             control={form.control}
-            name="dateAdded"
+            name="rating"
             render={({ field }) => (
               <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right  pt-1">Date Added:</FormLabel>
-
+                <FormLabel className="text-right pt-1"> Rating:</FormLabel>
                 <FormControl>
                   <Input
                     className="col-span-3"
@@ -152,10 +164,10 @@ export function BacklogForm({ name }: { name: string }) {
           />
           <FormField
             control={form.control}
-            name="backlogNotes"
+            name="completedNotes"
             render={({ field }) => (
               <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right  pt-1">Notes:</FormLabel>
+                <FormLabel className="text-right pt-1">Notes:</FormLabel>
                 <FormControl>
                   <Input
                     className="col-span-3"

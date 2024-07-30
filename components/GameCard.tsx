@@ -57,6 +57,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { BacklogForm } from "./BacklogForm";
+import { CompletedForm } from "./CompletedForm";
 
 type GameCardProps = {
   name: string;
@@ -96,8 +97,8 @@ const GameCard = ({
 
   const [goalTime, setGoalTime] = useState<string>();
   const [goalDate, setGoalDate] = useState<string>();
-  const [backlogNotes, setBacklogNotes] = useState<string>();
-  const [backlogPlatform, setBacklogPlatform] = useState<string>();
+  // const [backlogNotes, setBacklogNotes] = useState<string>();
+  // const [backlogPlatform, setBacklogPlatform] = useState<string>();
 
   let averageTime = (
     (gameplayMain + gameplayMainExtra + completionist) /
@@ -397,22 +398,6 @@ const GameCard = ({
     }
   };
 
-  function addToBacklog(e: React.FormEvent) {
-    e.preventDefault();
-    let backlogEntry = {
-      name,
-      backlogPlatform,
-      goalTime,
-      goalDate,
-      backlogNotes,
-      dateAdded: new Date().toLocaleDateString(),
-    };
-    console.log(backlogEntry);
-    toast({
-      title: `${name} added to backlog`,
-    });
-  }
-
   // function addGame(game) {
   //   let gameName = game.target.parentElement.parentElement.firstChild.innerText;
   //   if (!props.backlog.includes(gameName)) {
@@ -427,39 +412,6 @@ const GameCard = ({
   // }
 
   // return (
-
-  // add completed form
-  // <Card className="w-full p-10 rounded-none">
-  // <div className="flex gap-2">
-  //   <Input
-  //     className="w-14  text-center bg-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-  //     id="hours"
-  //     name="hours"
-  //     placeholder="HH"
-  //     type="number"
-  //   />
-  //   <Input
-  //     className="w-14 text-center bg-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-  //     id="minutes"
-  //     name="minutes"
-  //     placeholder="MM"
-  //     type="number"
-  //   />
-  //   <Input
-  //     className="w-14 text-center bg-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-  //     id="seconds"
-  //     name="seconds"
-  //     placeholder="SS"
-  //     type="number"
-  //   />
-  // </div>
-  // <Input
-  //     className="w-14  text-center bg-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-  //     id="Notes"
-  //     name="notes"
-  //     placeholder="Notes"
-  //     type="text"
-  //   />
 
   return (
     <>
@@ -533,113 +485,6 @@ const GameCard = ({
                   </DialogContent>
                 </Dialog>
 
-                {/* <Dialog>
-                  <DialogTrigger
-                    asChild
-                    className="
-                    bg-primary
-                    text-foreground
-                    max-h-6
-                    px-3
-                    pr-4
-                    text-xs
-                    font-black
-                    hover:bg-secondary-foreground
-                    hover:text-secondary"
-                  >
-                    <Button variant="outline">+ Backlog</Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
-                    <form onSubmit={(e) => addToBacklog(e)}>
-                      <DialogHeader>
-                        <DialogTitle className="font-extrabold text-2xl">
-                          {name}
-                        </DialogTitle>
-                        <DialogDescription className="text-sm font-extrabold text-foreground">
-                          Enter additional info (optional):
-                        </DialogDescription>
-                      </DialogHeader>
-
-                      <div className="grid gap-4 py-4">
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label
-                            htmlFor="backlog-platform"
-                            className="text-right"
-                          >
-                            Platform:
-                          </Label>
-                          <Input
-                            id="backlog-platform"
-                            placeholder={platforms[0]}
-                            className="col-span-3"
-                            onChange={(e) => setGoalTime(e.target.value)}
-                          />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label
-                            htmlFor="goal-time"
-                            className="text-right"
-                          >
-                            Goal Time:
-                          </Label>
-                          <Input
-                            id="goal-time"
-                            placeholder="HH-MM-SS"
-                            className="col-span-3"
-                            onChange={(e) => setGoalTime(e.target.value)}
-                          />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label
-                            htmlFor="goal-date"
-                            className="text-right"
-                          >
-                            Goal Date:
-                          </Label>
-                          <Input
-                            id="goal-date"
-                            placeholder="YYYY-MM-DD"
-                            className="col-span-3"
-                            onChange={(e) => setGoalDate(e.target.value)}
-                          />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label
-                            htmlFor="backlog-notes"
-                            className="text-right"
-                          >
-                            Notes
-                          </Label>
-                          <Input
-                            id="backlog-notes"
-                            placeholder="Enter notes here..."
-                            className="col-span-3"
-                            onChange={(e) => setBacklogNotes(e.target.value)}
-                          />
-                        </div>
-                      </div>
-                      <DialogFooter>
-                        <Button
-                          type="submit"
-                          className="
-                    bg-primary
-                    text-foreground
-                    max-h-6
-                    px-3
-                    pr-4
-                    text-xs
-                    font-black
-                    hover:bg-secondary-foreground
-                    hover:text-secondary"
-                        >
-                          Add to Backlog
-                        </Button>
-                      </DialogFooter>
-                    </form>
-                  </DialogContent>
-                </Dialog> */}
-
-                {/* completed dialog */}
                 <Dialog>
                   <DialogTrigger
                     asChild
@@ -656,117 +501,22 @@ const GameCard = ({
                   >
                     <Button variant="outline">+ Completed</Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
-                    <form onSubmit={(e) => addToBacklog(e)}>
-                      <DialogHeader>
-                        <DialogTitle className="font-extrabold text-2xl">
-                          {name}
-                        </DialogTitle>
-                        <DialogDescription className="text-sm font-extrabold text-foreground">
-                          Enter additional info (optional):
-                        </DialogDescription>
-                      </DialogHeader>
-
-                      <div className="grid gap-4 py-4">
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label
-                            htmlFor="completed-platform"
-                            className="text-right"
-                          >
-                            Platform:
-                          </Label>
-                          <Input
-                            id="completed-platform"
-                            placeholder={platforms[0]}
-                            className="col-span-3"
-                            onChange={(e) => setGoalTime(e.target.value)}
-                          />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label
-                            htmlFor="completed-date"
-                            className="text-right"
-                          >
-                            Completed Date:
-                          </Label>
-                          <Input
-                            id="completed-date"
-                            placeholder="YYYY-MM-DD"
-                            className="col-span-3"
-                            onChange={(e) => setGoalDate(e.target.value)}
-                          />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label
-                            htmlFor="completed-time"
-                            className="text-right"
-                          >
-                            Completed Time :
-                          </Label>
-                          <Input
-                            id="completed-time"
-                            placeholder="YYYY-MM-DD"
-                            className="col-span-3"
-                            onChange={(e) => setGoalDate(e.target.value)}
-                          />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label
-                            htmlFor="rating"
-                            className="text-right"
-                          >
-                            Rating:
-                          </Label>
-                          <Input
-                            id="rating"
-                            placeholder="0/10"
-                            className="col-span-3"
-                            onChange={(e) => setGoalDate(e.target.value)}
-                          />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label
-                            htmlFor="completed-notes"
-                            className="text-right"
-                          >
-                            Notes
-                          </Label>
-                          <Input
-                            id="completed-notes"
-                            placeholder="Enter notes here..."
-                            className="col-span-3"
-                            onChange={(e) => setCompletedNotes(e.target.value)}
-                          />
-                        </div>
-                      </div>
-                      <DialogFooter>
-                        <Button
-                          type="submit"
-                          className="
-                    bg-primary
-                    text-foreground
-                    max-h-6
-                    px-3
-                    pr-4
-                    text-xs
-                    font-black
-                    hover:bg-secondary-foreground
-                    hover:text-secondary"
-                        >
-                          Add to Completed
-                        </Button>
-                      </DialogFooter>
-                    </form>
+                  <DialogContent className="sm:max-w-[425px] pt-2 pb-1">
+                    <DialogHeader>
+                      <DialogTitle className="hidden">{name}</DialogTitle>
+                      <DialogDescription className="hidden">
+                        Enter additional info for completed(optional):
+                      </DialogDescription>
+                    </DialogHeader>
+                    <CompletedForm name={name} />
+                    <DialogFooter></DialogFooter>
                   </DialogContent>
                 </Dialog>
-
-                {/* <Button className="max-h-6 px-2 text-xs font-black hover:bg-secondary-foreground hover:text-secondary">
-                  + Backlog
-                </Button> */}
-                {/*                 
-                <Button className="max-h-6 px-2 text-xs font-black hover:bg-secondary-foreground hover:text-secondary">
-                  + Completed
-                </Button> */}
+                {/* Platform:
+Completed Date:
+Completed Time :
+Rating:
+Notes */}
               </div>
             </div>
 
