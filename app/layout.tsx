@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
 import { Toaster } from "@/components/ui/toaster";
 import { Suspense } from "react";
+import Loading from "@/components/Loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,11 +31,11 @@ export default function RootLayout({
             attribute="class"
             defaultTheme="system"
           >
-            {/* <Suspense> */}
-            <Navbar />
-            {/* </Suspense> */}
-            {children}
-            <Toaster />
+            <Suspense fallback={<Loading />}>
+              <Navbar />
+              {children}
+              <Toaster />
+            </Suspense>
           </ThemeProvider>
         </AuthProvider>
       </body>

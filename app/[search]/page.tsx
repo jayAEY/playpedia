@@ -1,12 +1,12 @@
 "use client";
 import SearchResults from "@/components/SearchResults";
-import { Suspense } from "react";
+// import { Suspense } from "react";
 
 const Search = () => {
   return (
-    <Suspense>
-      <SearchResults />;
-    </Suspense>
+    // <Suspense>
+    <SearchResults />
+    // </Suspense>
   );
 };
 
