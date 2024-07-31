@@ -144,10 +144,8 @@ export function Navbar() {
               type="search"
               placeholder="Search games..."
               className="pl-8 md:w-[200px]"
-              // value={=}
               onChange={(e) => setSearchValue(e.target.value)}
               defaultValue={searchQuery}
-              // defaultValue={searchParams.get("query")?.toString()}
             />
           </div>
         </form>

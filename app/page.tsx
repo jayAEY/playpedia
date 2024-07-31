@@ -18,13 +18,27 @@ export default function Home() {
               href="/login"
               className="z-10"
             >
-              <Button>Login</Button>{" "}
+              <Button
+                className="
+              w-full
+              text-xs
+              font-black"
+              >
+                Login
+              </Button>
             </a>
             <a
               href="/register"
               className="z-10"
             >
-              <Button>Register</Button>
+              <Button
+                className="
+              w-full
+              text-xs
+              font-black"
+              >
+                Register
+              </Button>
             </a>
           </div>
         )}

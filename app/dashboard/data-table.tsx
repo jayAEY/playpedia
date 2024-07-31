@@ -47,7 +47,11 @@ export function DataTable<TData, TValue>({
     []
   );
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
+    React.useState<VisibilityState>({
+      goalTime: false,
+      backlogPlatform: false,
+      backlogNotes: false,
+    });
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
@@ -70,44 +74,77 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div className="flex items-center py-4">
+    // <div className="bg-background p-5" >
+    <div className="bg-background h-full p-6 m-6 rounded-none border-foreground/15 shadow-2xl">
+      {/* filter and columns  */}
+      <div className="flex justify-between py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Search game..."
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="outline"
+              className="
+              max-h-6
+              mt-4
+              px-3
+              pr-4
+              text-xs
+              font-black
+              hover:bg-secondary-foreground
+              hover:text-secondary"
+            >
+              Columns
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                let handleColumnKeys = (id: string) => {
+                  switch (id) {
+                    case "backlogPlatform":
+                      return "Platform";
+                      break;
+                    case "goalTime":
+                      return "Goal Time";
+                      break;
+                    case "goalDate":
+                      return "Goal Date";
+                      break;
+                    case "dateAdded":
+                      return "Date Added";
+                      break;
+                    case "backlogNotes":
+                      return "Notes";
+                  }
+                };
+                if (column.id !== "name" && column.id !== "actions") {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {handleColumnKeys(column.id)}
+                    </DropdownMenuCheckboxItem>
+                  );
+                }
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant="outline"
-            className="ml-auto"
-          >
-            Columns
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          {table
-            .getAllColumns()
-            .filter((column) => column.getCanHide())
-            .map((column) => {
-              return (
-                <DropdownMenuCheckboxItem
-                  key={column.id}
-                  className="capitalize"
-                  checked={column.getIsVisible()}
-                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                >
-                  {column.id}
-                </DropdownMenuCheckboxItem>
-              );
-            })}
-        </DropdownMenuContent>
-      </DropdownMenu>
+
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -158,27 +195,48 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
-      <div className="flex-1 text-sm text-muted-foreground">
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
+      {/* pagination */}
+      <div className="flex items-center justify-between">
+        <div className="flex text-sm text-muted-foreground">
+          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredRowModel().rows.length} row(s) selected.
+        </div>
+        <div className="flex items-center justify-end space-x-2 py-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+            className="
+            max-h-6
+            mt-4
+            px-3
+            pr-4
+            text-xs
+            font-black
+            hover:bg-secondary-foreground
+            hover:text-secondary"
+          >
+            Previous
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+            className="
+            max-h-6
+            mt-4
+            px-3
+            pr-4
+            text-xs
+            font-black
+            hover:bg-secondary-foreground
+            hover:text-secondary"
+          >
+            Next
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -115,13 +115,19 @@ export function RegisterForm() {
             </div>
             <Button
               type="submit"
-              className="w-full"
+              className="
+              w-full
+              text-xs
+              font-black"
             >
               Create Account
             </Button>
             <Button
               variant="outline"
-              className="w-full"
+              className="
+              w-full
+              text-xs
+              font-black"
             >
               Login with Google
             </Button>

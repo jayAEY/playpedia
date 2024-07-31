@@ -58,17 +58,17 @@ type GameCardProps = {
   id: number | string;
 };
 
-type GameProps = {
-  name: string;
-  // background_image: string;
-  esrb_rating: { name: string };
-  genres: [{ name: string }];
-  platforms: [{ platform: { name: string } }];
-  released: string;
-  short_screenshots: [{ image: string }];
-  tags: object[];
-  metacritic: number;
-};
+// type GameProps = {
+//   name: string;
+//   // background_image: string;
+//   esrb_rating: { name: string };
+//   genres: [{ name: string }];
+//   platforms: [{ platform: { name: string } }];
+//   released: string;
+//   short_screenshots: [{ image: string }];
+//   tags: object[];
+//   metacritic: number;
+// };
 
 const GameCard = ({
   name,
@@ -80,7 +80,10 @@ const GameCard = ({
   const { toast } = useToast();
 
   const [gameData, setGameData] = useState<GameProps>();
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
+
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   let averageTime = (
     (gameplayMain + gameplayMainExtra + completionist) /
