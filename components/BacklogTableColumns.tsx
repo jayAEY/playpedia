@@ -25,7 +25,7 @@ export type BacklogGame = {
   dateAdded: string;
 };
 
-export const columns: ColumnDef<BacklogGame>[] = [
+export const BacklogTableColumns: ColumnDef<BacklogGame>[] = [
   {
     id: "select",
     header: ({ table }) => (

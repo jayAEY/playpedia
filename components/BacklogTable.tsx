@@ -38,7 +38,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({
+export function BacklogTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -76,6 +76,10 @@ export function DataTable<TData, TValue>({
   return (
     // <div className="bg-background p-5" >
     <div className="bg-background h-full p-6 m-6 rounded-none border-foreground/15 shadow-2xl">
+      <h1 className="text-2xl font-black text-foreground tracking-tight">
+        Backlog
+      </h1>
+
       {/* filter and columns  */}
       <div className="flex justify-between py-4">
         <Input
@@ -91,14 +95,8 @@ export function DataTable<TData, TValue>({
             <Button
               variant="outline"
               className="
-              max-h-6
-              mt-4
-              px-3
-              pr-4
               text-xs
-              font-black
-              hover:bg-secondary-foreground
-              hover:text-secondary"
+              font-black"
             >
               Columns
             </Button>
@@ -196,26 +194,20 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       {/* pagination */}
-      <div className="flex items-center justify-between">
+      <div className="flex pt-4 items-center max-h-min justify-between">
         <div className="flex text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
-        <div className="flex items-center justify-end space-x-2 py-4">
+        <div className="flex justify-end space-x-2 ">
           <Button
             variant="outline"
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
             className="
-            max-h-6
-            mt-4
-            px-3
-            pr-4
             text-xs
-            font-black
-            hover:bg-secondary-foreground
-            hover:text-secondary"
+            font-black"
           >
             Previous
           </Button>
@@ -225,14 +217,8 @@ export function DataTable<TData, TValue>({
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
             className="
-            max-h-6
-            mt-4
-            px-3
-            pr-4
             text-xs
-            font-black
-            hover:bg-secondary-foreground
-            hover:text-secondary"
+              font-black"
           >
             Next
           </Button>

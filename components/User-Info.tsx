@@ -5,12 +5,13 @@ import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import Backlog from "./work/Backlog";
-import Completed from "./work/Completed";
+import { BacklogTableColumns } from "./BacklogTableColumns";
+import { BacklogTable } from "./BacklogTable";
 
 type UserInfoProps = {};
 
-const UserInfo = ({ columns, DataTable }) => {
+// const UserInfo = ({ columns, DataTable }) => {
+const UserInfo = () => {
   const { data: session, status } = useSession();
 
   //   async function getData(): Promise<Payment[]> {
@@ -243,7 +244,7 @@ const UserInfo = ({ columns, DataTable }) => {
     // ];
   }
 
-  const data = getData();
+  const BacklogData = getData();
 
   return (
     <main>
@@ -271,14 +272,19 @@ const UserInfo = ({ columns, DataTable }) => {
             </Button>
           </div>
           <div className="p-4">
-            <DataTable
+            <BacklogTable
+              columns={BacklogTableColumns}
+              data={BacklogData}
+            />
+
+            {/* <DataTable
               columns={columns}
               data={data}
-            />
-            <DataTable
+            /> */}
+            {/* <DataTable
               columns={columns}
               data={data}
-            />
+            /> */}
           </div>
         </>
       ) : (

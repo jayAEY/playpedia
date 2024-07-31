@@ -2,7 +2,7 @@ import UserInfo from "@/components/User-Info";
 import authOptions from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { Payment, columns } from "./columns";
+import { Payment, columns } from "../../components/work/columns";
 import { DataTable } from "./data-table";
 
 const Dashboard = async () => {
@@ -11,9 +11,9 @@ const Dashboard = async () => {
   return (
     // <div></div>
     <UserInfo
-      DataTable={DataTable}
-      // Payment={Payment}
-      columns={columns}
+    // DataTable={DataTable}
+    // Payment={Payment}
+    // columns={columns}
     />
   );
 };
