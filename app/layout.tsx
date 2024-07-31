@@ -30,9 +30,9 @@ export default function RootLayout({
             attribute="class"
             defaultTheme="system"
           >
-            <Suspense>
-              <Navbar />
-            </Suspense>
+            {/* <Suspense> */}
+            <Navbar />
+            {/* </Suspense> */}
             {children}
             <Toaster />
           </ThemeProvider>
