@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/Theme-Provider";
 import { Navbar } from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
 import { Toaster } from "@/components/ui/toaster";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +30,9 @@ export default function RootLayout({
             attribute="class"
             defaultTheme="system"
           >
-            <Navbar />
+            <Suspense>
+              <Navbar />
+            </Suspense>
             {children}
             <Toaster />
           </ThemeProvider>
