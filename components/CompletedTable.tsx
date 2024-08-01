@@ -38,7 +38,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-export function BacklogTable<TData, TValue>({
+export function CompletedTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -48,9 +48,8 @@ export function BacklogTable<TData, TValue>({
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({
-      goalTime: false,
-      backlogPlatform: false,
-      backlogNotes: false,
+      completedPlatform: false,
+      completedNotes: false,
     });
   const [rowSelection, setRowSelection] = React.useState({});
 
@@ -76,7 +75,7 @@ export function BacklogTable<TData, TValue>({
   return (
     <div className="bg-background h-full w-full max-w-7xl p-6 m-6 s rounded-none border-foreground/15 shadow-2xl">
       <h1 className="text-2xl font-black text-foreground tracking-tight">
-        Backlog
+        Completed
       </h1>
 
       {/* filter and columns  */}
@@ -107,19 +106,19 @@ export function BacklogTable<TData, TValue>({
               .map((column) => {
                 let handleColumnKeys = (id: string) => {
                   switch (id) {
-                    case "backlogPlatform":
+                    case "completedPlatform":
                       return "Platform";
                       break;
-                    case "goalTime":
-                      return "Goal Time";
+                    case "completedDate":
+                      return "Completed Date";
                       break;
-                    case "goalDate":
-                      return "Goal Date";
+                    case "completedTime":
+                      return "Complete Time";
                       break;
-                    case "dateAdded":
-                      return "Date Added";
+                    case "rating":
+                      return "Rating";
                       break;
-                    case "backlogNotes":
+                    case "completedNotes":
                       return "Notes";
                   }
                 };

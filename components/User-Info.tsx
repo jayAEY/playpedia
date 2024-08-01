@@ -7,6 +7,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { BacklogTableColumns } from "./BacklogTableColumns";
 import { BacklogTable } from "./BacklogTable";
+import { CompletedTable } from "./CompletedTable";
+import { CompletedTableColumns } from "./CompletedTableColumns";
 
 type UserInfoProps = {};
 
@@ -15,7 +17,7 @@ const UserInfo = () => {
   const { data: session, status } = useSession();
 
   //   async function getData(): Promise<Payment[]> {
-  function getData() {
+  function getBacklogData() {
     // Fetch data from your API here.
     return [
       {
@@ -58,194 +60,257 @@ const UserInfo = () => {
         backlogNotes: "wow",
         dateAdded: "2024-07-31",
       },
+      {
+        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+        backlogPlatform: "p",
+        goalTime: "",
+        goalDate: "",
+        backlogNotes: "",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+        backlogPlatform: "lkasjhdflkjashf",
+        goalTime: "",
+        goalDate: "",
+        backlogNotes: "",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Meruru: The Apprentice of Arland DX",
+        backlogPlatform: "ps3",
+        goalTime: "1",
+        goalDate: "1",
+        backlogNotes: "kljvhskjhf",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
+        backlogPlatform: "pp",
+        goalTime: "p",
+        goalDate: "p",
+        backlogNotes: "",
+        dateAdded: "p",
+      },
+      {
+        name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
+        backlogPlatform: "pc",
+        goalTime: "tomorrow",
+        goalDate: "today",
+        backlogNotes: "wow",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+        backlogPlatform: "p",
+        goalTime: "",
+        goalDate: "",
+        backlogNotes: "",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+        backlogPlatform: "lkasjhdflkjashf",
+        goalTime: "",
+        goalDate: "",
+        backlogNotes: "",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Meruru: The Apprentice of Arland DX",
+        backlogPlatform: "ps3",
+        goalTime: "1",
+        goalDate: "1",
+        backlogNotes: "kljvhskjhf",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
+        backlogPlatform: "pp",
+        goalTime: "p",
+        goalDate: "p",
+        backlogNotes: "",
+        dateAdded: "p",
+      },
+      {
+        name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
+        backlogPlatform: "pc",
+        goalTime: "tomorrow",
+        goalDate: "today",
+        backlogNotes: "wow",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+        backlogPlatform: "p",
+        goalTime: "",
+        goalDate: "",
+        backlogNotes: "",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+        backlogPlatform: "lkasjhdflkjashf",
+        goalTime: "",
+        goalDate: "",
+        backlogNotes: "",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Meruru: The Apprentice of Arland DX",
+        backlogPlatform: "ps3",
+        goalTime: "1",
+        goalDate: "1",
+        backlogNotes: "kljvhskjhf",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
+        backlogPlatform: "pp",
+        goalTime: "p",
+        goalDate: "p",
+        backlogNotes: "",
+        dateAdded: "p",
+      },
+      {
+        name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
+        backlogPlatform: "pc",
+        goalTime: "tomorrow",
+        goalDate: "today",
+        backlogNotes: "wow",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+        backlogPlatform: "p",
+        goalTime: "",
+        goalDate: "",
+        backlogNotes: "",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+        backlogPlatform: "lkasjhdflkjashf",
+        goalTime: "",
+        goalDate: "",
+        backlogNotes: "",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Meruru: The Apprentice of Arland DX",
+        backlogPlatform: "ps3",
+        goalTime: "1",
+        goalDate: "1",
+        backlogNotes: "kljvhskjhf",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
+        backlogPlatform: "pp",
+        goalTime: "p",
+        goalDate: "p",
+        backlogNotes: "",
+        dateAdded: "p",
+      },
+      {
+        name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
+        backlogPlatform: "pc",
+        goalTime: "tomorrow",
+        goalDate: "today",
+        backlogNotes: "wow",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+        backlogPlatform: "p",
+        goalTime: "",
+        goalDate: "",
+        backlogNotes: "",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+        backlogPlatform: "lkasjhdflkjashf",
+        goalTime: "",
+        goalDate: "",
+        backlogNotes: "",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Meruru: The Apprentice of Arland DX",
+        backlogPlatform: "ps3",
+        goalTime: "1",
+        goalDate: "1",
+        backlogNotes: "kljvhskjhf",
+        dateAdded: "2024-07-31",
+      },
+      {
+        name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
+        backlogPlatform: "pp",
+        goalTime: "p",
+        goalDate: "p",
+        backlogNotes: "",
+        dateAdded: "p",
+      },
+      {
+        name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
+        backlogPlatform: "pc",
+        goalTime: "tomorrow",
+        goalDate: "today",
+        backlogNotes: "wow",
+        dateAdded: "2024-07-31",
+      },
     ];
-    // return [
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "a@example.com",
-    //   },
-    //   {
-    //     id: "728esd2f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "b@example.com",
-    //   },
-    //   {
-    //     id: "asd8ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "c@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "d@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "e@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "f@example.com",
-    //   },
-    //   {
-    //     id: "728esd2f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "g@example.com",
-    //   },
-    //   {
-    //     id: "asd8ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "h@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728esd2f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "asd8ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728esd2f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "asd8ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728esd2f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "asd8ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728esd2f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "asd8ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   {
-    //     id: "728ed52f",
-    //     amount: 100,
-    //     status: "pending",
-    //     email: "m@example.com",
-    //   },
-    //   // ...
-    // ];
   }
 
-  const BacklogData = getData();
-
+  const BacklogData = getBacklogData();
+  const CompletedData = [
+    {
+      name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+      backlogPlatform: "p",
+      completedPlatform: "lkashlkjashglkjaha",
+      completedDate: "lkashlskjashglkjaha",
+      completedTime: "lkashlkjashglasdasdkjaha",
+      rating: "lkashlkjasashglkjaha",
+      completedNotes: "lkashlkjashglkjaha",
+    },
+    {
+      name: "Atelier Meruru: The Apprentice of Arland DX",
+      backlogPlatform: "p",
+      completedPlatform: "lkashlkjashglkjaha",
+      completedDate: "lkashlskjashglkjaha",
+      completedTime: "lkashlkjashglasdasdkjaha",
+      rating: "lkashlkjasashglkjaha",
+      completedNotes: "lkashlkjashglkjaha",
+    },
+    {
+      name: "Atelier Rakjsdfhlkjashgdlkjashglkyza 2: Lost Legends & the Secret Fairy",
+      backlogPlatform: "p",
+      completedPlatform: "lkashlkjashglkjaha",
+      completedDate: "lkashlskjashglkjaha",
+      completedTime: "lkashlkjashglasdasdkjaha",
+      rating: "lkashlkjasashglkjaha",
+      completedNotes: "lkashlkjashglkjaha",
+    },
+    {
+      name: "Atelier Ryza 2: Lost Legendasdkhaljhljk34h5s & the Secret Fairy",
+      backlogPlatform: "p",
+      completedPlatform: "lkashlkjashglkjaha",
+      completedDate: "lkashlskjashglkjaha",
+      completedTime: "lkashlkjashglasdasdkjaha",
+      rating: "lkashlkjasashglkjaha",
+      completedNotes: "lkashlkjashglkjaha",
+    },
+    {
+      name: "Atelier Ryza 2: Lost 23424324Legends & the Secret Fairy",
+      backlogPlatform: "p",
+      completedPlatform: "lkashlkjashglkjaha",
+      completedDate: "lkashlskjashglkjaha",
+      completedTime: "lkashlkjashglasdasdkjaha",
+      rating: "lkashlkjasashglkjaha",
+      completedNotes: "lkashlkjashglkjaha",
+    },
+  ];
   return (
     <main>
       {status === "authenticated" ? (
@@ -271,20 +336,15 @@ const UserInfo = () => {
               Logout
             </Button>
           </div>
-          <div className="p-4">
+          <div className="flex flex-col p-4 justify-center items-center">
             <BacklogTable
               columns={BacklogTableColumns}
               data={BacklogData}
             />
-
-            {/* <DataTable
-              columns={columns}
-              data={data}
-            /> */}
-            {/* <DataTable
-              columns={columns}
-              data={data}
-            /> */}
+            <CompletedTable
+              columns={CompletedTableColumns}
+              data={CompletedData}
+            />
           </div>
         </>
       ) : (
