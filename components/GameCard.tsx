@@ -58,17 +58,17 @@ type GameCardProps = {
   id: number | string;
 };
 
-// type GameProps = {
-//   name: string;
-//   // background_image: string;
-//   esrb_rating: { name: string };
-//   genres: [{ name: string }];
-//   platforms: [{ platform: { name: string } }];
-//   released: string;
-//   short_screenshots: [{ image: string }];
-//   tags: object[];
-//   metacritic: number;
-// };
+type GameProps = {
+  name: string;
+  // background_image: string;
+  esrb_rating: { name: string };
+  genres: [{ name: string }];
+  platforms: [{ platform: { name: string } }];
+  released: string;
+  short_screenshots: [{ image: string }];
+  tags: object[];
+  metacritic: number;
+};
 
 const GameCard = ({
   name,
