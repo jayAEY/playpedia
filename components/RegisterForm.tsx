@@ -13,6 +13,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
@@ -65,6 +66,9 @@ export function RegisterForm() {
             <AlertDialogTitle className="text-center min-h-14 pb-8">
               {alertMessage}
             </AlertDialogTitle>
+            <AlertDialogDescription className="hidden">
+              {alertMessage}
+            </AlertDialogDescription>
           </AlertDialogHeader>
         </AlertDialogContent>
       </AlertDialog>

@@ -15,7 +15,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+
 import { toast } from "./ui/use-toast";
+import { useSession } from "next-auth/react";
 
 const formSchema = z.object({
   name: z.string(),
@@ -27,6 +29,7 @@ const formSchema = z.object({
 });
 
 export function BacklogForm({ name }: { name: string }) {
+  const { data: session, status } = useSession();
   let currentDate = new Date().toLocaleDateString();
 
   // 1. Define your form.
@@ -43,14 +46,28 @@ export function BacklogForm({ name }: { name: string }) {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  // function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(newGame: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-
-    console.log(values);
-    toast({
-      title: `${values.name} added to backlog`,
-    });
+    try {
+      const res = await fetch("/api/backlog", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: session?.user.email, newGame }),
+      });
+      if (res.ok) {
+        toast({
+          title: `${newGame.name} added to backlog`,
+        });
+      }
+      let responseObject = await res.json();
+      toast({
+        title: `$Error ${responseObject}`,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
