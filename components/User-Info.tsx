@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { BacklogTableColumns } from "./BacklogTableColumns";
+import { BacklogGame, BacklogTableColumns } from "./BacklogTableColumns";
 import { BacklogTable } from "./BacklogTable";
 import { CompletedTable } from "./CompletedTable";
 import { CompletedTableColumns } from "./CompletedTableColumns";
@@ -15,302 +15,313 @@ type UserInfoProps = {};
 // const UserInfo = ({ columns, DataTable }) => {
 const UserInfo = () => {
   const { data: session, status } = useSession();
+  // function getBacklogData() {
+  // console.log(session?.user.backlog);
+  // let backlog = session?.user.backlog;
+  // return [{}];
+  // function getBacklogData() {
+  // Fetch data from your API here.
+  // }
 
   //   async function getData(): Promise<Payment[]> {
-  function getBacklogData() {
-    // Fetch data from your API here.
-    return [
-      {
-        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-        backlogPlatform: "p",
-        goalTime: "",
-        goalDate: "",
-        backlogNotes: "",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-        backlogPlatform: "lkasjhdflkjashf",
-        goalTime: "",
-        goalDate: "",
-        backlogNotes: "",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Meruru: The Apprentice of Arland DX",
-        backlogPlatform: "ps3",
-        goalTime: "1",
-        goalDate: "1",
-        backlogNotes: "kljvhskjhf",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
-        backlogPlatform: "pp",
-        goalTime: "p",
-        goalDate: "p",
-        backlogNotes: "",
-        dateAdded: "p",
-      },
-      {
-        name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
-        backlogPlatform: "pc",
-        goalTime: "tomorrow",
-        goalDate: "today",
-        backlogNotes: "wow",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-        backlogPlatform: "p",
-        goalTime: "",
-        goalDate: "",
-        backlogNotes: "",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-        backlogPlatform: "lkasjhdflkjashf",
-        goalTime: "",
-        goalDate: "",
-        backlogNotes: "",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Meruru: The Apprentice of Arland DX",
-        backlogPlatform: "ps3",
-        goalTime: "1",
-        goalDate: "1",
-        backlogNotes: "kljvhskjhf",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
-        backlogPlatform: "pp",
-        goalTime: "p",
-        goalDate: "p",
-        backlogNotes: "",
-        dateAdded: "p",
-      },
-      {
-        name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
-        backlogPlatform: "pc",
-        goalTime: "tomorrow",
-        goalDate: "today",
-        backlogNotes: "wow",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-        backlogPlatform: "p",
-        goalTime: "",
-        goalDate: "",
-        backlogNotes: "",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-        backlogPlatform: "lkasjhdflkjashf",
-        goalTime: "",
-        goalDate: "",
-        backlogNotes: "",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Meruru: The Apprentice of Arland DX",
-        backlogPlatform: "ps3",
-        goalTime: "1",
-        goalDate: "1",
-        backlogNotes: "kljvhskjhf",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
-        backlogPlatform: "pp",
-        goalTime: "p",
-        goalDate: "p",
-        backlogNotes: "",
-        dateAdded: "p",
-      },
-      {
-        name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
-        backlogPlatform: "pc",
-        goalTime: "tomorrow",
-        goalDate: "today",
-        backlogNotes: "wow",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-        backlogPlatform: "p",
-        goalTime: "",
-        goalDate: "",
-        backlogNotes: "",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-        backlogPlatform: "lkasjhdflkjashf",
-        goalTime: "",
-        goalDate: "",
-        backlogNotes: "",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Meruru: The Apprentice of Arland DX",
-        backlogPlatform: "ps3",
-        goalTime: "1",
-        goalDate: "1",
-        backlogNotes: "kljvhskjhf",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
-        backlogPlatform: "pp",
-        goalTime: "p",
-        goalDate: "p",
-        backlogNotes: "",
-        dateAdded: "p",
-      },
-      {
-        name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
-        backlogPlatform: "pc",
-        goalTime: "tomorrow",
-        goalDate: "today",
-        backlogNotes: "wow",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-        backlogPlatform: "p",
-        goalTime: "",
-        goalDate: "",
-        backlogNotes: "",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-        backlogPlatform: "lkasjhdflkjashf",
-        goalTime: "",
-        goalDate: "",
-        backlogNotes: "",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Meruru: The Apprentice of Arland DX",
-        backlogPlatform: "ps3",
-        goalTime: "1",
-        goalDate: "1",
-        backlogNotes: "kljvhskjhf",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
-        backlogPlatform: "pp",
-        goalTime: "p",
-        goalDate: "p",
-        backlogNotes: "",
-        dateAdded: "p",
-      },
-      {
-        name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
-        backlogPlatform: "pc",
-        goalTime: "tomorrow",
-        goalDate: "today",
-        backlogNotes: "wow",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-        backlogPlatform: "p",
-        goalTime: "",
-        goalDate: "",
-        backlogNotes: "",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-        backlogPlatform: "lkasjhdflkjashf",
-        goalTime: "",
-        goalDate: "",
-        backlogNotes: "",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Meruru: The Apprentice of Arland DX",
-        backlogPlatform: "ps3",
-        goalTime: "1",
-        goalDate: "1",
-        backlogNotes: "kljvhskjhf",
-        dateAdded: "2024-07-31",
-      },
-      {
-        name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
-        backlogPlatform: "pp",
-        goalTime: "p",
-        goalDate: "p",
-        backlogNotes: "",
-        dateAdded: "p",
-      },
-      {
-        name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
-        backlogPlatform: "pc",
-        goalTime: "tomorrow",
-        goalDate: "today",
-        backlogNotes: "wow",
-        dateAdded: "2024-07-31",
-      },
-    ];
-  }
+  // function getBacklogData() {
+  // Fetch data from your API here.
+  // return [
+  // {
+  //   name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //   backlogPlatform: "p",
+  //   goalTime: "",
+  //   goalDate: "",
+  //   backlogNotes: "",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //   backlogPlatform: "lkasjhdflkjashf",
+  //   goalTime: "",
+  //   goalDate: "",
+  //   backlogNotes: "",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Meruru: The Apprentice of Arland DX",
+  //   backlogPlatform: "ps3",
+  //   goalTime: "1",
+  //   goalDate: "1",
+  //   backlogNotes: "kljvhskjhf",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
+  //   backlogPlatform: "pp",
+  //   goalTime: "p",
+  //   goalDate: "p",
+  //   backlogNotes: "",
+  //   dateAdded: "p",
+  // },
+  // {
+  //   name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
+  //   backlogPlatform: "pc",
+  //   goalTime: "tomorrow",
+  //   goalDate: "today",
+  //   backlogNotes: "wow",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //   backlogPlatform: "p",
+  //   goalTime: "",
+  //   goalDate: "",
+  //   backlogNotes: "",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //   backlogPlatform: "lkasjhdflkjashf",
+  //   goalTime: "",
+  //   goalDate: "",
+  //   backlogNotes: "",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Meruru: The Apprentice of Arland DX",
+  //   backlogPlatform: "ps3",
+  //   goalTime: "1",
+  //   goalDate: "1",
+  //   backlogNotes: "kljvhskjhf",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
+  //   backlogPlatform: "pp",
+  //   goalTime: "p",
+  //   goalDate: "p",
+  //   backlogNotes: "",
+  //   dateAdded: "p",
+  // },
+  // {
+  //   name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
+  //   backlogPlatform: "pc",
+  //   goalTime: "tomorrow",
+  //   goalDate: "today",
+  //   backlogNotes: "wow",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //   backlogPlatform: "p",
+  //   goalTime: "",
+  //   goalDate: "",
+  //   backlogNotes: "",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //   backlogPlatform: "lkasjhdflkjashf",
+  //   goalTime: "",
+  //   goalDate: "",
+  //   backlogNotes: "",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Meruru: The Apprentice of Arland DX",
+  //   backlogPlatform: "ps3",
+  //   goalTime: "1",
+  //   goalDate: "1",
+  //   backlogNotes: "kljvhskjhf",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
+  //   backlogPlatform: "pp",
+  //   goalTime: "p",
+  //   goalDate: "p",
+  //   backlogNotes: "",
+  //   dateAdded: "p",
+  // },
+  // {
+  //   name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
+  //   backlogPlatform: "pc",
+  //   goalTime: "tomorrow",
+  //   goalDate: "today",
+  //   backlogNotes: "wow",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //   backlogPlatform: "p",
+  //   goalTime: "",
+  //   goalDate: "",
+  //   backlogNotes: "",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //   backlogPlatform: "lkasjhdflkjashf",
+  //   goalTime: "",
+  //   goalDate: "",
+  //   backlogNotes: "",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Meruru: The Apprentice of Arland DX",
+  //   backlogPlatform: "ps3",
+  //   goalTime: "1",
+  //   goalDate: "1",
+  //   backlogNotes: "kljvhskjhf",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
+  //   backlogPlatform: "pp",
+  //   goalTime: "p",
+  //   goalDate: "p",
+  //   backlogNotes: "",
+  //   dateAdded: "p",
+  // },
+  // {
+  //   name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
+  //   backlogPlatform: "pc",
+  //   goalTime: "tomorrow",
+  //   goalDate: "today",
+  //   backlogNotes: "wow",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //   backlogPlatform: "p",
+  //   goalTime: "",
+  //   goalDate: "",
+  //   backlogNotes: "",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //   backlogPlatform: "lkasjhdflkjashf",
+  //   goalTime: "",
+  //   goalDate: "",
+  //   backlogNotes: "",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Meruru: The Apprentice of Arland DX",
+  //   backlogPlatform: "ps3",
+  //   goalTime: "1",
+  //   goalDate: "1",
+  //   backlogNotes: "kljvhskjhf",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
+  //   backlogPlatform: "pp",
+  //   goalTime: "p",
+  //   goalDate: "p",
+  //   backlogNotes: "",
+  //   dateAdded: "p",
+  // },
+  // {
+  //   name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
+  //   backlogPlatform: "pc",
+  //   goalTime: "tomorrow",
+  //   goalDate: "today",
+  //   backlogNotes: "wow",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //   backlogPlatform: "p",
+  //   goalTime: "",
+  //   goalDate: "",
+  //   backlogNotes: "",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //   backlogPlatform: "lkasjhdflkjashf",
+  //   goalTime: "",
+  //   goalDate: "",
+  //   backlogNotes: "",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Meruru: The Apprentice of Arland DX",
+  //   backlogPlatform: "ps3",
+  //   goalTime: "1",
+  //   goalDate: "1",
+  //   backlogNotes: "kljvhskjhf",
+  //   dateAdded: "2024-07-31",
+  // },
+  // {
+  //   name: "Atelier Lydie & Suelle: The Alchemists and the Mysterious Paintings DX",
+  //   backlogPlatform: "pp",
+  //   goalTime: "p",
+  //   goalDate: "p",
+  //   backlogNotes: "",
+  //   dateAdded: "p",
+  // },
+  // {
+  //   name: "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
+  //   backlogPlatform: "pc",
+  //   goalTime: "tomorrow",
+  //   goalDate: "today",
+  //   backlogNotes: "wow",
+  //   dateAdded: "2024-07-31",
+  // },
+  // ];
+  // }
 
-  const BacklogData = getBacklogData();
-  const CompletedData = [
-    {
-      name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-      backlogPlatform: "p",
-      completedPlatform: "lkashlkjashglkjaha",
-      completedDate: "lkashlskjashglkjaha",
-      completedTime: "lkashlkjashglasdasdkjaha",
-      rating: "lkashlkjasashglkjaha",
-      completedNotes: "lkashlkjashglkjaha",
-    },
-    {
-      name: "Atelier Meruru: The Apprentice of Arland DX",
-      backlogPlatform: "p",
-      completedPlatform: "lkashlkjashglkjaha",
-      completedDate: "lkashlskjashglkjaha",
-      completedTime: "lkashlkjashglasdasdkjaha",
-      rating: "lkashlkjasashglkjaha",
-      completedNotes: "lkashlkjashglkjaha",
-    },
-    {
-      name: "Atelier Rakjsdfhlkjashgdlkjashglkyza 2: Lost Legends & the Secret Fairy",
-      backlogPlatform: "p",
-      completedPlatform: "lkashlkjashglkjaha",
-      completedDate: "lkashlskjashglkjaha",
-      completedTime: "lkashlkjashglasdasdkjaha",
-      rating: "lkashlkjasashglkjaha",
-      completedNotes: "lkashlkjashglkjaha",
-    },
-    {
-      name: "Atelier Ryza 2: Lost Legendasdkhaljhljk34h5s & the Secret Fairy",
-      backlogPlatform: "p",
-      completedPlatform: "lkashlkjashglkjaha",
-      completedDate: "lkashlskjashglkjaha",
-      completedTime: "lkashlkjashglasdasdkjaha",
-      rating: "lkashlkjasashglkjaha",
-      completedNotes: "lkashlkjashglkjaha",
-    },
-    {
-      name: "Atelier Ryza 2: Lost 23424324Legends & the Secret Fairy",
-      backlogPlatform: "p",
-      completedPlatform: "lkashlkjashglkjaha",
-      completedDate: "lkashlskjashglkjaha",
-      completedTime: "lkashlkjashglasdasdkjaha",
-      rating: "lkashlkjasashglkjaha",
-      completedNotes: "lkashlkjashglkjaha",
-    },
-  ];
+  // const backlogData
+  let backlogData: BacklogGame[] = [];
+  backlogData = session?.user.backlog;
+  // const backlogData = getBacklogData();
+  // const completedData = [
+  //   {
+  //     name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //     backlogPlatform: "p",
+  //     completedPlatform: "lkashlkjashglkjaha",
+  //     completedDate: "lkashlskjashglkjaha",
+  //     completedTime: "lkashlkjashglasdasdkjaha",
+  //     rating: "lkashlkjasashglkjaha",
+  //     completedNotes: "lkashlkjashglkjaha",
+  //   },
+  //   {
+  //     name: "Atelier Meruru: The Apprentice of Arland DX",
+  //     backlogPlatform: "p",
+  //     completedPlatform: "lkashlkjashglkjaha",
+  //     completedDate: "lkashlskjashglkjaha",
+  //     completedTime: "lkashlkjashglasdasdkjaha",
+  //     rating: "lkashlkjasashglkjaha",
+  //     completedNotes: "lkashlkjashglkjaha",
+  //   },
+  //   {
+  //     name: "Atelier Rakjsdfhlkjashgdlkjashglkyza 2: Lost Legends & the Secret Fairy",
+  //     backlogPlatform: "p",
+  //     completedPlatform: "lkashlkjashglkjaha",
+  //     completedDate: "lkashlskjashglkjaha",
+  //     completedTime: "lkashlkjashglasdasdkjaha",
+  //     rating: "lkashlkjasashglkjaha",
+  //     completedNotes: "lkashlkjashglkjaha",
+  //   },
+  //   {
+  //     name: "Atelier Ryza 2: Lost Legendasdkhaljhljk34h5s & the Secret Fairy",
+  //     backlogPlatform: "p",
+  //     completedPlatform: "lkashlkjashglkjaha",
+  //     completedDate: "lkashlskjashglkjaha",
+  //     completedTime: "lkashlkjashglasdasdkjaha",
+  //     rating: "lkashlkjasashglkjaha",
+  //     completedNotes: "lkashlkjashglkjaha",
+  //   },
+  //   {
+  //     name: "Atelier Ryza 2: Lost 23424324Legends & the Secret Fairy",
+  //     backlogPlatform: "p",
+  //     completedPlatform: "lkashlkjashglkjaha",
+  //     completedDate: "lkashlskjashglkjaha",
+  //     completedTime: "lkashlkjashglasdasdkjaha",
+  //     rating: "lkashlkjasashglkjaha",
+  //     completedNotes: "lkashlkjashglkjaha",
+  //   },
+  // ];
+
   return (
     <main>
       {status === "authenticated" ? (
@@ -339,12 +350,12 @@ const UserInfo = () => {
           <div className="flex flex-col p-4 justify-center items-center">
             <BacklogTable
               columns={BacklogTableColumns}
-              data={BacklogData}
+              data={backlogData}
             />
-            <CompletedTable
+            {/* <CompletedTable
               columns={CompletedTableColumns}
-              data={CompletedData}
-            />
+              data={completedData}
+            /> */}
           </div>
         </>
       ) : (
