@@ -60,11 +60,13 @@ export function BacklogForm({ name }: { name: string }) {
         toast({
           title: `${newGame.name} added to backlog`,
         });
+        return;
+      } else {
+        let responseObject = await res.json();
+        toast({
+          title: `$Error ${responseObject}`,
+        });
       }
-      let responseObject = await res.json();
-      toast({
-        title: `$Error ${responseObject}`,
-      });
     } catch (err) {
       console.log(err);
     }

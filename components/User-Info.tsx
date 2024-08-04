@@ -9,14 +9,41 @@ import { BacklogGame, BacklogTableColumns } from "./BacklogTableColumns";
 import { BacklogTable } from "./BacklogTable";
 import { CompletedTable } from "./CompletedTable";
 import { CompletedTableColumns } from "./CompletedTableColumns";
+import { useEffect } from "react";
 
 type UserInfoProps = {};
 
 // const UserInfo = ({ columns, DataTable }) => {
 const UserInfo = () => {
   const { data: session, status } = useSession();
+  // let email = session?.user.email;
+  let backlogData: BacklogGame[] = [];
+
+  // console.log(email);
+  async function getBacklogData() {
+    let email = session?.user.email;
+
+    // console.log(await session?.user.email);
+    // console.log()
+    // router.push(`/search/?query=${searchValue}`);
+
+    // const res = await fetch(`api/backlog/email?=${email}`, {
+    // const res = await fetch(`api/backlog/email?=${email}`, {
+    const res = await fetch(`api/backlog/email?email=${email}`, {
+      method: "GET",
+    });
+    if (res.ok) {
+      console.log(await res.json());
+      // backlogData = await res.json();
+    }
+  }
+
+  useEffect(() => {
+    getBacklogData();
+  }, []);
+
   // function getBacklogData() {
-  // console.log(session?.user.backlog);
+  // console.log(session?.user);
   // let backlog = session?.user.backlog;
   // return [{}];
   // function getBacklogData() {
@@ -271,8 +298,8 @@ const UserInfo = () => {
   // }
 
   // const backlogData
-  let backlogData: BacklogGame[] = [];
-  backlogData = session?.user.backlog;
+  // let backlogData: BacklogGame[] = [];
+  // backlogData = session?.user.backlog;
   // const backlogData = getBacklogData();
   // const completedData = [
   //   {
