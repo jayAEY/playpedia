@@ -9,41 +9,36 @@ import { BacklogGame, BacklogTableColumns } from "./BacklogTableColumns";
 import { BacklogTable } from "./BacklogTable";
 import { CompletedTable } from "./CompletedTable";
 import { CompletedTableColumns } from "./CompletedTableColumns";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type UserInfoProps = {};
 
 // const UserInfo = ({ columns, DataTable }) => {
 const UserInfo = () => {
   const { data: session, status } = useSession();
+  const [backlogData, setBacklogData] = useState<BacklogGame[]>([]);
   // let email = session?.user.email;
-  let backlogData: BacklogGame[] = [];
+  // let backlogData: BacklogGame[] = [];
 
   // console.log(email);
+
   async function getBacklogData() {
     let email = session?.user.email;
 
-    // console.log(await session?.user.email);
     console.log(email);
-    // router.push(`/search/?query=${searchValue}`);
-
-    // const res = await fetch(`api/backlog/email?=${email}`, {
-    // const res = await fetch(`api/backlog/email?=${email}`, {
     const res = await fetch(`api/backlog?email=${email}`, {
       method: "GET",
     });
     if (res.ok) {
-      // console.log(await res.json());
       let response = await res.json();
-      backlogData = response.backlog;
-      console.log(backlogData);
+      // backlogData = response.backlog;
+      setBacklogData(response.backlog);
     }
   }
 
   useEffect(() => {
     getBacklogData();
   }, [session]);
-
   // function getBacklogData() {
   // console.log(session?.user);
   // let backlog = session?.user.backlog;
@@ -303,53 +298,53 @@ const UserInfo = () => {
   // let backlogData: BacklogGame[] = [];
   // backlogData = session?.user.backlog;
   // const backlogData = getBacklogData();
-  // const completedData = [
-  //   {
-  //     name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-  //     backlogPlatform: "p",
-  //     completedPlatform: "lkashlkjashglkjaha",
-  //     completedDate: "lkashlskjashglkjaha",
-  //     completedTime: "lkashlkjashglasdasdkjaha",
-  //     rating: "lkashlkjasashglkjaha",
-  //     completedNotes: "lkashlkjashglkjaha",
-  //   },
-  //   {
-  //     name: "Atelier Meruru: The Apprentice of Arland DX",
-  //     backlogPlatform: "p",
-  //     completedPlatform: "lkashlkjashglkjaha",
-  //     completedDate: "lkashlskjashglkjaha",
-  //     completedTime: "lkashlkjashglasdasdkjaha",
-  //     rating: "lkashlkjasashglkjaha",
-  //     completedNotes: "lkashlkjashglkjaha",
-  //   },
-  //   {
-  //     name: "Atelier Rakjsdfhlkjashgdlkjashglkyza 2: Lost Legends & the Secret Fairy",
-  //     backlogPlatform: "p",
-  //     completedPlatform: "lkashlkjashglkjaha",
-  //     completedDate: "lkashlskjashglkjaha",
-  //     completedTime: "lkashlkjashglasdasdkjaha",
-  //     rating: "lkashlkjasashglkjaha",
-  //     completedNotes: "lkashlkjashglkjaha",
-  //   },
-  //   {
-  //     name: "Atelier Ryza 2: Lost Legendasdkhaljhljk34h5s & the Secret Fairy",
-  //     backlogPlatform: "p",
-  //     completedPlatform: "lkashlkjashglkjaha",
-  //     completedDate: "lkashlskjashglkjaha",
-  //     completedTime: "lkashlkjashglasdasdkjaha",
-  //     rating: "lkashlkjasashglkjaha",
-  //     completedNotes: "lkashlkjashglkjaha",
-  //   },
-  //   {
-  //     name: "Atelier Ryza 2: Lost 23424324Legends & the Secret Fairy",
-  //     backlogPlatform: "p",
-  //     completedPlatform: "lkashlkjashglkjaha",
-  //     completedDate: "lkashlskjashglkjaha",
-  //     completedTime: "lkashlkjashglasdasdkjaha",
-  //     rating: "lkashlkjasashglkjaha",
-  //     completedNotes: "lkashlkjashglkjaha",
-  //   },
-  // ];
+  const completedData = [
+    {
+      name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+      backlogPlatform: "p",
+      completedPlatform: "lkashlkjashglkjaha",
+      completedDate: "lkashlskjashglkjaha",
+      completedTime: "lkashlkjashglasdasdkjaha",
+      rating: "lkashlkjasashglkjaha",
+      completedNotes: "lkashlkjashglkjaha",
+    },
+    {
+      name: "Atelier Meruru: The Apprentice of Arland DX",
+      backlogPlatform: "p",
+      completedPlatform: "lkashlkjashglkjaha",
+      completedDate: "lkashlskjashglkjaha",
+      completedTime: "lkashlkjashglasdasdkjaha",
+      rating: "lkashlkjasashglkjaha",
+      completedNotes: "lkashlkjashglkjaha",
+    },
+    {
+      name: "Atelier Rakjsdfhlkjashgdlkjashglkyza 2: Lost Legends & the Secret Fairy",
+      backlogPlatform: "p",
+      completedPlatform: "lkashlkjashglkjaha",
+      completedDate: "lkashlskjashglkjaha",
+      completedTime: "lkashlkjashglasdasdkjaha",
+      rating: "lkashlkjasashglkjaha",
+      completedNotes: "lkashlkjashglkjaha",
+    },
+    {
+      name: "Atelier Ryza 2: Lost Legendasdkhaljhljk34h5s & the Secret Fairy",
+      backlogPlatform: "p",
+      completedPlatform: "lkashlkjashglkjaha",
+      completedDate: "lkashlskjashglkjaha",
+      completedTime: "lkashlkjashglasdasdkjaha",
+      rating: "lkashlkjasashglkjaha",
+      completedNotes: "lkashlkjashglkjaha",
+    },
+    {
+      name: "Atelier Ryza 2: Lost 23424324Legends & the Secret Fairy",
+      backlogPlatform: "p",
+      completedPlatform: "lkashlkjashglkjaha",
+      completedDate: "lkashlskjashglkjaha",
+      completedTime: "lkashlkjashglasdasdkjaha",
+      rating: "lkashlkjasashglkjaha",
+      completedNotes: "lkashlkjashglkjaha",
+    },
+  ];
 
   return (
     <main>
@@ -380,6 +375,7 @@ const UserInfo = () => {
             <BacklogTable
               columns={BacklogTableColumns}
               data={backlogData}
+              // data={completedData}
             />
 
             {/* <CompletedTable
