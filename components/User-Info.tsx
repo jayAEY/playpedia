@@ -1,4 +1,7 @@
 "use client";
+
+import { useEffect, useState } from "react";
+
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
@@ -7,9 +10,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { BacklogGame, BacklogTableColumns } from "./BacklogTableColumns";
 import { BacklogTable } from "./BacklogTable";
+import { CompletedGame, CompletedTableColumns } from "./CompletedTableColumns";
 import { CompletedTable } from "./CompletedTable";
-import { CompletedTableColumns } from "./CompletedTableColumns";
-import { useEffect, useState } from "react";
 
 type UserInfoProps = {};
 
@@ -17,28 +19,42 @@ type UserInfoProps = {};
 const UserInfo = () => {
   const { data: session, status } = useSession();
   const [backlogData, setBacklogData] = useState<BacklogGame[]>([]);
+  const [completedData, setCompletedData] = useState<CompletedGame[]>([]);
+
   // let email = session?.user.email;
   // let backlogData: BacklogGame[] = [];
+  let email = session?.user.email;
 
   // console.log(email);
 
   async function getBacklogData() {
-    let email = session?.user.email;
+    // let email = session?.user.email;
 
-    console.log(email);
+    // console.log(email);
     const res = await fetch(`api/backlog?email=${email}`, {
       method: "GET",
     });
     if (res.ok) {
       let response = await res.json();
-      // backlogData = response.backlog;
       setBacklogData(response.backlog);
+    }
+  }
+
+  async function getCompletedData() {
+    const res = await fetch(`api/completed?email=${email}`, {
+      method: "GET",
+    });
+    if (res.ok) {
+      let response = await res.json();
+      setCompletedData(response.completed);
     }
   }
 
   useEffect(() => {
     getBacklogData();
+    getCompletedData();
   }, [session]);
+
   // function getBacklogData() {
   // console.log(session?.user);
   // let backlog = session?.user.backlog;
@@ -298,53 +314,53 @@ const UserInfo = () => {
   // let backlogData: BacklogGame[] = [];
   // backlogData = session?.user.backlog;
   // const backlogData = getBacklogData();
-  const completedData = [
-    {
-      name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
-      backlogPlatform: "p",
-      completedPlatform: "lkashlkjashglkjaha",
-      completedDate: "lkashlskjashglkjaha",
-      completedTime: "lkashlkjashglasdasdkjaha",
-      rating: "lkashlkjasashglkjaha",
-      completedNotes: "lkashlkjashglkjaha",
-    },
-    {
-      name: "Atelier Meruru: The Apprentice of Arland DX",
-      backlogPlatform: "p",
-      completedPlatform: "lkashlkjashglkjaha",
-      completedDate: "lkashlskjashglkjaha",
-      completedTime: "lkashlkjashglasdasdkjaha",
-      rating: "lkashlkjasashglkjaha",
-      completedNotes: "lkashlkjashglkjaha",
-    },
-    {
-      name: "Atelier Rakjsdfhlkjashgdlkjashglkyza 2: Lost Legends & the Secret Fairy",
-      backlogPlatform: "p",
-      completedPlatform: "lkashlkjashglkjaha",
-      completedDate: "lkashlskjashglkjaha",
-      completedTime: "lkashlkjashglasdasdkjaha",
-      rating: "lkashlkjasashglkjaha",
-      completedNotes: "lkashlkjashglkjaha",
-    },
-    {
-      name: "Atelier Ryza 2: Lost Legendasdkhaljhljk34h5s & the Secret Fairy",
-      backlogPlatform: "p",
-      completedPlatform: "lkashlkjashglkjaha",
-      completedDate: "lkashlskjashglkjaha",
-      completedTime: "lkashlkjashglasdasdkjaha",
-      rating: "lkashlkjasashglkjaha",
-      completedNotes: "lkashlkjashglkjaha",
-    },
-    {
-      name: "Atelier Ryza 2: Lost 23424324Legends & the Secret Fairy",
-      backlogPlatform: "p",
-      completedPlatform: "lkashlkjashglkjaha",
-      completedDate: "lkashlskjashglkjaha",
-      completedTime: "lkashlkjashglasdasdkjaha",
-      rating: "lkashlkjasashglkjaha",
-      completedNotes: "lkashlkjashglkjaha",
-    },
-  ];
+  // const completedData = [
+  //   {
+  //     name: "Atelier Ryza 2: Lost Legends & the Secret Fairy",
+  //     backlogPlatform: "p",
+  //     completedPlatform: "lkashlkjashglkjaha",
+  //     completedDate: "lkashlskjashglkjaha",
+  //     completedTime: "lkashlkjashglasdasdkjaha",
+  //     rating: "lkashlkjasashglkjaha",
+  //     completedNotes: "lkashlkjashglkjaha",
+  //   },
+  //   {
+  //     name: "Atelier Meruru: The Apprentice of Arland DX",
+  //     backlogPlatform: "p",
+  //     completedPlatform: "lkashlkjashglkjaha",
+  //     completedDate: "lkashlskjashglkjaha",
+  //     completedTime: "lkashlkjashglasdasdkjaha",
+  //     rating: "lkashlkjasashglkjaha",
+  //     completedNotes: "lkashlkjashglkjaha",
+  //   },
+  //   {
+  //     name: "Atelier Rakjsdfhlkjashgdlkjashglkyza 2: Lost Legends & the Secret Fairy",
+  //     backlogPlatform: "p",
+  //     completedPlatform: "lkashlkjashglkjaha",
+  //     completedDate: "lkashlskjashglkjaha",
+  //     completedTime: "lkashlkjashglasdasdkjaha",
+  //     rating: "lkashlkjasashglkjaha",
+  //     completedNotes: "lkashlkjashglkjaha",
+  //   },
+  //   {
+  //     name: "Atelier Ryza 2: Lost Legendasdkhaljhljk34h5s & the Secret Fairy",
+  //     backlogPlatform: "p",
+  //     completedPlatform: "lkashlkjashglkjaha",
+  //     completedDate: "lkashlskjashglkjaha",
+  //     completedTime: "lkashlkjashglasdasdkjaha",
+  //     rating: "lkashlkjasashglkjaha",
+  //     completedNotes: "lkashlkjashglkjaha",
+  //   },
+  //   {
+  //     name: "Atelier Ryza 2: Lost 23424324Legends & the Secret Fairy",
+  //     backlogPlatform: "p",
+  //     completedPlatform: "lkashlkjashglkjaha",
+  //     completedDate: "lkashlskjashglkjaha",
+  //     completedTime: "lkashlkjashglasdasdkjaha",
+  //     rating: "lkashlkjasashglkjaha",
+  //     completedNotes: "lkashlkjashglkjaha",
+  //   },
+  // ];
 
   return (
     <main>
@@ -378,10 +394,10 @@ const UserInfo = () => {
               // data={completedData}
             />
 
-            {/* <CompletedTable
+            <CompletedTable
               columns={CompletedTableColumns}
               data={completedData}
-            /> */}
+            />
           </div>
         </>
       ) : (

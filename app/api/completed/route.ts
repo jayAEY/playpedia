@@ -11,8 +11,8 @@ export async function GET(
   try {
     connectToDb();
     const user = await UsersModel.findOne({ email });
-    const backlog = await user.backlog;
-    return NextResponse.json({ backlog }, { status: 201 });
+    const completed = await user.completed;
+    return NextResponse.json({ completed }, { status: 201 });
   } catch (err) {
     return NextResponse.json({ message: JSON.stringify(err) }, { status: 500 });
   }
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     const user = await UsersModel.findOne({ email });
     const updatedUser = await UsersModel.findOneAndUpdate(
       { email },
-      { backlog: [...user.backlog, newGame] }
+      { completed: [...user.completed, newGame] }
     );
     return NextResponse.json({ message: `Post successful` }, { status: 201 });
   } catch (err) {
