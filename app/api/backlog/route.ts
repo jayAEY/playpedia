@@ -13,8 +13,17 @@ export async function GET(
   // console.log(email);
   // console.log("pp");
   // console.log(context.params.email);
-  console.log(email);
-  return NextResponse.json({ user: "pp" }, { status: 201 });
+  // console.log(email);
+  try {
+    connectToDb();
+    const user = await UsersModel.findOne({ email });
+    // console.log(user);
+    const backlog = await user.backlog;
+    return NextResponse.json({ backlog }, { status: 201 });
+  } catch (err) {
+    return NextResponse.json({ message: JSON.stringify(err) }, { status: 500 });
+  }
+  // return NextResponse.json({ user: email }, { status: 201 });
 }
 
 // export async function GET(req: NextRequest) {

@@ -24,23 +24,25 @@ const UserInfo = () => {
     let email = session?.user.email;
 
     // console.log(await session?.user.email);
-    // console.log()
+    console.log(email);
     // router.push(`/search/?query=${searchValue}`);
 
     // const res = await fetch(`api/backlog/email?=${email}`, {
     // const res = await fetch(`api/backlog/email?=${email}`, {
-    const res = await fetch(`api/backlog/email?email=${email}`, {
+    const res = await fetch(`api/backlog?email=${email}`, {
       method: "GET",
     });
     if (res.ok) {
-      console.log(await res.json());
-      // backlogData = await res.json();
+      // console.log(await res.json());
+      let response = await res.json();
+      backlogData = response.backlog;
+      console.log(backlogData);
     }
   }
 
   useEffect(() => {
     getBacklogData();
-  }, []);
+  }, [session]);
 
   // function getBacklogData() {
   // console.log(session?.user);
@@ -379,6 +381,7 @@ const UserInfo = () => {
               columns={BacklogTableColumns}
               data={backlogData}
             />
+
             {/* <CompletedTable
               columns={CompletedTableColumns}
               data={completedData}
