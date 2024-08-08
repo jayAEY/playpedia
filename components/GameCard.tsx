@@ -504,8 +504,8 @@ const GameCard = ({
                     <DialogFooter></DialogFooter>
                   </DialogContent>
                 </Dialog>
-                {/* Completed Dialog */}
 
+                {/* Completed Dialog */}
                 <Dialog>
                   {status === "authenticated" ? (
                     <DialogTrigger

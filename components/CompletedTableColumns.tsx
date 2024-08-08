@@ -17,6 +17,7 @@ import {
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type CompletedGame = {
+  id: number;
   name: string;
   completedPlatform: string;
   completedDate: string;

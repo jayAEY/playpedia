@@ -13,17 +13,12 @@ import { BacklogTable } from "./BacklogTable";
 import { CompletedGame, CompletedTableColumns } from "./CompletedTableColumns";
 import { CompletedTable } from "./CompletedTable";
 
-type UserInfoProps = {};
-
-// const UserInfo = ({ columns, DataTable }) => {
 const UserInfo = () => {
   const { data: session, status } = useSession();
   const [backlogData, setBacklogData] = useState<BacklogGame[]>([]);
   const [completedData, setCompletedData] = useState<CompletedGame[]>([]);
 
   let email = session?.user.email;
-
-  // console.log(email);
 
   async function getBacklogData() {
     const res = await fetch(`api/backlog?email=${email}`, {
@@ -50,6 +45,10 @@ const UserInfo = () => {
     getCompletedData();
     return;
   }, [session]);
+
+  async function editBacklog(id: number) {
+    console.log(email);
+  }
 
   // function getBacklogData() {
   // console.log(session?.user);
@@ -378,7 +377,7 @@ const UserInfo = () => {
                 signOut();
               }}
               type="submit"
-              className="mt-6 text-xs  font-black"
+              className="mt-6 text-xs font-black"
             >
               Logout
             </Button>

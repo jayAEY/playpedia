@@ -1047,7 +1047,7 @@ const SearchResults = () => {
   //   setLoading(false);
   // }, [searchQuery]);
 
-  console.log(data);
+  // console.log(data);
   return (
     <main>
       {loading ? (
