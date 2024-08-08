@@ -19,6 +19,7 @@ export async function GET(
 }
 export async function POST(req: NextRequest) {
   const { email, newGame } = await req.json();
+  console.log(newGame);
   try {
     connectToDb();
     const user = await UsersModel.findOne({ email });
@@ -26,6 +27,7 @@ export async function POST(req: NextRequest) {
       { email },
       { completed: [...user.completed, newGame] }
     );
+    await updatedUser.save();
     return NextResponse.json({ message: `Post successful` }, { status: 201 });
   } catch (err) {
     return NextResponse.json({ message: JSON.stringify(err) }, { status: 500 });

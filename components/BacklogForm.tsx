@@ -20,6 +20,7 @@ import { toast } from "./ui/use-toast";
 import { useSession } from "next-auth/react";
 
 const formSchema = z.object({
+  id: z.number(),
   name: z.string(),
   backlogPlatform: z.string().optional(),
   goalTime: z.string().optional(),
@@ -31,11 +32,13 @@ const formSchema = z.object({
 export function BacklogForm({ name }: { name: string }) {
   const { data: session, status } = useSession();
   let currentDate = new Date().toLocaleDateString();
+  const timeId = new Date().getTime();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      id: timeId,
       name: name,
       backlogPlatform: "",
       goalTime: "",
@@ -46,7 +49,6 @@ export function BacklogForm({ name }: { name: string }) {
   });
 
   // 2. Define a submit handler.
-  // function onSubmit(values: z.infer<typeof formSchema>) {
   async function onSubmit(newGame: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -60,6 +62,9 @@ export function BacklogForm({ name }: { name: string }) {
         toast({
           title: `${newGame.name} added to backlog`,
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
         return;
       } else {
         let responseObject = await res.json();

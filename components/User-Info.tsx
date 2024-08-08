@@ -21,16 +21,11 @@ const UserInfo = () => {
   const [backlogData, setBacklogData] = useState<BacklogGame[]>([]);
   const [completedData, setCompletedData] = useState<CompletedGame[]>([]);
 
-  // let email = session?.user.email;
-  // let backlogData: BacklogGame[] = [];
   let email = session?.user.email;
 
   // console.log(email);
 
   async function getBacklogData() {
-    // let email = session?.user.email;
-
-    // console.log(email);
     const res = await fetch(`api/backlog?email=${email}`, {
       method: "GET",
     });
@@ -53,6 +48,7 @@ const UserInfo = () => {
   useEffect(() => {
     getBacklogData();
     getCompletedData();
+    return;
   }, [session]);
 
   // function getBacklogData() {
@@ -391,7 +387,6 @@ const UserInfo = () => {
             <BacklogTable
               columns={BacklogTableColumns}
               data={backlogData}
-              // data={completedData}
             />
 
             <CompletedTable

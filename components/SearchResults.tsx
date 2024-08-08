@@ -1,7 +1,6 @@
 // "use client";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-// import { Suspense } from "react";
 
 import GameCard from "./GameCard";
 import { HowLongToBeatEntry } from "howlongtobeat";
@@ -1050,7 +1049,6 @@ const SearchResults = () => {
 
   console.log(data);
   return (
-    // <Suspense>
     <main>
       {loading ? (
         <h1 className="pl-10 pt-10 text-2xl font-semibold text-muted-foreground">
@@ -1088,7 +1086,6 @@ const SearchResults = () => {
             )}
       </section>
     </main>
-    // </Suspense>
   );
 };
 

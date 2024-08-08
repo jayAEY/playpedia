@@ -19,6 +19,7 @@ import { toast } from "./ui/use-toast";
 import { useSession } from "next-auth/react";
 
 const formSchema = z.object({
+  id: z.number(),
   name: z.string(),
   completedPlatform: z.string().optional(),
   completedDate: z.string().optional(),
@@ -29,12 +30,13 @@ const formSchema = z.object({
 
 export function CompletedForm({ name }: { name: string }) {
   const { data: session, status } = useSession();
-  let currentDate = new Date().toLocaleDateString();
-
+  const currentDate = new Date().toLocaleDateString();
+  const timeId = new Date().getTime();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      id: timeId,
       name: name,
       completedPlatform: "",
       completedTime: "",
@@ -58,6 +60,9 @@ export function CompletedForm({ name }: { name: string }) {
         toast({
           title: `${newGame.name} added to completed`,
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
         return;
       } else {
         let responseObject = await res.json();

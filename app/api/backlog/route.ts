@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
       { email },
       { backlog: [...user.backlog, newGame] }
     );
+    await updatedUser.save();
     return NextResponse.json({ message: `Post successful` }, { status: 201 });
   } catch (err) {
     return NextResponse.json({ message: JSON.stringify(err) }, { status: 500 });
