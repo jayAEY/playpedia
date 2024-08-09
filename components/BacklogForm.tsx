@@ -29,7 +29,15 @@ const formSchema = z.object({
   dateAdded: z.string().optional(),
 });
 
-export function BacklogForm({ name }: { name: string }) {
+export function BacklogForm({
+  name,
+  addOrEdit,
+  id,
+}: {
+  name: string;
+  addOrEdit: string;
+  id?: number;
+}) {
   const { data: session, status } = useSession();
   let currentDate = new Date().toLocaleDateString();
   const timeId = new Date().getTime();
@@ -38,7 +46,7 @@ export function BacklogForm({ name }: { name: string }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      id: timeId,
+      id: id || timeId,
       name: name,
       backlogPlatform: "",
       goalTime: "",
@@ -52,28 +60,54 @@ export function BacklogForm({ name }: { name: string }) {
   async function onSubmit(newGame: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    try {
-      const res = await fetch("/api/backlog", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: session?.user.email, newGame }),
-      });
-      if (res.ok) {
-        toast({
-          title: `${newGame.name} added to backlog`,
+    if (addOrEdit == "add") {
+      try {
+        const res = await fetch("/api/backlog", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: session?.user.email, newGame }),
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
-        return;
-      } else {
-        let responseObject = await res.json();
-        toast({
-          title: `$Error ${responseObject}`,
-        });
+        if (res.ok) {
+          toast({
+            title: `${newGame.name} added to backlog`,
+          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+          return;
+        } else {
+          let responseObject = await res.json();
+          toast({
+            title: `$Error ${responseObject}`,
+          });
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
+    } else {
+      try {
+        const res = await fetch("/api/backlog", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: session?.user.email, newGame, id }),
+        });
+        if (res.ok) {
+          toast({
+            title: `${newGame.name} has been edited`,
+          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+          return;
+        } else {
+          let responseObject = await res.json();
+          toast({
+            title: `$Error ${responseObject}`,
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 

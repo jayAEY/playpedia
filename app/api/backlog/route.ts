@@ -34,16 +34,22 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-  const { email, editedGame } = await req.json();
+  const { email, newGame, id } = await req.json();
   try {
-    //   connectToDb();
-    //   const user = await UsersModel.findOne({ email });
-    //   const updatedUser = await UsersModel.findOneAndUpdate(
-    //     { email },
-    //     { backlog: [...user.backlog, newGame] }
-    // );
-    //   await updatedUser.save();
-    return NextResponse.json({ message: `Post successful` }, { status: 201 });
+    connectToDb();
+    const user = await UsersModel.findOne({ email });
+    const backlog = JSON.parse(JSON.stringify(await user.backlog));
+    let index: number = -1;
+    backlog.forEach((game: { id: any }, i: number) => {
+      if (game.id == id) index = i;
+    });
+    if (index > -1) backlog[index] = newGame;
+    const updatedUser = await UsersModel.findOneAndUpdate(
+      { email },
+      { backlog }
+    );
+    await updatedUser.save();
+    return NextResponse.json({ message: `Game Deleted` }, { status: 201 });
   } catch (err) {
     return NextResponse.json({ message: JSON.stringify(err) }, { status: 500 });
   }
@@ -62,7 +68,7 @@ export async function DELETE(req: NextRequest) {
       { backlog: updatedBacklog }
     );
     await updatedUser.save();
-    return NextResponse.json({ message: `Post successful` }, { status: 201 });
+    return NextResponse.json({ message: `Game Deleted` }, { status: 201 });
   } catch (err) {
     return NextResponse.json({ message: JSON.stringify(err) }, { status: 500 });
   }

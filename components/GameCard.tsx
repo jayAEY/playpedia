@@ -500,7 +500,10 @@ const GameCard = ({
                         Enter additional info for backlog(optional):
                       </DialogDescription>
                     </DialogHeader>
-                    <BacklogForm name={name} />
+                    <BacklogForm
+                      name={name}
+                      addOrEdit="add"
+                    />
                     <DialogFooter></DialogFooter>
                   </DialogContent>
                 </Dialog>
