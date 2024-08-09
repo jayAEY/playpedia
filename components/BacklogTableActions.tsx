@@ -37,14 +37,46 @@ import {
 import { BacklogForm } from "./BacklogForm";
 import { useState } from "react";
 import { CompletedForm } from "./CompletedForm";
+import { toast } from "./ui/use-toast";
+import { useSession } from "next-auth/react";
 
 const BacklogTableActions = (game: { game: BacklogGame }) => {
+  const { data: session, status } = useSession();
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+
+  const { id, name } = game.game;
+  const email = session?.user.email;
 
   async function backlogEdit(id: number) {
     console.log(id);
     setAlertOpen(false);
+  }
+
+  async function backlogRemove(id: number) {
+    try {
+      const res = await fetch("/api/backlog", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, id }),
+      });
+      if (res.ok) {
+        toast({
+          title: `${name} removed`,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+        return;
+      } else {
+        let responseObject = await res.json();
+        toast({
+          title: `$Error ${responseObject}`,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
   return (
     <>
@@ -67,12 +99,12 @@ const BacklogTableActions = (game: { game: BacklogGame }) => {
 
             <DialogContent className="sm:max-w-[425px] pt-2 pb-1">
               <DialogHeader>
-                <DialogTitle className="hidden">{game.game.name}</DialogTitle>
+                <DialogTitle className="hidden">{name}</DialogTitle>
                 <DialogDescription className="hidden">
                   Enter additional info for backlog(optional):
                 </DialogDescription>
               </DialogHeader>
-              <BacklogForm name={game.game.name} />
+              <BacklogForm name={name} />
               <DialogFooter></DialogFooter>
             </DialogContent>
           </Dialog>
@@ -104,7 +136,7 @@ const BacklogTableActions = (game: { game: BacklogGame }) => {
                 </AlertDialogCancel>
                 <AlertDialogAction
                   className="text-xs font-black"
-                  onClick={() => backlogEdit(game.game.id)}
+                  onClick={() => backlogRemove(id)}
                 >
                   Continue
                 </AlertDialogAction>
@@ -121,12 +153,12 @@ const BacklogTableActions = (game: { game: BacklogGame }) => {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] pt-2 pb-1">
               <DialogHeader>
-                <DialogTitle className="hidden">{game.game.name}</DialogTitle>
+                <DialogTitle className="hidden">{name}</DialogTitle>
                 <DialogDescription className="hidden">
                   Enter additional info for completed(optional):
                 </DialogDescription>
               </DialogHeader>
-              <CompletedForm name={game.game.name} />
+              <CompletedForm name={name} />
               <DialogFooter></DialogFooter>
             </DialogContent>
           </Dialog>
