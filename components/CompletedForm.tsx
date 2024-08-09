@@ -28,7 +28,15 @@ const formSchema = z.object({
   completedNotes: z.string().optional(),
 });
 
-export function CompletedForm({ name }: { name: string }) {
+export function CompletedForm({
+  name,
+  backlogRemove,
+  id,
+}: {
+  name: string;
+  backlogRemove?: (id: number) => Promise<void>;
+  id?: number;
+}) {
   const { data: session, status } = useSession();
   const currentDate = new Date().toLocaleDateString();
   const timeId = new Date().getTime();
@@ -50,6 +58,9 @@ export function CompletedForm({ name }: { name: string }) {
   async function onSubmit(newGame: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    if (backlogRemove) {
+      backlogRemove(id);
+    }
     try {
       const res = await fetch("/api/completed", {
         method: "POST",

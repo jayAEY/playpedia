@@ -162,7 +162,11 @@ const BacklogTableActions = (game: { game: BacklogGame }) => {
                   Enter additional info for completed(optional):
                 </DialogDescription>
               </DialogHeader>
-              <CompletedForm name={name} />
+              <CompletedForm
+                name={name}
+                backlogRemove={backlogRemove}
+                id={id}
+              />
               <DialogFooter></DialogFooter>
             </DialogContent>
           </Dialog>
