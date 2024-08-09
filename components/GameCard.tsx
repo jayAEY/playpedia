@@ -556,7 +556,10 @@ const GameCard = ({
                         Enter additional info for completed(optional):
                       </DialogDescription>
                     </DialogHeader>
-                    <CompletedForm name={name} />
+                    <CompletedForm
+                      name={name}
+                      addOrEdit="add"
+                    />
                     <DialogFooter></DialogFooter>
                   </DialogContent>
                 </Dialog>

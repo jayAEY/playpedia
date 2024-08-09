@@ -32,10 +32,12 @@ const formSchema = z.object({
 export function BacklogForm({
   name,
   addOrEdit,
+  completedRemove,
   id,
 }: {
   name: string;
   addOrEdit: string;
+  completedRemove?: (id: number) => Promise<void>;
   id?: number;
 }) {
   const { data: session, status } = useSession();
@@ -60,6 +62,10 @@ export function BacklogForm({
   async function onSubmit(newGame: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    if (completedRemove && id) {
+      completedRemove(id);
+    }
+
     if (addOrEdit == "add") {
       try {
         const res = await fetch("/api/backlog", {

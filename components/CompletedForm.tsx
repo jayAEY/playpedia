@@ -30,21 +30,24 @@ const formSchema = z.object({
 
 export function CompletedForm({
   name,
+  addOrEdit,
   backlogRemove,
   id,
 }: {
   name: string;
+  addOrEdit: string;
   backlogRemove?: (id: number) => Promise<void>;
   id?: number;
 }) {
   const { data: session, status } = useSession();
   const currentDate = new Date().toLocaleDateString();
   const timeId = new Date().getTime();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      id: timeId,
+      id: id || timeId,
       name: name,
       completedPlatform: "",
       completedTime: "",
@@ -58,31 +61,58 @@ export function CompletedForm({
   async function onSubmit(newGame: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    if (backlogRemove) {
+    if (backlogRemove && id) {
       backlogRemove(id);
     }
-    try {
-      const res = await fetch("/api/completed", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: session?.user.email, newGame }),
-      });
-      if (res.ok) {
-        toast({
-          title: `${newGame.name} added to completed`,
+
+    if (addOrEdit == "add") {
+      try {
+        const res = await fetch("/api/completed", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: session?.user.email, newGame }),
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
-        return;
-      } else {
-        let responseObject = await res.json();
-        toast({
-          title: `$Error ${responseObject}`,
-        });
+        if (res.ok) {
+          toast({
+            title: `${newGame.name} added to completed`,
+          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+          return;
+        } else {
+          let responseObject = await res.json();
+          toast({
+            title: `$Error ${responseObject}`,
+          });
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
+    } else {
+      try {
+        const res = await fetch("/api/completed", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: session?.user.email, newGame, id }),
+        });
+        if (res.ok) {
+          toast({
+            title: `${newGame.name} has been edited`,
+          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+          return;
+        } else {
+          let responseObject = await res.json();
+          toast({
+            title: `$Error ${responseObject}`,
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 

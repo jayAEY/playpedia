@@ -33,3 +33,44 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: JSON.stringify(err) }, { status: 500 });
   }
 }
+
+export async function PUT(req: NextRequest) {
+  const { email, newGame, id } = await req.json();
+  try {
+    connectToDb();
+    const user = await UsersModel.findOne({ email });
+    const completed = JSON.parse(JSON.stringify(await user.completed));
+    let index: number = -1;
+    completed.forEach((game: { id: any }, i: number) => {
+      if (game.id == id) index = i;
+    });
+    if (index > -1) completed[index] = newGame;
+    const updatedUser = await UsersModel.findOneAndUpdate(
+      { email },
+      { completed }
+    );
+    await updatedUser.save();
+    return NextResponse.json({ message: `Game Deleted` }, { status: 201 });
+  } catch (err) {
+    return NextResponse.json({ message: JSON.stringify(err) }, { status: 500 });
+  }
+}
+export async function DELETE(req: NextRequest) {
+  const { email, id } = await req.json();
+  try {
+    connectToDb();
+    const user = await UsersModel.findOne({ email });
+    const completed = await user.completed;
+    const updatedCompleted = completed.filter(
+      (game: { id: any }) => game.id !== id
+    );
+    const updatedUser = await UsersModel.findOneAndUpdate(
+      { email },
+      { completed: updatedCompleted }
+    );
+    await updatedUser.save();
+    return NextResponse.json({ message: `Game Deleted` }, { status: 201 });
+  } catch (err) {
+    return NextResponse.json({ message: JSON.stringify(err) }, { status: 500 });
+  }
+}
