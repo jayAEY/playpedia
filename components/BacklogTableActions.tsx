@@ -43,7 +43,6 @@ import { useSession } from "next-auth/react";
 const BacklogTableActions = (game: { game: BacklogGame }) => {
   const { data: session, status } = useSession();
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
 
   const { id, name } = game.game;
   const email = session?.user.email;
@@ -143,7 +142,7 @@ const BacklogTableActions = (game: { game: BacklogGame }) => {
             </AlertDialogContent>
           </AlertDialog>
 
-          {/* Mark as Completed */}
+          {/* mark as Completed */}
           <Dialog>
             <DialogTrigger asChild>
               <p className="px-2 py-1 text-sm cursor-pointer">

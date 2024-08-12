@@ -192,7 +192,8 @@ export function BacklogTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      {/* pagination */}
+
+      {/* Pagination */}
       <div className="flex pt-4 items-center max-h-min justify-between">
         <div className="flex text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
