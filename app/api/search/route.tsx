@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { HowLongToBeatService, HowLongToBeatEntry } from "howlongtobeat";
-
 let hltbService = new HowLongToBeatService();
 
 export async function POST(req: NextRequest) {
