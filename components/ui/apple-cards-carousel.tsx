@@ -104,7 +104,9 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
           <div
             className={cn(
-              "flex flex-row justify-start gap-4 pl-4",
+              "flex flex-row justify-start gap-4",
+
+              // "flex flex-row justify-start gap-4 pl-4",
               // "max-w-7xl mx-auto" // remove max-w-4xl if you want the carousel to span the full width of its container
               "max-w-7xl" // remove max-w-4xl if you want the carousel to span the full width of its container
             )}
@@ -135,18 +137,18 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         </div>
         <div className="flex justify-end gap-2 pr-2">
           <button
-            className="relative z-40 h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-50"
+            className="relative z-40 h-8 w-8 rounded-full flex items-center justify-center border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground disabled:opacity-50"
             onClick={scrollLeft}
             disabled={!canScrollLeft}
           >
             <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
           </button>
           <button
-            className="relative z-40 h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-50"
+            className="relative z-40 h-8 w-8 rounded-full flex items-center justify-center border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground disabled:opacity-50"
             onClick={scrollRight}
             disabled={!canScrollRight}
           >
-            <IconArrowNarrowRight className="h-6 w-6 text-gray-500" />
+            <IconArrowNarrowRight className="h-6 w-6 " />
           </button>
         </div>
       </div>
@@ -243,9 +245,9 @@ export const Card = ({
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={handleOpen}
         // className="rounded-none bg-gray-100 dark:bg-neutral-900 h-80 w-56 md:h-[40rem] md:w-96 overflow-hidden flex flex-col items-start justify-start relative z-10"
-        className="rounded-none bg-gray-100 dark:bg-neutral-900 min-h-[60svh] md:h-[50rem] w-[79vw] overflow-hidden flex flex-col items-start justify-start relative z-10"
+        className="rounded-none bg-gray-100 dark:bg-neutral-900 min-h-[52svh] md:h-[30rem] w-[80vw] overflow-hidden flex flex-col items-start justify-start relative z-10"
       >
-        <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
+        <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/100 via-transparent to-transparent z-30 pointer-events-none" />
         <div className="relative z-40 p-8">
           <motion.p
             layoutId={layout ? `category-${card.category}` : undefined}

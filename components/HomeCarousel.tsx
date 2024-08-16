@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
+import { Gamepad2 } from "lucide-react";
 
 export function HomeCarousel() {
   const cards = data.map((card, index) => (
@@ -14,14 +15,18 @@ export function HomeCarousel() {
   ));
 
   return (
-    <div className="w-svw px-10 lg:px-[10svw]">
+    <div className="w-svw px-[10svw]">
       {/* <h2 className="max-w-7xl p-4 mx-auto text-5xl font-bold "> */}
-
-      <h2 className="max-w-7xl p-4 text-5xl font-bold ">
-        Welcome to playpedia!
+      {/* <h2 className="max-w-6xl pb-4 text-5xl font-extrabold "> */}
+      <h2 className="flex flex-col md:flex-row pb-4 text-5xl font-extrabold ">
+        Welcome to
+        <span className="flex mx-0 md:mx-4 gap-2">
+          <Gamepad2 className="mt-2 h-12 w-12" />
+          playpedia
+        </span>
       </h2>
       {/* <p className="p-4 ml-0 md:py-0 text-sm max-w-lg"> */}
-      <p className="p-4 md:py-0 text-sm max-w-lg">
+      <p className=" md:py-0 text-md max-w-xl">
         Your ultimate companion for managing and exploring your video game
         journey! We offer a seamless experience for discovering new games,
         organizing your gaming backlog, and tracking your gaming progress.
@@ -68,7 +73,7 @@ const data = [
   {
     category: "Comprehensive Database",
     title: "Find Info on thousands of games",
-    src: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "/search-screenshot.png",
     content: <DummyContent />,
   },
   {
@@ -85,7 +90,7 @@ const data = [
   },
   {
     category: "Progress Tracking",
-    title: "Track various goals and achievements to",
+    title: "Track various goals and achievements to keep yourself motivated",
     src: "https://images.unsplash.com/photo-1599202860130-f600f4948364?q=80&w=2515&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     content: <DummyContent />,
   },

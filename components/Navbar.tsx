@@ -43,7 +43,7 @@ export function Navbar() {
         {status === "authenticated" ? (
           <Link
             href="/dashboard"
-            className="text-foreground transition-colors hover:text-foreground"
+            className="text-foreground transition-colors hover:text-primary"
           >
             Dashboard
           </Link>
@@ -51,13 +51,13 @@ export function Navbar() {
           <>
             <Link
               href="/login"
-              className="text-foreground transition-colors hover:text-foreground"
+              className="text-foreground transition-colors hover:text-primary"
             >
               Login
             </Link>
             <Link
               href="/register"
-              className="text-foreground transition-colors hover:text-foreground"
+              className="text-foreground transition-colors hover:text-primary"
             >
               Register
             </Link>
@@ -143,7 +143,7 @@ export function Navbar() {
             <Input
               type="search"
               placeholder="Search games..."
-              className="pl-8 md:w-[200px]"
+              className="pl-8 md:w-[200px] hover:bg-muted"
               onChange={(e) => setSearchValue(e.target.value)}
               defaultValue={searchQuery}
             />

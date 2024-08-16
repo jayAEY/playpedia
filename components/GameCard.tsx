@@ -460,7 +460,7 @@ const GameCard = ({
                       asChild
                       className="
                     bg-primary
-                    text-foreground
+                    text-white
                     max-h-6
                     px-3
                     pr-4
@@ -476,7 +476,7 @@ const GameCard = ({
                       variant="outline"
                       className="
                   bg-primary
-                  text-foreground
+                  text-white
                   max-h-6
                   px-3
                   pr-4
@@ -515,7 +515,7 @@ const GameCard = ({
                       asChild
                       className="
                     bg-primary
-                    text-foreground
+                    text-white
                     max-h-6
                     px-3
                     pr-4
@@ -531,7 +531,7 @@ const GameCard = ({
                       variant="outline"
                       className="
                   bg-primary
-                  text-foreground
+                  text-white
                   max-h-6
                   px-3
                   pr-4

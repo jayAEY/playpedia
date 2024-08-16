@@ -57,3 +57,12 @@ Key Features:
     Community Features: Connect with other gamers, share your lists, and discuss your favorite games. Participate in community challenges and see how your progress stacks up against others.
 
 GameTracker is your go-to platform for organizing your gaming life, ensuring you never lose track of the games you want to play, and helping you celebrate the ones you've conquered. Start building your ultimate game collection today and take control of your gaming adventure!
+
+THINGS TO DO:
+
+- MAKE README
+- ADD PROGRESS TABLE?
+- ADD STATS TO DASHBOARD
+- FIND RIGHT IMAGES FOR HOMEPAGE CAROUSEL
+- CLEAN COMMENTS FROM EVERYTHING
+- GAME RECOMMENDATION FEATURE?

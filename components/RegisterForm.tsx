@@ -148,12 +148,20 @@ export function RegisterForm() {
         </div>
       </form>
       <div className="max-h-screen object-contain hidden bg-muted lg:block">
+        {/* <div className="h-full top-0 inset-x-0 bg-gradient-to-b from-black/100 via-transparent to-transparent z-30 pointer-events-none"> */}
         <Image
           priority
           src={heroImage}
           alt="Hero Image"
           className="h-screen w-full object-cover"
         />
+        {/* </div> */}
+        {/* <Image
+          priority
+          src={heroImage}
+          alt="Hero Image"
+          className="h-screen w-full object-cover"
+        /> */}
       </div>
     </main>
   );
