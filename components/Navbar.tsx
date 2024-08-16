@@ -43,7 +43,7 @@ export function Navbar() {
         {status === "authenticated" ? (
           <Link
             href="/dashboard"
-            className="text-foreground transition-colors hover:text-primary"
+            className="text-foreground transition-colors text-xs font-black hover:text-primary"
           >
             Dashboard
           </Link>
@@ -51,13 +51,13 @@ export function Navbar() {
           <>
             <Link
               href="/login"
-              className="text-foreground transition-colors hover:text-primary"
+              className="text-foreground transition-colors text-xs font-black hover:text-primary"
             >
               Login
             </Link>
             <Link
               href="/register"
-              className="text-foreground transition-colors hover:text-primary"
+              className="text-foreground transition-colors text-xs font-black hover:text-primary"
             >
               Register
             </Link>
@@ -101,7 +101,7 @@ export function Navbar() {
                   </div>
                   <Link
                     href="/dashboard"
-                    className="hover:text-foreground"
+                    className="text-xs font-black hover:text-foreground"
                   >
                     Dashboard
                   </Link>
@@ -117,13 +117,13 @@ export function Navbar() {
                   </div>
                   <Link
                     href="/login"
-                    className="hover:text-foreground"
+                    className="text-xs font-black hover:text-foreground"
                   >
                     Login
                   </Link>
                   <Link
                     href="/register"
-                    className="hover:text-foreground"
+                    className="text-xs font-black hover:text-foreground"
                   >
                     Register
                   </Link>

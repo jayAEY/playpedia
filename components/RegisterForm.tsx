@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import heroImage from "@/public/eberhard-grossgasteiger-LmqySFs3TQQ-unsplash.jpg";
+import heroImage from "@/public/search-screenshot.png";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -147,21 +147,14 @@ export function RegisterForm() {
           </div>
         </div>
       </form>
-      <div className="max-h-screen object-contain hidden bg-muted lg:block">
-        {/* <div className="h-full top-0 inset-x-0 bg-gradient-to-b from-black/100 via-transparent to-transparent z-30 pointer-events-none"> */}
+      <div className="max-h-screen object-contain hidden bg-gray-400 dark:bg-neutral-900 lg:block">
         <Image
           priority
           src={heroImage}
           alt="Hero Image"
-          className="h-screen w-full object-cover"
+          className="min-h-screen w-full object-cover opacity-90"
         />
-        {/* </div> */}
-        {/* <Image
-          priority
-          src={heroImage}
-          alt="Hero Image"
-          className="h-screen w-full object-cover"
-        /> */}
+        <div className="bg-gradient-to-b from-black/100" />
       </div>
     </main>
   );

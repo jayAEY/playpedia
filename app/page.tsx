@@ -1,68 +1,74 @@
 "use client";
 import { HomeCarousel } from "@/components/HomeCarousel";
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const { data: session, status } = useSession();
 
   // console.log(status);
   return (
-    <main className="flex min-h-[90%] flex-col items-center lg:items-start justify-between p-[3svh]">
+    <main className="flex min-h-[90%] pt-20 flex-col items-center lg:items-start justify-between p-[3svh]">
       <div>
         <HomeCarousel />
       </div>
+      {/* <Link
+              href="/login"
+              className="text-foreground transition-colors mb-5 text-xs font-black hover:text-primary"
+            > */}
 
-      <div className="grid px-10 lg:px-[10svw] lg:mb-0 lg:grid-cols-3 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="grid w-svw px-[10svw] gap-4 md:grid-cols-4">
+        <Link
+          href="/search"
+          className="text-foreground transition-colors mb-5 hover:text-primary hover:opacity-85"
         >
-          <h2 className="mb-3 text-2xl font-semibold">Search </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
+          <span className="flex w-full items-center gap-1">
+            <h2 className="mb-1 text-xl font-black">Search</h2>
+            <ArrowRight className="h-4 w-4" />
+          </span>
+          <p className=" max-w-none md:max-w-52 text-sm text-muted-foreground">
             Find new games and info to help plan your next journey.
           </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+        </Link>
+        <Link
+          href="/login"
+          className="text-foreground transition-colors mb-5 hover:text-primary hover:opacity-85"
         >
-          <h2 className="mb-3 text-2xl font-semibold">Register </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Create an account to start your plans and organize your gaming
-            journey
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 "
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">Login </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
+          <span className="flex w-full items-center gap-1">
+            <h2 className="mb-1 text-xl font-black">Login</h2>
+            <ArrowRight className="h-4 w-4" />
+          </span>
+          <p className=" max-w-none md:max-w-52 text-sm text-muted-foreground">
             Already have an account? Login to keep tracking your progress.
           </p>
-        </a>
-        {/* 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+        </Link>{" "}
+        <Link
+          href="/register"
+          className="text-foreground transition-colors mb-5 hover:text-primary hover:opacity-85"
         >
-          <h2 className="mb-3 text-2xl font-semibold">Deploy </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+          <span className="flex w-full items-center gap-1">
+            <h2 className="mb-1 text-xl font-black">Register</h2>
+            <ArrowRight className="h-4 w-4" />
+          </span>
+          <p className=" max-w-none md:max-w-52 text-sm text-muted-foreground">
+            Don't have an account? Sign up and save your info.
           </p>
-        </a> */}
+        </Link>{" "}
+        <Link
+          href="/dashboard"
+          className="text-foreground transition-colors mb-5 hover:text-primary hover:opacity-85"
+        >
+          <span className="flex w-full items-center gap-1">
+            <h2 className="mb-1 text-xl font-black">Dashboard</h2>
+            <ArrowRight className="h-4 w-4" />
+          </span>
+          <p className=" max-w-none md:max-w-52 text-sm text-muted-foreground">
+            See stats and info for your goals and progress
+          </p>
+        </Link>
       </div>
     </main>
 
