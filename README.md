@@ -38,3 +38,22 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 https://tanstack.com/table/latest/docs/introduction
+
+Welcome to GameTracker, your ultimate companion for managing and exploring your video game journey! Whether you're a casual gamer or a hardcore enthusiast, GameTracker offers a seamless experience for discovering new games, organizing your gaming backlog, and tracking your progress.
+Key Features:
+
+    Comprehensive Game Database: Search through an extensive collection of video games across all platforms and genres. Access detailed information including release dates, reviews, ratings, gameplay descriptions, and more.
+
+    Personalized Backlog: Create your own personalized backlog of games you plan to play. Organize your list by priority, platform, or genre, and easily add new titles as you discover them.
+
+    Completed Games List: Keep track of the games you’ve completed and reflect on your achievements. Rate each game, write your own reviews, and share your accomplishments with friends.
+
+    Progress Tracking: Monitor your progress in each game with detailed tracking features. Mark stages, levels, or quests as completed, and set goals to keep yourself motivated.
+
+
+    ADD THESE?
+    Game Recommendations: Receive personalized game recommendations based on your interests and gaming history. Discover hidden gems and popular titles you might have missed.
+
+    Community Features: Connect with other gamers, share your lists, and discuss your favorite games. Participate in community challenges and see how your progress stacks up against others.
+
+GameTracker is your go-to platform for organizing your gaming life, ensuring you never lose track of the games you want to play, and helping you celebrate the ones you've conquered. Start building your ultimate game collection today and take control of your gaming adventure!
