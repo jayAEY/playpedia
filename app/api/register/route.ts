@@ -9,7 +9,9 @@ export function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const { email, password, avatar } = await req.json();
+  const { email, username, password, avatar, created } = await req.json();
+
+  console.log(email, username, created);
   try {
     connectToDb();
     const user = await UsersModel.findOne({ email });
@@ -20,7 +22,13 @@ export async function POST(req: NextRequest) {
       );
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new UsersModel({ email, password: hashedPassword, avatar });
+    const newUser = new UsersModel({
+      email,
+      username,
+      password: hashedPassword,
+      created,
+      avatar,
+    });
     await newUser.save();
     return NextResponse.json(
       { message: `${email} is now registered!` },

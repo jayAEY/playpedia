@@ -37,6 +37,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+to get certain db items in session tokens update authoptions next-auth.d.ts in types folder
+https://next-auth.js.org/getting-started/typescript
+
 https://tanstack.com/table/latest/docs/introduction
 
 Welcome to GameTracker, your ultimate companion for managing and exploring your video game journey! Whether you're a casual gamer or a hardcore enthusiast, GameTracker offers a seamless experience for discovering new games, organizing your gaming backlog, and tracking your progress.

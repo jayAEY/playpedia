@@ -49,7 +49,6 @@ export function CompletedTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({
       completedPlatform: false,
-      completedNotes: false,
     });
   const [rowSelection, setRowSelection] = React.useState({});
 

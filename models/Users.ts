@@ -2,7 +2,9 @@ import mongoose, { Schema, models } from "mongoose";
 
 const usersSchema = new Schema({
   email: { type: String, required: true },
+  username: { type: String, required: true },
   password: { type: String, required: true },
+  created: { type: String, required: true },
   avatar: String,
   backlog: Array,
   completed: Array,

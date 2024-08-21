@@ -20,6 +20,7 @@ import {
 
 export function RegisterForm() {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState("");
   const [alertOpen, setAlertOpen] = useState(false);
@@ -29,12 +30,12 @@ export function RegisterForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-
+    const created = new Date();
     try {
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, avatar }),
+        body: JSON.stringify({ email, password, avatar, username, created }),
       });
       if (res.ok) {
         setAlertOpen(true);
@@ -93,6 +94,16 @@ export function RegisterForm() {
                 placeholder="email@example.com"
                 required
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="username">Username</Label>
+              <Input
+                id="username"
+                type="username"
+                placeholder="username"
+                required
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div className="grid gap-2">

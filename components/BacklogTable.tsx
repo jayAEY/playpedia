@@ -50,7 +50,6 @@ export function BacklogTable<TData, TValue>({
     React.useState<VisibilityState>({
       goalTime: false,
       backlogPlatform: false,
-      backlogNotes: false,
     });
   const [rowSelection, setRowSelection] = React.useState({});
 

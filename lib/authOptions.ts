@@ -31,7 +31,9 @@ const authOptions: NextAuthOptions = {
       user &&
         (token.user = {
           email: user.email,
+          username: user.username,
           avatar: user.avatar,
+          created: user.created,
           backlog: user.backlog,
           completed: user.completed,
         });
@@ -42,7 +44,9 @@ const authOptions: NextAuthOptions = {
       let token = params.token;
       session.user = token.user as {
         email: string;
+        username: string;
         avatar: string;
+        created: string;
         backlog: [];
         completed: [];
       };

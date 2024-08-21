@@ -27,11 +27,13 @@ const UserInfo = () => {
   const [backlogData, setBacklogData] = useState<BacklogGame[]>([]);
   const [completedData, setCompletedData] = useState<CompletedGame[]>([]);
 
-  const [memberSince, setMemberSince] = useState<string>("");
+  // const [memberSince, setMemberSince] = useState<string>("");
   const [totalBacklog, setTotalBacklog] = useState<number>(0);
   const [totalCompleted, setTotalCompleted] = useState<number>(0);
 
-  let email = session?.user.email;
+  let email = session?.user.email || "";
+  let created =
+    new Date(session?.user.created as string).toLocaleDateString() || "--";
 
   async function getBacklogData() {
     const res = await fetch(`api/backlog?email=${email}`, {
@@ -66,51 +68,49 @@ const UserInfo = () => {
           {/* <div className="flex flex-col text-center items-center justify-center p-24"> */}
           <div className="grid grid-cols-4 items-center gap-4 grid-rows-1 text-center p-10">
             <div className="flex col-span-4 justify-center">
-              {session.user.avatar && (
-                <Card className="w-80 flex-col border-none rounded-none">
-                  <CardHeader>
-                    <CardTitle className="text-3xl font-black">
-                      Username
+              <Card className="w-80 flex-col border-none rounded-none">
+                <CardHeader className="flex items-center">
+                  <Avatar className="w-48 h-48 rounded-full">
+                    <AvatarImage src={session?.user?.avatar} />
+                    <AvatarFallback>IMG</AvatarFallback>
+                  </Avatar>
+                </CardHeader>
+                <CardContent className="flex flex-col items-center gap-4">
+                  <div>
+                    <CardTitle className="text-3xl text-primary font-black">
+                      {session?.user.username}
                     </CardTitle>
                     <CardDescription> {session?.user?.email}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex flex-col items-center gap-6">
-                    <Avatar className="w-32 h-32 rounded-full">
-                      <AvatarImage src={session?.user?.avatar} />
-                      <AvatarFallback>IMG</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h2 className="text-md font-extrabold">Member since:</h2>
-                      <p className="text-sm text-muted-foreground">
-                        member since
-                      </p>
-                    </div>
-                    <div>
-                      <h2 className="text-md font-extrabold">
-                        Total Backlogged:
-                      </h2>
-                      <p className="text-sm text-muted-foreground">--</p>
-                    </div>
-                    <div>
-                      <h2 className="text-md font-extrabold">
-                        Total Completed:
-                      </h2>
-                      <p className="text-sm text-muted-foreground">--</p>
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button
-                      onClick={() => {
-                        signOut();
-                      }}
-                      type="submit"
-                      className="text-xs font-black m-auto"
-                    >
-                      Logout
-                    </Button>
-                  </CardFooter>
-                </Card>
-              )}
+                  </div>
+                  <div>
+                    <h2 className="text-md font-black">Member since:</h2>
+                    <p className="text-sm text-muted-foreground">{created}</p>
+                  </div>
+                  <div>
+                    <h2 className="text-md font-black">Total Backlogged:</h2>
+                    <p className="text-sm text-muted-foreground">
+                      {backlogData.length}
+                    </p>
+                  </div>
+                  <div>
+                    <h2 className="text-md font-black">Total Completed:</h2>
+                    <p className="text-sm text-muted-foreground">
+                      {completedData.length}
+                    </p>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button
+                    onClick={() => {
+                      signOut();
+                    }}
+                    type="submit"
+                    className="text-xs font-black m-auto"
+                  >
+                    Logout
+                  </Button>
+                </CardFooter>
+              </Card>
             </div>
             {/* <div className="flex flex-col p-4 justify-center items-center"> */}
             <BacklogTable
@@ -127,9 +127,7 @@ const UserInfo = () => {
       ) : (
         <div className="flex min-h-screen flex-col items-center justify-center p-24">
           <h1 className="text-3xl font-bold">Welcome!</h1>
-          <h1 className="text-3xl font-extrabold text-red-400 ">
-            Please login
-          </h1>
+          <h1 className="text-3xl font-black text-red-400 ">Please login</h1>
         </div>
       )}
     </main>
