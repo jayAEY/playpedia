@@ -72,7 +72,6 @@ export function CompletedTable<TData, TValue>({
   });
 
   return (
-    // <div className="bg-background h-full w-full max-w-7xl p-6 m-6 s rounded-none border-foreground/15 shadow-2xl">
     <div className="bg-background w-full row-start-3 col-start-1 2xl:col-start-2 col-span-4 2xl:col-span-2 p-6 rounded-none border-foreground/15 shadow-2xl">
       <h1 className="text-2xl font-black text-foreground tracking-tight">
         Completed

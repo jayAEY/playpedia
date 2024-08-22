@@ -65,10 +65,9 @@ const UserInfo = () => {
     <main>
       {status === "authenticated" ? (
         <>
-          {/* <div className="flex flex-col text-center items-center justify-center p-24"> */}
           <div className="grid grid-cols-4 items-center gap-4 grid-rows-1 text-center p-10">
             <div className="flex col-span-4 justify-center">
-              <Card className="w-80 flex-col border-none rounded-none">
+              <Card className="w-80 flex-col border-none rounded-none shadow-2xl">
                 <CardHeader className="flex items-center">
                   <Avatar className="w-48 h-48 rounded-full">
                     <AvatarImage src={session?.user?.avatar} />
