@@ -4,6 +4,7 @@ import UsersModel from "@/models/Users";
 import bcrypt from "bcryptjs";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -22,6 +23,10 @@ const authOptions: NextAuthOptions = {
         if (!passwordMatch) throw new Error("Wrong Password");
         return user;
       },
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET as string,
     }),
   ],
   callbacks: {
@@ -55,7 +60,7 @@ const authOptions: NextAuthOptions = {
   },
   session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,
-  pages: { signIn: "/login" },
+  // pages: { signIn: "/login" },
 };
 
 export default authOptions;

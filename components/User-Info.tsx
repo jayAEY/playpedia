@@ -86,13 +86,13 @@ const UserInfo = () => {
                     <p className="text-sm text-muted-foreground">{created}</p>
                   </div>
                   <div>
-                    <h2 className="text-md font-black">Total Backlogged:</h2>
+                    <h2 className="text-md font-black">Backlogged:</h2>
                     <p className="text-sm text-muted-foreground">
                       {backlogData.length}
                     </p>
                   </div>
                   <div>
-                    <h2 className="text-md font-black">Total Completed:</h2>
+                    <h2 className="text-md font-black">Completed:</h2>
                     <p className="text-sm text-muted-foreground">
                       {completedData.length}
                     </p>
