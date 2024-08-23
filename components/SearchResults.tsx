@@ -22,9 +22,11 @@ const SearchResults = () => {
     if (res.ok) {
       setData(await res.json());
       setLoading(false);
+      return;
     } else {
       setLoading(false);
       console.log(await res.json());
+      return;
     }
   }
 

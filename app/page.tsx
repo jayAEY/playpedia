@@ -54,7 +54,7 @@ export default function Home() {
             <ArrowRight className="h-4 w-4" />
           </span>
           <p className=" max-w-none md:max-w-52 text-sm text-muted-foreground">
-            Don't have an account? Sign up and save your info.
+            Don&apos;t have an account? Sign up and save your info.
           </p>
         </Link>{" "}
         <Link

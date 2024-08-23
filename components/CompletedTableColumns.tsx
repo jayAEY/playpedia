@@ -121,7 +121,7 @@ export const CompletedTableColumns: ColumnDef<CompletedGame>[] = [
     id: "actions",
     header: "Actions",
     cell: ({ row }) => {
-      const game: BacklogGame = row.original;
+      const game: CompletedGame = row.original;
       return <CompletedTableActions game={game} />;
     },
   },

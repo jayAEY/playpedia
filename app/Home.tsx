@@ -1,5 +1,6 @@
 "use client";
 import { HomeCarousel } from "@/components/HomeCarousel";
+import { ArrowRight } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
