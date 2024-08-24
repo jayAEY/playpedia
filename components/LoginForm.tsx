@@ -116,7 +116,7 @@ export function LoginForm() {
             >
               Login
             </Button>
-            <Button
+            {/* <Button
               variant="outline"
               className="
               w-full
@@ -124,9 +124,9 @@ export function LoginForm() {
               font-black"
             >
               Login with Google
-            </Button>
+            </Button> */}
           </div>
-          <div className="mt-4 text-center text-sm">
+          <div className="text-center text-sm">
             Don&apos;t have an account?{" "}
             <Link
               href="/register"

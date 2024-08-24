@@ -17,6 +17,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { signIn } from "next-auth/react";
 
 export function RegisterForm() {
   const [email, setEmail] = useState("");
@@ -53,6 +54,10 @@ export function RegisterForm() {
     }
   }
 
+  // function googleSignIn() {
+  //   const han
+  // }
+
   return (
     <main className="w-full top-14 absolute min-h-screen flex justify-center lg:grid lg:grid-cols-2 md:top-0">
       <AlertDialog open={alertOpen}>
@@ -73,12 +78,107 @@ export function RegisterForm() {
           </AlertDialogHeader>
         </AlertDialogContent>
       </AlertDialog>
-      <form
-        id="register-form"
-        className="flex items-center justify-center py-12"
-        onSubmit={handleSubmit}
+      <div
+        id="login-form"
+        className="flex flex-col items-center justify-center py-12"
+        // onSubmit={handleSubmit}
       >
-        <div className="mx-auto grid w-[350px] gap-6">
+        <div className="mx-auto grid w-[350px] gap-3">
+          <form
+            id="register-form"
+            className="mx-auto grid w-[350px] gap-6"
+            onSubmit={handleSubmit}
+          >
+            <div className="grid gap-2 text-center">
+              <h1 className="text-3xl font-bold">Register</h1>
+              <p className="text-balance text-muted-foreground">
+                Enter your email below to create your account
+              </p>
+            </div>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="email@example.com"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="username">Username</Label>
+                <Input
+                  id="username"
+                  type="username"
+                  placeholder="username"
+                  required
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="password">Password</Label>
+                </div>
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="Avatar">Avatar (optional):</Label>
+                </div>
+                <Input
+                  id="avatar"
+                  type="text"
+                  placeholder="Enter Url"
+                  onChange={(e) => setAvatar(e.target.value)}
+                />
+              </div>
+              <Button
+                type="submit"
+                className="
+              w-full
+              text-xs
+              font-black"
+              >
+                Create Account
+              </Button>
+            </div>
+          </form>
+          <Button
+            onClick={() => signIn("google")}
+            variant="outline"
+            className="
+              w-full
+              text-xs
+              font-black"
+          >
+            Login with Google
+          </Button>
+          <span className="pt-4 text-sm text-center">
+            Don&apos;t have an account?{" "}
+            <Link
+              href="/register"
+              className="underline"
+            >
+              Sign up
+            </Link>
+          </span>
+        </div>
+      </div>
+
+      {/* <div className="mx-auto grid w-[350px] gap-6"> */}
+      {/* <div className="mx-auto grid w-[350px] gap-6"> */}
+      {/* <div> */}
+      {/* <form
+          id="register-form"
+          className="flex items-center justify-center py-12"
+          onSubmit={handleSubmit}
+        >
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">Register</h1>
             <p className="text-balance text-muted-foreground">
@@ -137,27 +237,30 @@ export function RegisterForm() {
             >
               Create Account
             </Button>
-            <Button
-              variant="outline"
-              className="
+          </div>
+        </form>
+
+        <Button
+          onClick={() => signIn("google")}
+          variant="outline"
+          className="
               w-full
               text-xs
               font-black"
-            >
-              Login with Google
-            </Button>
-          </div>
-          <div className="mt-4 text-center text-sm">
-            Already have an account?{" "}
-            <Link
-              href="/login"
-              className="underline"
-            >
-              Sign in
-            </Link>
-          </div>
+        >
+          Login with Google
+        </Button>
+        <div className="mt-4 text-center text-sm">
+          Already have an account?{" "}
+          <Link
+            href="/login"
+            className="underline"
+          >
+            Sign in
+          </Link>
         </div>
-      </form>
+      </div> */}
+      {/* </div> */}
       <div className="max-h-screen object-contain hidden bg-gray-400 dark:bg-neutral-900 lg:block">
         <Image
           priority
