@@ -67,8 +67,7 @@ export function LoginForm() {
           </AlertDialogHeader>
         </AlertDialogContent>
       </AlertDialog>
-      <form
-        id="login-form"
+      {/* <form
         className="flex items-center justify-center py-12"
         onSubmit={handleSubmit}
       >
@@ -93,12 +92,6 @@ export function LoginForm() {
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
-                {/* <Link
-                  href="/forgot-password"
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  Forgot your password?
-                </Link> */}
               </div>
               <Input
                 id="password"
@@ -116,7 +109,7 @@ export function LoginForm() {
             >
               Login
             </Button>
-            {/* <Button
+            <Button
               variant="outline"
               className="
               w-full
@@ -124,7 +117,7 @@ export function LoginForm() {
               font-black"
             >
               Login with Google
-            </Button> */}
+            </Button>
           </div>
           <div className="text-center text-sm">
             Don&apos;t have an account?{" "}
@@ -136,7 +129,80 @@ export function LoginForm() {
             </Link>
           </div>
         </div>
-      </form>
+      </form> */}
+
+      <div
+        id="login"
+        className="flex flex-col items-center justify-center py-12"
+      >
+        <div className="mx-auto grid w-[350px] gap-3">
+          <form
+            id="login-form"
+            className="mx-auto grid w-[350px] gap-6"
+            onSubmit={handleSubmit}
+          >
+            <div className="grid gap-2 text-center">
+              <h1 className="text-3xl font-bold">Login</h1>
+              <p className="text-balance text-muted-foreground">
+                Enter your email below to login to your account
+              </p>
+            </div>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="email@example.com"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="password">Password</Label>
+                </div>
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+
+              <Button
+                type="submit"
+                className="
+              w-full
+              text-xs
+              font-black"
+              >
+                Login
+              </Button>
+            </div>
+          </form>
+          <Button
+            onClick={() => signIn("google")}
+            variant="outline"
+            className="
+              w-full
+              text-xs
+              font-black"
+          >
+            Login with Google
+          </Button>
+          <span className="pt-4 text-sm text-center">
+            Don&apos;t have an account?{" "}
+            <Link
+              href="/register"
+              className="underline"
+            >
+              Sign up
+            </Link>
+          </span>
+        </div>
+      </div>
+
       <div className="max-h-screen object-contain hidden bg-gray-400 dark:bg-neutral-900 lg:block">
         <Image
           priority
