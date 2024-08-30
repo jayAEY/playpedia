@@ -27,13 +27,13 @@ const UserInfo = () => {
   const [backlogData, setBacklogData] = useState<BacklogGame[]>([]);
   const [completedData, setCompletedData] = useState<CompletedGame[]>([]);
 
-  // const [memberSince, setMemberSince] = useState<string>("");
-  const [totalBacklog, setTotalBacklog] = useState<number>(0);
-  const [totalCompleted, setTotalCompleted] = useState<number>(0);
-
   let email = session?.user.email || "";
   let created =
-    new Date(session?.user.created as string).toLocaleDateString() || "--";
+    session?.user &&
+    new Date(session.user.createdAt.toString()).toLocaleDateString();
+  console.log(created);
+  // console.log(session?.user);
+  // new Date(session?.user.created as string).toLocaleDateString() || "--";
 
   async function getBacklogData() {
     const res = await fetch(`api/backlog?email=${email}`, {

@@ -1,3 +1,4 @@
+import { Date } from "mongoose";
 import NextAuth from "next-auth";
 
 declare module "next-auth" {
@@ -9,7 +10,7 @@ declare module "next-auth" {
       email: string;
       username: string;
       avatar: string;
-      created: string;
+      createdAt: Date;
       backlog: [];
       completed: [];
     };

@@ -31,12 +31,12 @@ export function RegisterForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const created = new Date();
+    // const created = new Date();
     try {
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, avatar, username, created }),
+        body: JSON.stringify({ email, password, avatar, username }),
       });
       if (res.ok) {
         setAlertOpen(true);
