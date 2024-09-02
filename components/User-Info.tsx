@@ -28,12 +28,9 @@ const UserInfo = () => {
   const [completedData, setCompletedData] = useState<CompletedGame[]>([]);
 
   let email = session?.user.email || "";
-  let created =
-    session?.user &&
-    new Date(session.user.createdAt.toString()).toLocaleDateString();
-  console.log(created);
-  // console.log(session?.user);
-  // new Date(session?.user.created as string).toLocaleDateString() || "--";
+  let created = session?.user.createdAt
+    ? new Date(session?.user.createdAt.toString()).toLocaleDateString()
+    : "";
 
   async function getBacklogData() {
     const res = await fetch(`api/backlog?email=${email}`, {

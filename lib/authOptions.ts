@@ -6,6 +6,8 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { Date } from "mongoose";
+import { NextResponse } from "next/server";
+import { signIn } from "next-auth/react";
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -43,58 +45,55 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt(params: any) {
-      let token = params.token;
-      let user = params.user;
-      user &&
-        (token.user = {
-          email: user.email,
-          username: user.username,
-          avatar: user.avatar,
-          createdAt: user.createdAt,
-          backlog: user.backlog,
-          completed: user.completed,
-        });
+    async jwt({ token, user }) {
+      const sessionUser = await UsersModel.findOne({
+        email: token.email,
+      });
+      token.user = {
+        email: sessionUser.email,
+        username: sessionUser.username,
+        avatar: sessionUser.avatar,
+        createdAt: sessionUser.createdAt,
+        backlog: sessionUser.backlog,
+        completed: sessionUser.completed,
+      };
       return token;
     },
-    async session(params) {
-      let session = params.session;
-      let token = params.token;
+
+    // async session(params) {
+
+    async session({ session, token }) {
       session.user = token.user as {
         email: string;
         username: string;
         avatar: string;
-        createdAt: Date;
         backlog: [];
         completed: [];
+        createdAt: Date;
       };
       return session;
     },
 
-    //   async signIn({ user }) {
-    //     // console.log("inside callback");
-    //     // console.log(user);
+    // async signIn({ user, account, profile }) {
+    //   if (account?.provider == "google") {
     //     await connectToDb();
-    //     const u = await UsersModel.findOne({ email: user.email });
     //     const { email, name, image } = user;
-    //     const created = new Date();
-    //     console.log(u);
+    //     const u = await UsersModel.findOne({ email: user.email });
     //     if (!u) {
     //       const newUser = new UsersModel({
     //         email,
     //         username: name,
-    //         created,
     //         avatar: image,
     //       });
     //       await newUser.save();
     //     }
-    //     return true;
-    //   },
+    //   }
+    //   return true;
     // },
   },
   session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,
-  // pages: { signIn: "/login" },
+  pages: { signIn: "/login" },
 };
 
 export default authOptions;

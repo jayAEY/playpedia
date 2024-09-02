@@ -9,10 +9,11 @@ declare module "next-auth" {
     user: {
       email: string;
       username: string;
+      // password: string;
       avatar: string;
-      createdAt: Date;
       backlog: [];
       completed: [];
+      createdAt: Date;
     };
   }
 }
