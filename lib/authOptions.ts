@@ -59,9 +59,6 @@ const authOptions: NextAuthOptions = {
       };
       return token;
     },
-
-    // async session(params) {
-
     async session({ session, token }) {
       session.user = token.user as {
         email: string;
@@ -74,22 +71,22 @@ const authOptions: NextAuthOptions = {
       return session;
     },
 
-    // async signIn({ user, account, profile }) {
-    //   if (account?.provider == "google") {
-    //     await connectToDb();
-    //     const { email, name, image } = user;
-    //     const u = await UsersModel.findOne({ email: user.email });
-    //     if (!u) {
-    //       const newUser = new UsersModel({
-    //         email,
-    //         username: name,
-    //         avatar: image,
-    //       });
-    //       await newUser.save();
-    //     }
-    //   }
-    //   return true;
-    // },
+    async signIn({ user, account, profile }) {
+      if (account?.provider == "google") {
+        await connectToDb();
+        const { email, name, image } = user;
+        const u = await UsersModel.findOne({ email: user.email });
+        if (!u) {
+          const newUser = new UsersModel({
+            email,
+            username: name,
+            avatar: image,
+          });
+          await newUser.save();
+        }
+      }
+      return true;
+    },
   },
   session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,

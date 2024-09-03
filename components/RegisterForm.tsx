@@ -54,10 +54,6 @@ export function RegisterForm() {
     }
   }
 
-  // function googleSignIn() {
-  //   const han
-  // }
-
   return (
     <main className="w-full top-14 absolute min-h-screen flex justify-center lg:grid lg:grid-cols-2 md:top-0">
       <AlertDialog open={alertOpen}>
@@ -81,7 +77,6 @@ export function RegisterForm() {
       <div
         id="register"
         className="flex flex-col items-center justify-center py-12"
-        // onSubmit={handleSubmit}
       >
         <div className="mx-auto grid w-[350px] gap-3">
           <form
@@ -149,6 +144,16 @@ export function RegisterForm() {
               </Button>
             </div>
           </form>
+          <Button
+            onClick={() => signIn("google")}
+            variant="outline"
+            className="
+              w-full
+              text-xs
+              font-black"
+          >
+            Register with Google
+          </Button>
           <span className="pt-4 text-sm text-center">
             Already have an account?{" "}
             <Link
