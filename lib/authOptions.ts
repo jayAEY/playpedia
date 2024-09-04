@@ -73,16 +73,21 @@ const authOptions: NextAuthOptions = {
 
     async signIn({ user, account, profile }) {
       if (account?.provider == "google") {
-        await connectToDb();
-        const { email, name, image } = user;
-        const u = await UsersModel.findOne({ email: user.email });
-        if (!u) {
-          const newUser = new UsersModel({
-            email,
-            username: name,
-            avatar: image,
-          });
-          await newUser.save();
+        if (profile?.email_verified) {
+          await connectToDb();
+          const { email, name, image } = user;
+          const u = await UsersModel.findOne({ email: user.email });
+          if (!u) {
+            const newUser = new UsersModel({
+              email,
+              username: name,
+              avatar: image,
+            });
+            await newUser.save();
+          }
+        } else {
+          false;
+          // ????
         }
       }
       return true;

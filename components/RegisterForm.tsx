@@ -152,7 +152,7 @@ export function RegisterForm() {
               text-xs
               font-black"
           >
-            Register with Google
+            Login with Google
           </Button>
           <span className="pt-4 text-sm text-center">
             Already have an account?{" "}
