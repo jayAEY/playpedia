@@ -11,7 +11,7 @@ export default function Home() {
 
   // console.log(status);
   return (
-    <main className="flex min-h-[90%] pt-20 flex-col items-center lg:items-start justify-between p-[3svh]">
+    <main className="flex max-w-svw min-h-[90%] pt-20 flex-col items-center lg:items-start justify-between">
       <div>
         <HomeCarousel />
       </div>
