@@ -16,8 +16,6 @@ export function HomeCarousel() {
 
   return (
     <div className="w-svw px-[10svw]">
-      {/* <h2 className="max-w-7xl p-4 mx-auto text-5xl font-bold "> */}
-      {/* <h2 className="max-w-6xl pb-4 text-5xl font-extrabold "> */}
       <h2 className="flex flex-col md:flex-row pb-4 text-5xl font-extrabold ">
         Welcome to
         <span className="flex mx-0 md:mx-4 gap-2">
@@ -25,7 +23,6 @@ export function HomeCarousel() {
           playpedia
         </span>
       </h2>
-      {/* <p className="p-4 ml-0 md:py-0 text-sm max-w-lg"> */}
       <p className=" md:py-0 text-md max-w-xl">
         Your ultimate companion for managing and exploring your video game
         journey! We offer a seamless experience for discovering new games,
@@ -43,7 +40,6 @@ const DummyContent = () => {
         return (
           <div
             key={"dummy-content" + index}
-            // className="bg-[#F5F5F7] p-8 md:p-14 rounded-3xl mb-4"
             className="bg-[#F5F5F7] p-8 md:p-14 rounded-none mb-4"
           >
             <p className="text-neutral-600 text-base md:text-2xl font-sans max-w-3xl mx-auto">

@@ -108,7 +108,6 @@ const UserInfo = () => {
                 </CardFooter>
               </Card>
             </div>
-            {/* <div className="flex flex-col p-4 justify-center items-center"> */}
             <BacklogTable
               columns={BacklogTableColumns}
               data={backlogData}
