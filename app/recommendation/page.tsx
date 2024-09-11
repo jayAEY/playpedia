@@ -1,4 +1,4 @@
-import { CompletedForm } from "@/components/CompletedForm";
+import { RecommendForm } from "@/components/RecommendForm";
 import { ArrowRight, Gamepad2 } from "lucide-react";
 import React from "react";
 
@@ -17,7 +17,7 @@ const Recommendation = () => {
         gaming history. Discover hidden gems and popular titles you might have
         missed.
       </p>
-      <CompletedForm />
+      <RecommendForm />
     </div>
     // <div className="grid w-svw px-[10svw] md:grid-cols-4">
     //   <Link
