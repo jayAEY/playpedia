@@ -72,7 +72,8 @@ export function RecommendForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="sm:max-w-[425px]"
+        // className="sm:max-w-[425px]"
+        className="max-w-xl"
       >
         {/* <h1 className="text-2xl font-extrabold">Search by name</h1> */}
         <div className="grid gap-4">
@@ -81,11 +82,11 @@ export function RecommendForm() {
             // name="completedPlatform"
             name="name"
             render={({ field }) => (
-              <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right pt-1">Name:</FormLabel>
+              <FormItem className="grid grid-cols-8 items-center gap-4">
+                <FormLabel className="text-left pt-1">Name:</FormLabel>
                 <FormControl>
                   <Input
-                    className="col-span-3"
+                    className="col-span-7"
                     placeholder="Enter game name"
                     {...field}
                   />
@@ -94,6 +95,135 @@ export function RecommendForm() {
               </FormItem>
             )}
           />
+        </div>
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            className="
+                    bg-primary
+                    text-foreground
+                    max-h-6
+                    mt-4
+                    px-3
+                    pr-4
+                    text-xs
+                    font-black
+                    hover:bg-secondary-foreground
+                    hover:text-secondary"
+          >
+            Search by name
+          </Button>
+        </div>
+        <div className="grid gap-4">
+          <FormField
+            control={form.control}
+            // name="completedPlatform"
+            name="name"
+            render={({ field }) => (
+              <FormItem className="grid grid-cols-8 items-center gap-4">
+                <FormLabel className="text-left pt-1">Genre:</FormLabel>
+                <FormControl>
+                  <select
+                    name="genre"
+                    id="genre"
+                    className="bg-transparent col-span-7 flex h-9 w-full rounded-md border border-input px-3 py-1 text-sm shadow-sm transition-colors text-muted-foreground focus:bg-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                  >
+                    <option
+                      // className="text-input"
+                      className="font-sans"
+                    >
+                      Select a genre
+                    </option>
+                    <option value="Action">Action</option>
+                    <option value="Shooter">Shooter</option>
+                    <option value="Platformer">Platformer</option>
+                    <option value="Family">Family</option>
+                    <option value="Indie">Indie</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Racing">Racing</option>
+                    <option value="Board Games">Board Games</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Simulation">Simulation</option>
+                    <option value="Massively Multiplayer">
+                      Massively Multiplayer
+                    </option>
+                    <option value="Educational">Educational</option>
+                    <option value="Puzzle">Puzzle</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Card">Card</option>
+                    {/* all genres: */}
+                    {/* Action Shooter Platformer Family Indie Casual Racing Board
+                    Games Adventure Simulation Massively Multiplayer Educational
+                    RPG Puzzle Sports Card
+                     */}
+                  </select>
+                  {/* <Input
+                    className="col-span-7"
+                    placeholder="Enter game name"
+                    type="select"
+                    {...field}
+                  /> */}
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            className="
+                    bg-primary
+                    text-foreground
+                    max-h-6
+                    mt-4
+                    px-3
+                    pr-4
+                    text-xs
+                    font-black
+                    hover:bg-secondary-foreground
+                    hover:text-secondary"
+          >
+            Search by genre
+          </Button>
+        </div>
+        <div className="grid gap-4">
+          <FormField
+            control={form.control}
+            // name="completedPlatform"
+            name="name"
+            render={({ field }) => (
+              <FormItem className="grid grid-cols-8 items-center gap-4">
+                <FormLabel className="text-left pt-1">Platform:</FormLabel>
+                <FormControl>
+                  <Input
+                    className="col-span-7"
+                    placeholder="Select Platform"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            className="
+                    bg-primary
+                    text-foreground
+                    max-h-6
+                    mt-4
+                    px-3
+                    pr-4
+                    text-xs
+                    font-black
+                    hover:bg-secondary-foreground
+                    hover:text-secondary"
+          >
+            Search by platform
+          </Button>
         </div>
         {/* <h1 className="text-2xl font-extrabold">{name}</h1>
         <FormField

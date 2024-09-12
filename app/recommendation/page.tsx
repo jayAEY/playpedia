@@ -6,12 +6,12 @@ const Recommendation = () => {
   return (
     // <div className="w-svw px-[10svw]">
     <div className="w-svw p-[10svw] flex flex-col">
-      <h2 className="flex flex-col md:flex-row pb-4 text-5xl font-extrabold ">
+      <h1 className="flex flex-col md:flex-row text-[2.8rem] font-extrabold ">
         Need a recommendation?
         {/* <span className="flex mx-0 md:mx-4 gap-2"> */}
         {/* <Gamepad2 className="mt-2 h-12 w-12" /> */}
         {/* </span> */}
-      </h2>
+      </h1>
       <p className=" md:py-0 text-md max-w-xl">
         Receive personalized game recommendations based on your interests and
         gaming history. Discover hidden gems and popular titles you might have
@@ -19,6 +19,7 @@ const Recommendation = () => {
       </p>
       <RecommendForm />
     </div>
+
     // <div className="grid w-svw px-[10svw] md:grid-cols-4">
     //   <Link
     //     href="/login"
