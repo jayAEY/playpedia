@@ -6,14 +6,7 @@ import { redirect } from "next/navigation";
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/");
-  return (
-    // <div></div>
-    <UserInfo
-    // DataTable={DataTable}
-    // Payment={Payment}
-    // columns={columns}
-    />
-  );
+  return <UserInfo />;
 };
 
 export default Dashboard;

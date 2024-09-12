@@ -91,7 +91,6 @@ const GameCard = ({
   const { data: session, status } = useSession();
 
   const [gameData, setGameData] = useState<GameProps>();
-  // const [loading, setLoading] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
   let averageTime = (
@@ -113,8 +112,6 @@ const GameCard = ({
     }
     setLoading(false);
   }
-
-  // console.log(platforms.filter((platform) => platform !== "Emulated").toString());
 
   let handlePlatformIcons = (platform: string, index: number) => {
     switch (platform) {
