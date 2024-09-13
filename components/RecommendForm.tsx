@@ -17,6 +17,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "./ui/use-toast";
 import { useSession } from "next-auth/react";
+import router from "next/router";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().optional(),
@@ -44,10 +46,15 @@ export function RecommendForm() {
   //   id?: number;
   // }) {
 
+  const router = useRouter();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
+      genre: "",
+      platform: "",
       //   id: id || timeId,
     },
     // defaultValues: {
@@ -66,6 +73,7 @@ export function RecommendForm() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(selection);
+    router.push(`/search/?query=${"Best games ever"}`);
   }
 
   return (
