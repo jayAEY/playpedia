@@ -19,7 +19,9 @@ import { toast } from "./ui/use-toast";
 import { useSession } from "next-auth/react";
 
 const formSchema = z.object({
-  name: z.string(),
+  name: z.string().optional(),
+  genre: z.string().optional(),
+  platform: z.string().optional(),
 
   //   id: z.number(),
   //   name: z.string(),
@@ -41,9 +43,6 @@ export function RecommendForm() {
   //   backlogRemove?: (id: number) => Promise<void>;
   //   id?: number;
   // }) {
-  const { data: session, status } = useSession();
-  const currentDate = new Date().toLocaleDateString();
-  const timeId = new Date().getTime();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -63,9 +62,10 @@ export function RecommendForm() {
   });
 
   // 2. Define a submit handler.
-  async function onSubmit(newGame: z.infer<typeof formSchema>) {
+  async function onSubmit(selection: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    console.log(selection);
   }
 
   return (
@@ -79,7 +79,6 @@ export function RecommendForm() {
         <div className="grid gap-4">
           <FormField
             control={form.control}
-            // name="completedPlatform"
             name="name"
             render={({ field }) => (
               <FormItem className="grid grid-cols-8 items-center gap-4">
@@ -118,51 +117,114 @@ export function RecommendForm() {
           <FormField
             control={form.control}
             // name="completedPlatform"
-            name="name"
+            name="genre"
             render={({ field }) => (
               <FormItem className="grid grid-cols-8 items-center gap-4">
                 <FormLabel className="text-left pt-1">Genre:</FormLabel>
                 <FormControl>
                   <select
+                    {...field}
                     name="genre"
                     id="genre"
                     className="bg-transparent col-span-7 flex h-9 w-full rounded-md border border-input px-3 py-1 text-sm shadow-sm transition-colors text-muted-foreground focus:bg-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                   >
+                    <option className="font-sans">Select a genre</option>
                     <option
-                      // className="text-input"
                       className="font-sans"
+                      value="Action"
                     >
-                      Select a genre
+                      Action
                     </option>
-                    <option value="Action">Action</option>
-                    <option value="Shooter">Shooter</option>
-                    <option value="Platformer">Platformer</option>
-                    <option value="Family">Family</option>
-                    <option value="Indie">Indie</option>
-                    <option value="Casual">Casual</option>
-                    <option value="Racing">Racing</option>
-                    <option value="Board Games">Board Games</option>
-                    <option value="Adventure">Adventure</option>
-                    <option value="Simulation">Simulation</option>
-                    <option value="Massively Multiplayer">
+                    <option
+                      className="font-sans"
+                      value="Shooter"
+                    >
+                      Shooter
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Platformer"
+                    >
+                      Platformer
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Family"
+                    >
+                      Family
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Indie"
+                    >
+                      Indie
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Casual"
+                    >
+                      Casual
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Racing"
+                    >
+                      Racing
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Board Games"
+                    >
+                      Board Games
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Adventure"
+                    >
+                      Adventure
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Simulation"
+                    >
+                      Simulation
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Massively Multiplayer"
+                    >
                       Massively Multiplayer
                     </option>
-                    <option value="Educational">Educational</option>
-                    <option value="Puzzle">Puzzle</option>
-                    <option value="Sports">Sports</option>
-                    <option value="Card">Card</option>
+                    <option
+                      className="font-sans"
+                      value="Educational"
+                    >
+                      Educational
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Puzzle"
+                    >
+                      Puzzle
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Sports"
+                    >
+                      Sports
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Card"
+                    >
+                      Card
+                    </option>
                     {/* all genres: */}
                     {/* Action Shooter Platformer Family Indie Casual Racing Board
                     Games Adventure Simulation Massively Multiplayer Educational
                     RPG Puzzle Sports Card
                      */}
                   </select>
-                  {/* <Input
-                    className="col-span-7"
-                    placeholder="Enter game name"
-                    type="select"
-                    {...field}
-                  /> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -190,17 +252,199 @@ export function RecommendForm() {
         <div className="grid gap-4">
           <FormField
             control={form.control}
-            // name="completedPlatform"
-            name="name"
+            name="platform"
             render={({ field }) => (
               <FormItem className="grid grid-cols-8 items-center gap-4">
                 <FormLabel className="text-left pt-1">Platform:</FormLabel>
                 <FormControl>
-                  <Input
-                    className="col-span-7"
-                    placeholder="Select Platform"
+                  <select
                     {...field}
-                  />
+                    name="genre"
+                    id="genre"
+                    className="bg-transparent col-span-7 flex h-9 w-full rounded-md border border-input px-3 py-1 text-sm shadow-sm transition-colors text-muted-foreground focus:bg-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                  >
+                    <option className="font-sans">Select a platform</option>
+                    <option
+                      className="font-sans"
+                      value="PlayStation"
+                    >
+                      PlayStation
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="PlayStation 2"
+                    >
+                      PlayStation 2
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="PlayStation 3"
+                    >
+                      PlayStation 3
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="PlayStation 4"
+                    >
+                      PlayStation 4
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="PlayStation 5"
+                    >
+                      PlayStation 5
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="PlayStation Vita"
+                    >
+                      PlayStation Vita
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="PlayStation Portable"
+                    >
+                      PlayStation Portable
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="PSP"
+                    >
+                      PSP
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Xbox"
+                    >
+                      Xbox
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Xbox 360"
+                    >
+                      Xbox 360
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Xbox One"
+                    >
+                      Xbox One
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Xbox Series X/S"
+                    >
+                      Xbox Series X/S
+                    </option>
+                    <option
+                      className="font-sans"
+                      value="Xbox Series S/X"
+                    >
+                      Xbox Series S/X
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="NES"
+                    >
+                      NES
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Super Nintendo"
+                    >
+                      Super Nintendo
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Nintendo Switch"
+                    >
+                      Nintendo Switch
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Switch"
+                    >
+                      Switch
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Wii"
+                    >
+                      Wii
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Nintendo Gamecube"
+                    >
+                      Nintendo Gamecube
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Nintendo 64"
+                    >
+                      Nintendo 64
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Game Boy Color"
+                    >
+                      Game Boy Color
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Nintendo DS"
+                    >
+                      Nintendo DS
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Game Boy"
+                    >
+                      Game Boy
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Game Boy Advance"
+                    >
+                      Game Boy Advance
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="iOS"
+                    >
+                      iOS
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Apple Macintosh"
+                    >
+                      Apple Macintosh
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Android"
+                    >
+                      Android
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Mobile"
+                    >
+                      Mobile
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="PC"
+                    >
+                      PC
+                    </option>{" "}
+                    <option
+                      className="font-sans"
+                      value="Linux"
+                    >
+                      Linux
+                    </option>
+                  </select>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -225,137 +469,6 @@ export function RecommendForm() {
             Search by platform
           </Button>
         </div>
-        {/* <h1 className="text-2xl font-extrabold">{name}</h1>
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="hidden">Name</FormLabel>
-              <FormControl>
-                <Input
-                  className="hidden"
-                  {...field}
-                  disabled
-                />
-              </FormControl>
-              <FormDescription className="text-sm font-extrabold text-foreground">
-                Enter additional info (optional)
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="grid gap-4">
-          <FormField
-            control={form.control}
-            name="completedPlatform"
-            render={({ field }) => (
-              <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right pt-1">Platform:</FormLabel>
-                <FormControl>
-                  <Input
-                    className="col-span-3"
-                    placeholder="Enter platform"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="completedTime"
-            render={({ field }) => (
-              <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right pt-1">
-                  Completed Time:
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    className="col-span-3"
-                    placeholder="HHH:MM:SS"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="completedDate"
-            render={({ field }) => (
-              <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right pt-1">
-                  Completed Date:
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    className="col-span-3"
-                    // defaultValue={na
-                    placeholder="YYYY-MM-DD"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="rating"
-            render={({ field }) => (
-              <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right pt-1"> Rating:</FormLabel>
-                <FormControl>
-                  <Input
-                    className="col-span-3"
-                    {...field}
-                    placeholder="?/?"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="completedNotes"
-            render={({ field }) => (
-              <FormItem className="grid grid-cols-4 items-center gap-4">
-                <FormLabel className="text-right pt-1">Notes:</FormLabel>
-                <FormControl>
-                  <Input
-                    className="col-span-3"
-                    placeholder="Notes ..."
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="flex justify-end">
-          <Button
-            type="submit"
-            className="
-                    bg-primary
-                    text-foreground
-                    max-h-6
-                    mt-4
-                    px-3
-                    pr-4
-                    text-xs
-                    font-black
-                    hover:bg-secondary-foreground
-                    hover:text-secondary"
-          >
-            Add to Completed
-          </Button>
-        </div> */}
       </form>
     </Form>
   );
