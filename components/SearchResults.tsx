@@ -32,9 +32,9 @@ const SearchResults = () => {
 
   useEffect(() => {
     getData();
-  }, [searchQuery]);
+  }, [searchQuery, getData]);
 
-  console.log(data);
+  // console.log(data);
   return (
     <main>
       {loading ? (

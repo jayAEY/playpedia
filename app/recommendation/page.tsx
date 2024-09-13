@@ -15,8 +15,8 @@ const Recommendation = () => {
       <p className="pb-6 text-md max-w-xl">
         Receive personalized game recommendations based on your interests and
         gaming history. Discover hidden gems and popular titles you might have
-        missed. Search for a game that's similar to another that you liked or
-        find recommendations based on genre and platform!
+        missed. Search for a game that&apos;s similar to another that you liked
+        or find recommendations based on genre and platform!
       </p>
       <RecommendForm />
     </div>
